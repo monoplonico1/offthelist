@@ -246,7 +246,49 @@ a { color: inherit; }
 .how-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 31.25px; }
 .sec-how .display { font-size: clamp(36px, 7vw, 59.89px); line-height: 1.02; }
 .how-body { color: #444; font-size: 16px; line-height: 30px; }
-.how-body ol { padding-left: 24px; margin-bottom: 30px; }
+
+/* Línea de tiempo: un punto por paso, unidos por una línea vertical.
+   Al entrar en pantalla (reveal.js) los puntos aparecen en orden y la
+   línea se dibuja hacia el siguiente. */
+.timeline { --dot: 14px; --gap: 22px; margin-bottom: 30px; padding: 0; list-style: none; }
+.timeline li { position: relative; padding-left: 34px; color: var(--ink-strong); }
+.timeline li + li { margin-top: var(--gap); }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc((30px - var(--dot)) / 2);
+  box-sizing: border-box;
+  width: var(--dot);
+  height: var(--dot);
+  background: var(--cream);
+  border: 2px solid var(--coral);
+  border-radius: 50%;
+  transition: scale .5s cubic-bezier(.34, 1.56, .64, 1), background-color .4s ease;
+}
+.timeline li:last-child::before { background: var(--coral); }
+.timeline li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--dot) / 2 - 1px);
+  top: calc((30px + var(--dot)) / 2 + 4px);
+  width: 2px;
+  height: calc(100% + var(--gap) - var(--dot) - 8px);
+  background: linear-gradient(var(--coral), rgba(249, 81, 87, .35));
+  border-radius: 2px;
+  transform-origin: top;
+  transition: scale .6s ease;
+}
+/* Mientras el bloque no ha entrado en pantalla, puntos y línea ocultos
+   (sin transición, para que se oculten al instante). Al entrar, aparecen
+   en orden: punto, línea, punto, línea, punto. */
+.reveal:not(.is-in) .timeline li::before { scale: 0; transition: none; }
+.reveal:not(.is-in) .timeline li::after { scale: 1 0; transition: none; }
+.is-in .timeline li:nth-child(1)::before { transition-delay: .35s; }
+.is-in .timeline li:nth-child(1)::after { transition-delay: .6s; }
+.is-in .timeline li:nth-child(2)::before { transition-delay: 1s; }
+.is-in .timeline li:nth-child(2)::after { transition-delay: 1.25s; }
+.is-in .timeline li:nth-child(3)::before { transition-delay: 1.65s; }
 .how-body em { color: var(--coral); font-style: normal; }
 .sec-how .blob { width: min(443.33px, 100%); aspect-ratio: 1; }
 .blob-how-1, .blob-how-2 {
@@ -476,8 +518,8 @@ a { color: inherit; }
   .canvas > * { position: absolute; }
 
   /* Unos 100 px de aire entre bloques: cada margen completa lo que
-     faltaba respecto al Figma (77, 72 y 65 px de origen). */
-  .sec-approach { margin-top: 23px; }
+     faltaba respecto al Figma (77, 72 y 65 px de origen; la línea de tiempo de "How it works" suma 44 px). */
+  .sec-approach { margin-top: 67px; }
   .sec-mystery { margin-top: 28px; }
   .sec-footer { margin-top: 35px; }
 
