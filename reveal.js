@@ -6,7 +6,6 @@
 
   // Cada grupo entra escalonado: sus elementos aparecen uno tras otro.
   var GRUPOS = [
-    { sel: '.nav', tipo: 'fade' },
     { sel: '.hero-photo', tipo: 'zoom' },
     { sel: '.hero-content > *' },
     { sel: '.trust-bar li:not(.trust-sep)' },

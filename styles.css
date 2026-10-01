@@ -20,7 +20,11 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Que los anclajes (#how-it-works…) no queden debajo del menú fijo */
+  scroll-padding-top: 110px;
+}
 
 body {
   margin: 0;
@@ -123,7 +127,33 @@ a { color: inherit; }
   gap: 24px;
   padding: 24px 20px 0;
 }
-.brand img { width: 64px; height: 64px; }
+.brand img { width: 64px; height: 64px; transition: width .35s ease, height .35s ease; }
+
+/* ---------- Menú fijo (header.js) ----------
+   Siempre visible. Arriba del todo es transparente, como en el Figma; al
+   bajar se compacta y toma fondo para leerse sobre cualquier sección. */
+.page .nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: padding .35s ease, background-color .35s ease, box-shadow .35s ease;
+}
+.page .nav.is-scrolled {
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: rgba(250, 250, 248, .9);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+          backdrop-filter: saturate(1.4) blur(14px);
+  box-shadow: 0 10px 30px -18px rgba(43, 17, 19, .35);
+}
+.nav.is-scrolled .brand img { width: 44px; height: 44px; }
+/* Hueco que el menú ocupaba antes de ser fijo (en escritorio la home ya lo
+   tenía en posición absoluta, así que allí no hace falta) */
+.sec-hero .canvas { padding-top: 88px; }
+.subpage main { padding-top: 88px; }
 .nav-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; justify-content: flex-end; }
 .nav-links a:not(.btn) {
   color: var(--ink-strong);
@@ -133,6 +163,52 @@ a { color: inherit; }
   text-decoration: none;
 }
 .nav-links a:not(.btn):hover { color: var(--coral); }
+
+/* Móvil: los enlaces no caben en una línea, así que van en un panel que
+   abre el botón de menú (header.js). */
+.nav { align-items: center; }
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: var(--coral);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.nav-toggle span { width: 18px; height: 2px; background: #fff; border-radius: 2px; transition: translate .3s ease, rotate .3s ease; }
+.nav.is-open .nav-toggle span:first-child { translate: 0 3.5px; rotate: 45deg; }
+.nav.is-open .nav-toggle span:last-child { translate: 0 -3.5px; rotate: -45deg; }
+.nav-toggle:focus-visible { outline: 2px solid var(--dark); outline-offset: 3px; }
+
+@media (max-width: 1023px) {
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 12px;
+    right: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 14px;
+    background: var(--cream);
+    border: 1px solid var(--rule);
+    border-radius: 24px;
+    box-shadow: 0 18px 40px -18px rgba(43, 17, 19, .4);
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -8px;
+    transition: opacity .25s ease, translate .25s ease, visibility .25s;
+  }
+  .nav.is-open .nav-links { opacity: 1; visibility: visible; translate: 0 0; }
+  .nav-links a:not(.btn) { padding: 12px 10px; font-size: 15px; line-height: 1.2; }
+  .nav-links .btn { margin-top: 8px; }
+}
 
 .sec-hero .canvas { display: flex; flex-direction: column; }
 .sec-hero .nav { order: -1; }
@@ -255,6 +331,7 @@ a { color: inherit; }
   display: flex;
   align-items: center;
   height: var(--vh);
+  padding-top: 68px; /* alto del menú compacto, para que no tape la foto */
   overflow: hidden;
 }
 .pillars-inner { display: flex; flex-direction: column; gap: 28px; width: 100%; padding: 0 20px; }
@@ -430,8 +507,15 @@ a { color: inherit; }
   }
   .hero-photo { top: 26.69px; left: 823.51px; width: 552.04px; height: 822.86px; margin: 0; object-fit: cover; }
   .nav { top: 0; left: 0; width: 1440px; padding: 32.55px 110.67px 0 149.73px; }
+  .page .nav.is-scrolled { padding-top: 14px; padding-bottom: 14px; }
   .brand img { width: 90.49px; height: 90.49px; }
+  .nav.is-scrolled .brand img { width: 56px; height: 56px; }
+  .sec-hero .canvas { padding-top: 0; }
+  .subpage main { padding-top: 123px; }
   .nav-links { gap: 52.08px; flex-wrap: nowrap; }
+  .nav { align-items: flex-start; }
+  .page .nav.is-scrolled { align-items: center; }
+  .nav-toggle { display: none; }
   .hero-content { top: 265.61px; left: 148.43px; gap: 32.55px; padding: 0; }
   .hero-title { width: 976.49px; font-size: 66.4px; line-height: 70.31px; }
   .hero-lead { width: 559.86px; font-size: 22px; }
@@ -505,6 +589,7 @@ a { color: inherit; }
 
   /* Pilares: la composición del Figma (573 px de alto), centrada en la ventana */
   .sec-pillars .canvas > .pillars-track { position: relative; }
+  .pillars-stage { padding-top: 84px; }
   .pillars-inner { position: relative; display: block; width: 1440px; height: 573.53px; padding: 0; }
   .pillars-inner > * { position: absolute; }
   .pillars-media { top: 0; left: 130.85px; width: 573.53px; height: 573.53px; }
