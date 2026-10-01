@@ -7,7 +7,8 @@
   if (!track) return;
 
   var items = Array.prototype.slice.call(document.querySelectorAll('.pillar'));
-  var imgs = Array.prototype.slice.call(document.querySelectorAll('.pillar-img'));
+  // Foto y figura de cada categoría; se activan junto con su título.
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('.pillar-img, .pillar-shape'));
   var n = items.length;
   var actual = 0;
 
@@ -21,8 +22,8 @@
       if (activo) boton.setAttribute('aria-current', 'true');
       else boton.removeAttribute('aria-current');
     });
-    imgs.forEach(function (img, k) {
-      img.classList.toggle('is-active', k === i);
+    imgs.forEach(function (el) {
+      el.classList.toggle('is-active', Number(el.getAttribute('data-pillar')) === i);
     });
   }
 

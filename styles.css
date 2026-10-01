@@ -215,6 +215,37 @@ a { color: inherit; }
 .pillars-line { width: 100%; transform: rotate(180deg); }
 .pillars-dot { display: none; }
 
+/* Figura de cada categoría: la saliente gira y se desvanece; la entrante
+   aparece con un pequeño rebote y luego "respira" mientras está activa. */
+.pillar-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  scale: .3;
+  rotate: -120deg;
+  transition:
+    opacity .45s ease,
+    scale .9s cubic-bezier(.34, 1.56, .64, 1),
+    rotate .9s cubic-bezier(.34, 1.56, .64, 1);
+}
+.pillar-shape.is-active {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+  animation: shape-breathe 6s ease-in-out .9s infinite;
+}
+@keyframes shape-breathe {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  33% { transform: scale(1.07, .95) rotate(7deg); }
+  66% { transform: scale(.95, 1.06) rotate(-5deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pillar-shape { transition: opacity .3s ease; scale: 1; rotate: 0deg; }
+  .pillar-shape.is-active { animation: none; }
+}
+
 /* ---------- Pilares: sección fija que el scroll recorre (pillars.js) ---------- */
 
 .pillars-track { position: relative; height: calc(var(--vh) * 4); }
@@ -477,7 +508,7 @@ a { color: inherit; }
   .pillars-inner { position: relative; display: block; width: 1440px; height: 573.53px; padding: 0; }
   .pillars-inner > * { position: absolute; }
   .pillars-media { top: 0; left: 130.85px; width: 573.53px; height: 573.53px; }
-  .pillars-dot { display: block; top: 34.5px; left: 597.61px; width: 48.17px; height: 48.17px; }
+  .pillars-dot { display: block; overflow: visible; top: 34.5px; left: 597.61px; width: 48.17px; height: 48.17px; }
   .pillars { top: 95.69px; left: 778.59px; width: 559.86px; }
   .pillar-title { font-size: 59.89px; line-height: 61.19px; }
   .pillar-desc p { font-size: 19px; }

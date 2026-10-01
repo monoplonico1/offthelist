@@ -148,7 +148,13 @@
                 <img class="pillar-img" data-pillar="2" src="assets/pillar-explore.png" alt="Explore">
                 <img class="pillar-img" data-pillar="3" src="assets/pillar-transform.png" alt="Transform">
               </div>
-              <img class="pillars-dot" src="assets/dot.svg" alt="" aria-hidden="true" width="48" height="48">
+              <!-- Una figura por categoría; pillars.js activa la que corresponde -->
+              <div class="pillars-dot" aria-hidden="true">
+                <img class="pillar-shape is-active" data-pillar="0" src="assets/dot.svg" alt="" width="48" height="48">
+                <svg class="pillar-shape" data-pillar="1" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.0956193 1.42264C-0.293986 0.578492 0.578492 -0.293986 1.42264 0.0956195L4.36289 1.45266C5.69236 2.06626 7.22399 2.06626 8.55347 1.45266L11.4937 0.0956193C12.3379 -0.293986 13.2103 0.578492 12.8207 1.42264L11.4637 4.36289C10.8501 5.69236 10.8501 7.22399 11.4637 8.55347L12.8207 11.4937C13.2103 12.3379 12.3379 13.2103 11.4937 12.8207L8.55347 11.4637C7.22399 10.8501 5.69236 10.8501 4.36289 11.4637L1.42264 12.8207C0.578492 13.2103 -0.293986 12.3379 0.0956195 11.4937L1.45266 8.55347C2.06626 7.22399 2.06626 5.69236 1.45266 4.36289L0.0956193 1.42264Z" fill="#FF8C00"/></svg>
+                <svg class="pillar-shape" data-pillar="2" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.2923 6.9844e-06C13.0621 7.03972e-06 13.5433 0.83334 13.1584 1.50001L7.13412 11.9343C6.61349 12.836 5.23322 12.4409 5.26867 11.4002L5.4951 4.75389C5.50903 4.34503 5.27251 3.96891 4.89798 3.80433L0.599541 1.91552C-0.391405 1.48008 -0.0805654 6.56224e-06 1.00183 6.65535e-06L12.2923 6.9844e-06Z" fill="#1CCE4B"/></svg>
+                <svg class="pillar-shape" data-pillar="3" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0667 3.07413C14.0976 6.37309 11.8051 11.0711 8.50615 13.102C5.20719 15.1328 6.53953 10.6248 4.50868 7.32584C2.47782 4.02688 -2.1472 3.18623 1.15177 1.15537C4.45073 -0.875483 10.0359 -0.224833 12.0667 3.07413Z" fill="#9E5CBF"/></svg>
+              </div>
               <ol class="pillars">
                 <li class="pillar is-active" data-pillar="0">
                   <button type="button" class="pillar-title" aria-current="true">Culture</button>
