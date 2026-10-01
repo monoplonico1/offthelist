@@ -160,7 +160,7 @@ a { color: inherit; }
 
 /* ---------- How it works ---------- */
 
-.sec-how .canvas { display: flex; flex-direction: column; gap: 32px; padding: 80px 20px 0; }
+.sec-how .canvas { display: flex; flex-direction: column; gap: 32px; padding: 100px 20px 0; }
 .how-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 31.25px; }
 .sec-how .display { font-size: clamp(36px, 7vw, 59.89px); line-height: 1.02; }
 .how-body { color: #444; font-size: 16px; line-height: 30px; }
@@ -175,7 +175,7 @@ a { color: inherit; }
 
 /* ---------- Approach ---------- */
 
-.sec-approach .canvas { padding: 80px 20px 0; }
+.sec-approach .canvas { padding: 100px 20px 0; }
 .approach .eyebrow { font-size: 14px; }
 .approach .display { margin-top: 18px; font-size: clamp(36px, 7vw, 59.89px); line-height: 1.02; }
 .steps { display: grid; gap: 22px; margin-top: 54px; }
@@ -188,7 +188,7 @@ a { color: inherit; }
 
 /* ---------- Mystery + pilares ---------- */
 
-.sec-mystery .canvas { display: flex; flex-direction: column; gap: 40px; padding: 80px 20px 0; }
+.sec-mystery .canvas { display: flex; flex-direction: column; gap: 40px; padding: 100px 20px 0; }
 .mystery-card { display: none; }
 .mystery-traveller { display: none; }
 .mystery-copy {
@@ -204,7 +204,7 @@ a { color: inherit; }
 .mystery-body { display: flex; flex-direction: column; gap: 22.13px; color: #fff; font-size: 13.67px; line-height: 22.13px; }
 .mystery-copy .ctas { gap: 10px; }
 
-.pillars-head { display: flex; flex-direction: column; align-items: flex-end; gap: 32px; }
+.pillars-head { display: flex; flex-direction: column; align-items: flex-end; gap: 32px; margin-bottom: 60px; }
 .display-right { text-align: right; font-size: clamp(36px, 7vw, 66.33px); line-height: 1.02; }
 .pillars-line { width: 100%; transform: rotate(180deg); }
 .blob-pillars {
@@ -227,7 +227,7 @@ a { color: inherit; }
 
 /* ---------- Galería + testimonios ---------- */
 
-.sec-stories .canvas { padding: 80px 0 0; }
+.sec-stories .canvas { padding: 100px 0 0; }
 .gallery {
   display: flex;
   gap: 14px;
@@ -263,7 +263,7 @@ a { color: inherit; }
 
 /* ---------- Cierre ---------- */
 
-.sec-footer { margin-top: 80px; background: var(--coral); color: #fff; }
+.sec-footer { margin-top: 100px; background: var(--coral); color: #fff; }
 .footer-wave { display: none; }
 .footer-content { display: flex; flex-direction: column; align-items: center; gap: 28.64px; padding: 80px 20px 64px; text-align: center; }
 .footer-content h2 { max-width: 911.39px; font-weight: 400; font-size: clamp(30px, 6vw, 46.87px); line-height: 1.11; text-transform: uppercase; }
@@ -282,6 +282,24 @@ a { color: inherit; }
 .social img { width: 15.62px; height: 15.62px; }
 .footer-bar { background: var(--dark); padding: 12px 20px; text-align: center; font-size: 16.93px; line-height: 26.04px; }
 
+/* ---------- Animación al hacer scroll (reveal.js) ----------
+   Usa translate/scale y no transform, para no pisar los transform
+   que ya tienen algunos elementos (botones, línea, fotos volteadas). */
+
+.reveal {
+  opacity: 0;
+  translate: 0 40px;
+  transition:
+    opacity .8s ease var(--reveal-delay, 0ms),
+    translate .9s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms),
+    scale .9s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms);
+}
+.reveal-fade { translate: 0 -16px; }
+.reveal-zoom { translate: 0 24px; scale: .94; }
+.reveal-left { translate: -60px 0; }
+.reveal-right { translate: 60px 0; }
+.reveal.is-in { opacity: 1; translate: 0 0; scale: 1; }
+
 /* =========================================================
    Escritorio: la maqueta de 1440 px. scale.js le aplica zoom
    para que ocupe todo el ancho de la ventana, sea cual sea.
@@ -297,13 +315,20 @@ a { color: inherit; }
   }
   .canvas > * { position: absolute; }
 
+  /* Unos 100 px de aire entre bloques: cada margen completa lo que
+     faltaba respecto al Figma (77, 72 y 65 px de origen). */
+  .sec-approach { margin-top: 23px; }
+  .sec-mystery { margin-top: 28px; }
+  .sec-footer { margin-top: 35px; }
+
   .deco-grid {
     display: block;
     position: absolute;
     top: 0;
+    bottom: 0;
     left: calc(50% - 720px + 407.52px);
     width: 624.95px;
-    height: 6409.69px;
+    height: 100%;
     max-width: none;
     z-index: -2;
   }
@@ -357,7 +382,7 @@ a { color: inherit; }
   .steps { grid-template-columns: repeat(3, 1fr); height: 520px; }
 
   /* Mystery + pilares: 2666 – 4551 */
-  .sec-mystery { height: 1884.63px; }
+  .sec-mystery { height: 1909.63px; }
   .sec-mystery .canvas { display: block; padding: 0; }
   .mystery-card {
     display: block;
@@ -391,12 +416,12 @@ a { color: inherit; }
   }
   .mystery-copy { top: 173.83px; left: 716.51px; width: 559.86px; padding: 0; background: none; border-radius: 0; }
   .mystery-copy .serif-title { font-size: 60px; }
-  .pillars-head { top: 907.49px; left: 130.85px; width: 1159.42px; gap: 67.16px; }
+  .pillars-head { top: 907.49px; margin: 0; left: 130.85px; width: 1159.42px; gap: 67.16px; }
   .display-right { font-size: 66.33px; line-height: 67.77px; }
   .pillars-line { width: 1145.1px; max-width: none; }
-  .blob-pillars { top: 1253.17px; left: 130.85px; width: 573.53px; height: 573.53px; }
-  .pillars-dot { display: block; top: 1287.67px; left: 597.61px; width: 48.17px; height: 48.17px; }
-  .pillars { top: 1348.86px; left: 778.59px; width: 559.86px; }
+  .blob-pillars { top: 1278.17px; left: 130.85px; width: 573.53px; height: 573.53px; }
+  .pillars-dot { display: block; top: 1312.67px; left: 597.61px; width: 48.17px; height: 48.17px; }
+  .pillars { top: 1373.86px; left: 778.59px; width: 559.86px; }
   .pillars h3, .pillar-rest { font-size: 59.89px; line-height: 61.19px; }
 
   /* Galería + testimonios: 4551 – 5705 */
@@ -436,7 +461,7 @@ a { color: inherit; }
   .quote figcaption { flex: 1; align-items: flex-start; }
 
   /* Cierre: 5705 – 6410 */
-  .sec-footer { height: 705.03px; margin-top: 0; background: none; }
+  .sec-footer { height: 705.03px; background: none; }
   .footer-wave { display: block; top: 25.61px; left: 0; width: 1440px; height: 685.33px; max-width: none; }
   .footer-content { top: 222.3px; left: 141.55px; right: 141.55px; padding: 0; }
   .footer-bar { top: 653.07px; left: 0; width: 1440px; height: 57.46px; padding: 10px 0 0; }
