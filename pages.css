@@ -1,0 +1,282 @@
+/* Off The List — Sample journeys y About.
+   Se carga después de styles.css y reutiliza sus variables, botones, eyebrow,
+   menú y cierre. Medidas del Figma (1440 px); por debajo de 1024 px se apila. */
+
+:root {
+  --sand: #f4f0eb;
+  --ink-deep: #24201f;
+  --card-shadow: 0 22px 52px -10px rgba(43, 17, 19, .17);
+}
+
+.nav-links a[aria-current="page"] { color: var(--coral); }
+
+/* ---------- Piezas compartidas ---------- */
+
+.page-title {
+  color: var(--ink);
+  font-weight: 400;
+  font-size: clamp(38px, 8vw, 66.4px);
+  line-height: 1.06;
+  text-transform: uppercase;
+}
+.page-lead { color: var(--ink); font-size: 18px; line-height: 1.55; }
+
+.photo-card {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  box-shadow: var(--card-shadow);
+}
+.sand-card { background: var(--sand); border-radius: 48px; }
+
+.serif-heading {
+  color: var(--ink-strong);
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(36px, 7vw, 54px);
+  line-height: 1.08;
+  letter-spacing: -1px;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--coral);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.text-link img { width: 16px; height: 16px; transition: translate .2s ease; }
+.text-link:hover img { translate: 4px 0; }
+
+.subpage .sec-footer { margin-top: 0; }
+
+/* ---------- Sample journeys ---------- */
+
+.sj-hero { display: flex; flex-direction: column; gap: 32px; padding: 40px 20px 0; }
+.sj-hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
+.sj-hero-art { max-width: 430px; aspect-ratio: 430 / 615; }
+
+.sj-intro-wrap { padding: 64px 20px 0; }
+.sj-intro { display: flex; flex-direction: column; gap: 24px; padding: 40px 28px; }
+.sj-intro h2 {
+  color: var(--ink-strong);
+  font-weight: 400;
+  font-size: clamp(28px, 6vw, 48px);
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+.sj-intro p { font-size: 17px; line-height: 1.55; }
+
+.journeys { padding: 76px 20px 84px; }
+.journeys-head { display: flex; flex-direction: column; gap: 18px; padding-bottom: 36px; }
+.journeys-head h2 {
+  color: var(--ink-strong);
+  font-weight: 400;
+  font-size: clamp(34px, 7vw, 64px);
+  line-height: 1.06;
+  text-transform: uppercase;
+}
+
+.journey {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 24px;
+  background: var(--cream);
+  border: 1px solid var(--rule);
+  border-radius: 40px;
+}
+.journey + .journey { margin-top: 32px; }
+.journey-art { max-height: 520px; aspect-ratio: 430 / 690; }
+.journey-details { display: flex; flex-direction: column; gap: 23px; color: var(--ink-deep); }
+.journey-region { color: var(--coral); font-size: 22px; }
+.journey-intro { display: flex; flex-direction: column; gap: 12px; }
+.journey-intro h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 50px);
+  line-height: 1.04;
+  letter-spacing: -1px;
+}
+.journey-intro p { font-size: 17px; line-height: 1.5; }
+
+.journey-facts {
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.journey-facts > div { display: flex; flex: 1; flex-direction: column; gap: 6px; }
+.journey-facts dt, .journey-label {
+  color: var(--coral);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.journey-label { letter-spacing: 1.7px; }
+.journey-facts dd { margin: 0; font-size: 16px; line-height: 1.3; }
+
+.journey-keystones, .journey-keystones ul { display: flex; flex-direction: column; gap: 14px; }
+.journey-keystones li { display: flex; gap: 12px; color: var(--ink-soft); font-size: 16px; line-height: 1.48; }
+.journey-keystones li::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 9px;
+  background: url("assets/marker.svg") center / contain no-repeat;
+}
+
+.journey-price { display: flex; flex-direction: column; gap: 3px; }
+.journey-amount { font-family: var(--serif); font-size: 30px; }
+.journey-note { color: var(--ink-soft); font-size: 12px; }
+
+/* ---------- About ---------- */
+
+.about-hero { display: flex; flex-direction: column; gap: 40px; padding: 40px 20px 0; }
+.about-hero-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.about-portrait { max-width: 486px; aspect-ratio: 486 / 680; border-radius: 48px; }
+
+.about-purpose { display: flex; flex-direction: column; gap: 64px; padding: 64px 20px; }
+
+.manifesto { display: flex; flex-direction: column; gap: 32px; padding: 40px 28px; }
+.manifesto-head { display: flex; flex-direction: column; gap: 22px; }
+.manifesto-head h2 {
+  color: var(--ink-strong);
+  font-weight: 400;
+  font-size: clamp(30px, 6vw, 52px);
+  line-height: 1.07;
+  text-transform: uppercase;
+}
+.manifesto-body { display: flex; flex-direction: column; gap: 22px; }
+.manifesto-body p { font-size: 17px; line-height: 1.62; }
+.manifesto-body .manifesto-strong {
+  color: var(--ink-strong);
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.origin { display: flex; flex-direction: column; gap: 40px; }
+.origin-media { position: relative; padding-bottom: 58px; }
+.origin-photo { width: 85%; aspect-ratio: 470 / 602; border-radius: 48px; }
+.origin-year {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 206px;
+  height: 176px;
+  padding: 24px;
+  background: var(--coral);
+  border-radius: 28px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.origin-year .origin-year-num { font-family: var(--serif); font-weight: 700; font-size: 44px; line-height: 1; }
+.origin-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
+.origin-lead { color: var(--ink-strong); font-size: 20px; line-height: 1.55; }
+.origin-body { color: var(--ink-soft); font-size: 16px; line-height: 1.68; }
+.pull-quote { color: var(--ink-strong); font-family: var(--serif); font-style: italic; font-size: 22px; line-height: 1.45; }
+.pull-quote span { color: var(--coral); }
+
+.founder-wrap { padding: 64px 20px; background: var(--sand); }
+.founder { display: flex; flex-direction: column; gap: 40px; padding: 28px; background: var(--cream); border-radius: 48px; }
+.founder-photo { max-width: 430px; aspect-ratio: 430 / 536; border-radius: 28px; }
+.founder-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+.founder-copy .serif-heading { font-size: clamp(36px, 7vw, 50px); letter-spacing: 0; }
+.founder-copy p { font-size: 17px; line-height: 1.62; }
+.founder-copy .founder-role { color: var(--coral); font-size: 14px; line-height: 1.3; letter-spacing: 1.3px; text-transform: uppercase; }
+.founder-copy .founder-quote { color: var(--ink-strong); font-family: var(--serif); font-style: italic; font-size: 23px; line-height: 1.42; }
+
+/* =========================================================
+   Escritorio: medidas del Figma. scale.js escala la página.
+   ========================================================= */
+@media (min-width: 1024px) {
+  .page-title { font-size: 66.4px; line-height: 70.31px; }
+  .page-lead { font-size: 22px; }
+
+  .sec-footer.on-sand { background: var(--sand); }
+
+  /* Sample journeys */
+  .sj-hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    height: 720px;
+    padding: 56px 56px 52px 0;
+  }
+  .sj-hero-copy { width: 749px; padding-left: 60px; }
+  .sj-hero-art { flex: none; width: 430px; height: 615px; max-width: none; }
+
+  .sj-intro-wrap { padding: 0 100px; }
+  .sj-intro {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 66px 96px 76px;
+    border-radius: 80px;
+  }
+  .sj-intro h2 { flex: none; width: 720px; font-size: 48px; }
+
+  .journeys { padding: 76px 0 84px; }
+  .journeys-head { padding: 0 96px 80px; }
+  .journeys-head h2 { width: 730px; font-size: 64px; }
+  .journey {
+    flex-direction: row;
+    align-items: center;
+    gap: 54px;
+    height: 800px;
+    margin: 0 96px;
+    padding: 54px;
+    border-radius: 56px;
+  }
+  .journey + .journey { margin-top: 88px; }
+  .journey-art { flex: none; width: 430px; height: 690px; max-height: none; }
+  .journey-details { width: 656px; }
+  .journey-region { font-size: 28px; }
+  .journey-intro h3 { font-size: 50px; }
+
+  /* About */
+  .about-hero { flex-direction: row; align-items: center; gap: 72px; height: 794px; padding: 86px 150px; }
+  .about-hero-copy { flex: none; width: 594px; }
+  .about-hero .page-lead { width: 530px; font-size: 21px; }
+  .about-hero-media { position: relative; flex: 1; min-width: 0; height: 760px; }
+  .about-portrait { position: absolute; top: 0; right: 0; width: 486px; height: 680px; max-width: none; }
+
+  .about-purpose { gap: 104px; padding: 56px 100px 104px; }
+  .manifesto {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 72px;
+    min-height: 360px;
+    padding: 66px 78px;
+    border-radius: 80px;
+  }
+  .manifesto-head { flex: none; width: 682px; }
+  .manifesto-head h2 { font-size: 52px; }
+  .manifesto-body { flex: 1; }
+
+  .origin { flex-direction: row; align-items: center; gap: 86px; min-height: 660px; }
+  .origin-media { flex: none; width: 554px; height: 660px; padding: 0; }
+  .origin-photo { position: absolute; top: 0; left: 0; width: 470px; height: 602px; }
+  .origin-copy { flex: 1; min-width: 0; }
+  .origin-copy .serif-heading { font-size: 54px; }
+
+  .founder-wrap { padding: 96px 100px; }
+  .founder { flex-direction: row; align-items: center; gap: 70px; min-height: 620px; padding: 54px; }
+  .founder-photo { flex: none; width: 430px; height: 536px; max-width: none; }
+  .founder-copy .serif-heading { font-size: 50px; }
+}

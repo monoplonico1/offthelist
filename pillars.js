@@ -11,17 +11,6 @@
   var n = items.length;
   var actual = 0;
 
-  // Mientras no existan las fotos de cada categoría, se usa la de respaldo.
-  imgs.forEach(function (img) {
-    var respaldo = img.getAttribute('data-fallback');
-    if (!respaldo) return;
-    function usarRespaldo() {
-      if (img.getAttribute('src') !== respaldo) img.setAttribute('src', respaldo);
-    }
-    img.addEventListener('error', usarRespaldo);
-    if (img.complete && img.naturalWidth === 0) usarRespaldo();
-  });
-
   function activar(i) {
     if (i === actual) return;
     actual = i;

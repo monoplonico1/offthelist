@@ -23,7 +23,20 @@
     { sel: '.pillar' },
     { sel: '.shot', paso: 60 },
     { sel: '.testimonials > *' },
-    { sel: '.footer-content > *' }
+    { sel: '.footer-content > *' },
+    // Sample journeys
+    { sel: '.sj-hero-copy > *' },
+    { sel: '.sj-hero-art', tipo: 'zoom' },
+    { sel: '.sj-intro', tipo: 'zoom' },
+    { sel: '.journeys-head > *' },
+    { sel: '.journey', paso: 0 },
+    // About
+    { sel: '.about-hero-copy > *' },
+    { sel: '.about-portrait', tipo: 'zoom' },
+    { sel: '.manifesto', tipo: 'zoom' },
+    { sel: '.origin-media', tipo: 'left' },
+    { sel: '.origin-copy > *' },
+    { sel: '.founder', tipo: 'zoom' }
   ];
 
   var observer = new IntersectionObserver(function (entradas) {
@@ -35,7 +48,7 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
 
   GRUPOS.forEach(function (g) {
-    var paso = g.paso || 110;
+    var paso = g.paso === undefined ? 110 : g.paso;
     document.querySelectorAll(g.sel).forEach(function (el, i) {
       el.classList.add('reveal');
       if (g.tipo) el.classList.add('reveal-' + g.tipo);

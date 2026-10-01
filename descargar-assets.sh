@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Descarga las imágenes del Figma "Off the List" (frame 24:1837) a ./assets.
-# Las URLs las genera el MCP de Figma y caducan a los 7 días (emitidas el 2026-09-30).
+# Las URLs las genera el MCP de Figma y caducan a los 7 días (emitidas el 2026-09-30
+# las de la home, el 2026-10-01 las de pilares, Sample journeys y About).
+# Los archivos que ya existen en assets/ no se vuelven a bajar.
 # Si ya caducaron, vuelve a pedir el design context del nodo y actualiza los IDs.
 set -euo pipefail
 cd "$(dirname "$0")"
@@ -8,6 +10,7 @@ mkdir -p assets
 B=https://www.figma.com/api/mcp/asset
 while read -r archivo id; do
   [ -z "$archivo" ] && continue
+  if [ -s "assets/$archivo" ]; then continue; fi   # ya descargado
   echo "→ $archivo"
   curl -fsSL -o "assets/$archivo" "$B/$id"
 done <<'LISTA'
@@ -51,5 +54,16 @@ instagram.svg 5046b6de-cc27-48e5-aeda-1b57bf54ea96.svg
 facebook.svg a17556b3-ac66-4aa1-9b39-33248a6bf50b.svg
 twitter.svg c22e6dc9-8393-4790-bfbf-479d027f444c.svg
 youtube.svg 3e6590ed-06a9-44dd-a185-1e1bd302b1de.svg
+pillar-adventure.png 2651ad7e-ff60-4a75-ac4c-86c6878fdee6.png
+pillar-explore.png c95c77a6-6063-4fcd-abc5-f43bdd45414e.png
+pillar-transform.png 37fb55ec-70f5-440a-9cc2-41568c325aca.png
+journey-armenia.png a0d1992e-37c6-4fdf-8f72-84df52dbdb50.png
+journey-kyrgyzstan.png c9184cb8-aecb-421f-9948-9c0797b31cb4.png
+journey-morocco.png 82c81619-4a32-4b72-9c1d-c6917e945f03.png
+journey-borneo.png 27967698-5620-46d6-9bb6-769212aa449a.png
+about-hero.png ae43babc-b8a3-4150-9e91-80926d101c26.png
+about-origin.png 26351791-7dde-46a1-9bcf-493bc2b814c7.png
+about-founder.png dea11764-6e48-44fd-a2b9-11ccbbaef725.png
+arrow-right.svg 7806e416-81d2-460d-bb46-7fbe36df20eb.svg
 LISTA
 echo "Listo: $(ls assets | wc -l) archivos en assets/"
