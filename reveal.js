@@ -18,9 +18,9 @@
     { sel: '.mystery-traveller', tipo: 'left' },
     { sel: '.mystery-copy > *' },
     { sel: '.pillars-head > *', tipo: 'right' },
-    { sel: '.blob-pillars', tipo: 'zoom' },
+    { sel: '.pillars-media', tipo: 'zoom' },
     { sel: '.pillars-dot', tipo: 'zoom' },
-    { sel: '.pillar-active, .pillar-rest li' },
+    { sel: '.pillar' },
     { sel: '.shot', paso: 60 },
     { sel: '.testimonials > *' },
     { sel: '.footer-content > *' }

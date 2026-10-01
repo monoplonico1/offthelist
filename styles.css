@@ -35,7 +35,13 @@ h1, h2, h3, p, ol, ul, figure, blockquote { margin: 0; }
 ul { padding: 0; list-style: none; }
 a { color: inherit; }
 
-.page { position: relative; overflow: hidden; }
+.page {
+  position: relative;
+  /* clip y no hidden: hidden rompe el position: sticky de los pilares */
+  overflow-x: clip;
+  /* Alto de la ventana en px del diseño; scale.js lo corrige cuando hay zoom */
+  --vh: 100vh;
+}
 
 /* ---------- Piezas compartidas ---------- */
 
@@ -207,23 +213,69 @@ a { color: inherit; }
 .pillars-head { display: flex; flex-direction: column; align-items: flex-end; gap: 32px; margin-bottom: 60px; }
 .display-right { text-align: right; font-size: clamp(36px, 7vw, 66.33px); line-height: 1.02; }
 .pillars-line { width: 100%; transform: rotate(180deg); }
-.blob-pillars {
-  width: min(573.53px, 100%);
+.pillars-dot { display: none; }
+
+/* ---------- Pilares: sección fija que el scroll recorre (pillars.js) ---------- */
+
+.pillars-track { position: relative; height: calc(var(--vh) * 4); }
+.pillars-stage {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: var(--vh);
+  overflow: hidden;
+}
+.pillars-inner { display: flex; flex-direction: column; gap: 28px; width: 100%; padding: 0 20px; }
+.pillars-media {
+  position: relative;
+  width: min(42vh, 100%);
   aspect-ratio: 1;
   -webkit-mask: url("assets/mask-blob-2.svg") center / 100% 100% no-repeat;
           mask: url("assets/mask-blob-2.svg") center / 100% 100% no-repeat;
 }
-.pillars-dot { display: none; }
-.pillars { display: flex; flex-direction: column; gap: 28.64px; }
-.pillars h3, .pillar-rest {
-  font-weight: 400;
-  font-size: clamp(36px, 7vw, 59.89px);
-  line-height: 1.02;
-  text-transform: uppercase;
+.pillar-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  scale: 1.08;
+  transition: opacity .7s ease, scale 1.4s cubic-bezier(.2, .7, .2, 1);
 }
-.pillar-active { display: flex; flex-direction: column; gap: 6.51px; }
-.pillar-active p { font-size: 19px; line-height: 24.74px; }
-.pillar-rest { display: flex; flex-direction: column; gap: 15.62px; color: var(--muted); }
+.pillar-img.flip { transform: scaleX(-1); }
+.pillar-img.is-active { opacity: 1; scale: 1; }
+
+.pillars { padding: 0; list-style: none; }
+.pillar + .pillar { margin-top: 15.62px; }
+.pillar-title {
+  display: block;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: clamp(30px, 7vw, 59.89px);
+  line-height: 1.02;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color .4s ease;
+}
+.pillar-title:hover { color: var(--coral); }
+.pillar-title:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; border-radius: 4px; }
+.pillar.is-active .pillar-title { color: var(--ink); }
+.pillar-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows .5s ease, opacity .5s ease;
+}
+.pillar-desc p { overflow: hidden; font-size: 17px; line-height: 24.74px; }
+.pillar-desc p::before { content: ""; display: block; height: 6.51px; }
+.pillar-desc p::after { content: ""; display: block; height: 13.02px; }
+.pillar.is-active .pillar-desc { grid-template-rows: 1fr; opacity: 1; }
 
 /* ---------- Galería + testimonios ---------- */
 
@@ -382,7 +434,7 @@ a { color: inherit; }
   .steps { grid-template-columns: repeat(3, 1fr); height: 520px; }
 
   /* Mystery + pilares: 2666 – 4551 */
-  .sec-mystery { height: 1909.63px; }
+  .sec-mystery { height: 1178.6px; }
   .sec-mystery .canvas { display: block; padding: 0; }
   .mystery-card {
     display: block;
@@ -419,10 +471,16 @@ a { color: inherit; }
   .pillars-head { top: 907.49px; margin: 0; left: 130.85px; width: 1159.42px; gap: 67.16px; }
   .display-right { font-size: 66.33px; line-height: 67.77px; }
   .pillars-line { width: 1145.1px; max-width: none; }
-  .blob-pillars { top: 1278.17px; left: 130.85px; width: 573.53px; height: 573.53px; }
-  .pillars-dot { display: block; top: 1312.67px; left: 597.61px; width: 48.17px; height: 48.17px; }
-  .pillars { top: 1373.86px; left: 778.59px; width: 559.86px; }
-  .pillars h3, .pillar-rest { font-size: 59.89px; line-height: 61.19px; }
+
+  /* Pilares: la composición del Figma (573 px de alto), centrada en la ventana */
+  .sec-pillars .canvas > .pillars-track { position: relative; }
+  .pillars-inner { position: relative; display: block; width: 1440px; height: 573.53px; padding: 0; }
+  .pillars-inner > * { position: absolute; }
+  .pillars-media { top: 0; left: 130.85px; width: 573.53px; height: 573.53px; }
+  .pillars-dot { display: block; top: 34.5px; left: 597.61px; width: 48.17px; height: 48.17px; }
+  .pillars { top: 95.69px; left: 778.59px; width: 559.86px; }
+  .pillar-title { font-size: 59.89px; line-height: 61.19px; }
+  .pillar-desc p { font-size: 19px; }
 
   /* Galería + testimonios: 4551 – 5705 */
   .sec-stories { height: 1153.57px; }

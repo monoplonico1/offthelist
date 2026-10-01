@@ -8,7 +8,10 @@
 
   function ajustar() {
     var ancho = document.documentElement.clientWidth;
-    page.style.zoom = ancho >= MIN_ESCRITORIO ? ancho / DISENO : '';
+    var zoom = ancho >= MIN_ESCRITORIO ? ancho / DISENO : 1;
+    page.style.zoom = zoom === 1 ? '' : zoom;
+    // Con zoom, 100vh ya no es el alto de la ventana: se pasa en px del diseño.
+    page.style.setProperty('--vh', window.innerHeight / zoom + 'px');
   }
 
   ajustar();

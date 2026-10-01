@@ -110,7 +110,7 @@
       </div>
     </section>
 
-    <!-- Mystery trips + four pillars -->
+    <!-- Mystery trips + encabezado de los pilares -->
     <section class="sec sec-mystery" id="mystery">
       <div class="canvas">
         <div class="mystery-card" aria-hidden="true"></div>
@@ -133,19 +133,42 @@
           <h2 class="display display-right">Every trip<br>is built on<br>four things.</h2>
           <img class="pillars-line" src="assets/line.svg" alt="" aria-hidden="true">
         </div>
+      </div>
+    </section>
 
-        <div class="blob blob-pillars"><img src="assets/pillars.png" alt="Couple travelling together"></div>
-        <img class="pillars-dot" src="assets/dot.svg" alt="" aria-hidden="true" width="48" height="48">
-        <div class="pillars">
-          <div class="pillar-active">
-            <h3>Culture</h3>
-            <p>Full immersion. Not observation. You're a guest, not a tourist.</p>
+    <!-- Cuatro pilares: la sección se queda fija y el scroll recorre las categorías -->
+    <section class="sec sec-pillars" id="pillars" aria-label="The four things every trip is built on">
+      <div class="canvas">
+        <div class="pillars-track">
+          <div class="pillars-stage">
+            <div class="pillars-inner">
+              <div class="pillars-media">
+                <img class="pillar-img is-active flip" data-pillar="0" src="assets/pillar-culture.png" alt="Couple walking through a souk" data-fallback="assets/pillars.png">
+                <img class="pillar-img" data-pillar="1" src="assets/pillar-adventure.png" alt="" data-fallback="assets/pillars.png">
+                <img class="pillar-img" data-pillar="2" src="assets/pillar-explore.png" alt="" data-fallback="assets/pillars.png">
+                <img class="pillar-img" data-pillar="3" src="assets/pillar-transform.png" alt="" data-fallback="assets/pillars.png">
+              </div>
+              <img class="pillars-dot" src="assets/dot.svg" alt="" aria-hidden="true" width="48" height="48">
+              <ol class="pillars">
+                <li class="pillar is-active" data-pillar="0">
+                  <button type="button" class="pillar-title" aria-current="true">Culture</button>
+                  <div class="pillar-desc"><p>Full immersion. Not observation. You're a guest, not a tourist.</p></div>
+                </li>
+                <li class="pillar" data-pillar="1">
+                  <button type="button" class="pillar-title">Adventure</button>
+                  <div class="pillar-desc"><p>Say yes to the thing you'd normally talk yourself out of. Calibrated to your nerve, not someone else's.</p></div>
+                </li>
+                <li class="pillar" data-pillar="2">
+                  <button type="button" class="pillar-title">Explore</button>
+                  <div class="pillar-desc"><p>Side streets, local tables, places without a review count. Room to wander, built into every day.</p></div>
+                </li>
+                <li class="pillar" data-pillar="3">
+                  <button type="button" class="pillar-title">Transform</button>
+                  <div class="pillar-desc"><p>Come home a little different. Every trip is designed around the feeling you want to bring back.</p></div>
+                </li>
+              </ol>
+            </div>
           </div>
-          <ul class="pillar-rest">
-            <li>Adventure</li>
-            <li>Explore</li>
-            <li>Transform</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -225,5 +248,6 @@
   </div>
   <script src="scale.js"></script>
   <script src="reveal.js"></script>
+  <script src="pillars.js"></script>
 </body>
 </html>
