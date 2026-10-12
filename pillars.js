@@ -3,8 +3,7 @@
 // scroll dentro del track decide qué categoría está activa. Al pulsar una
 // categoría, la página se desplaza hasta su tramo.
 // Una línea de tiempo junto a los títulos se llena con el scroll y llega a
-// cada punto justo cuando se activa su categoría. Mientras la sección está
-// fija, un aviso indica que la página continúa.
+// cada punto justo cuando se activa su categoría.
 (function () {
   var track = document.querySelector('.pillars-track');
   if (!track) return;
@@ -15,13 +14,9 @@
   var n = items.length;
   var actual = 0;
 
-  var stage = document.querySelector('.pillars-stage');
   var linea = document.querySelector('.pillars-progress');
   var relleno = document.querySelector('.pillars-progress-fill');
-  var contador = document.querySelector('.pillars-count');
   var lista = document.querySelector('.pillars-list');
-
-  function dosCifras(x) { return (x < 10 ? '0' : '') + x; }
 
   function activar(i) {
     if (i === actual) return;
@@ -37,7 +32,6 @@
     imgs.forEach(function (el) {
       el.classList.toggle('is-active', Number(el.getAttribute('data-pillar')) === i);
     });
-    if (contador) contador.textContent = dosCifras(i + 1) + ' / ' + dosCifras(n);
   }
 
   // Centro vertical de cada título, en coordenadas de .pillars. Se suma
@@ -79,14 +73,10 @@
   function actualizar() {
     pendiente = false;
     var t = recorrido();
-    var bruto = (window.scrollY - t.inicio) / t.largo;
-    var avance = Math.min(Math.max(bruto, 0), 0.9999);
+    var avance = (window.scrollY - t.inicio) / t.largo;
+    avance = Math.min(Math.max(avance, 0), 0.9999);
     activar(Math.floor(avance * n));
     dibujarLinea(avance);
-    if (stage) {
-      stage.classList.toggle('is-pinned', bruto >= 0 && bruto <= 1);
-      stage.classList.toggle('is-end', bruto > 0.97);
-    }
   }
   function alHacerScroll() {
     if (pendiente) return;
