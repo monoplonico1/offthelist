@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Off The List — Your next favourite trip isn't on your list</title>
   <meta name="description" content="Take a quiz. We build a trip around who you are. You choose whether to know where you're going or find out at the gate.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
   <div class="page">
@@ -83,7 +85,7 @@
           <h2 class="display">Simple &amp; personal.<br>Nothing like anything else.</h2>
           <div class="steps">
             <article class="step">
-              <img class="step-photo" src="assets/step-1.png" alt="">
+              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="A grid of shapes where a few, your answers, light up in colour"><circle cx="81" cy="75" r="13" fill="#E6DDD3"/><g class="art-pick" style="--i:1"><rect x="121" y="63" width="24" height="24" rx="6" fill="#F95157"/></g><path d="M185 61 L199 86 H171 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="237" cy="75" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/><rect x="279" y="65" width="20" height="20" rx="4" fill="#E6DDD3" transform="rotate(45 289 75)"/><path d="M81 111 L95 136 H67 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="133" cy="125" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/><rect x="175" y="115" width="20" height="20" rx="4" fill="#E6DDD3" transform="rotate(45 185 125)"/><g class="art-pick" style="--i:2"><circle cx="237" cy="125" r="13" fill="#FF8C00"/></g><g class="art-pick" style="--i:3"><rect x="277" y="113" width="24" height="24" rx="6" fill="#9E5CBF"/></g><g class="art-pick" style="--i:4"><rect x="71" y="165" width="20" height="20" rx="4" fill="#1CCE4B" transform="rotate(45 81 175)"/></g><circle cx="133" cy="175" r="13" fill="#E6DDD3"/><rect x="173" y="163" width="24" height="24" rx="6" fill="#E6DDD3"/><path d="M237 161 L251 186 H223 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="289" cy="175" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/></svg>
               <div class="step-copy">
                 <p class="step-num">01 · Tell us</p>
                 <h3>We begin with you, not a map.</h3>
@@ -91,7 +93,7 @@
               </div>
             </article>
             <article class="step">
-              <img class="step-photo" src="assets/step-2.png" alt="">
+              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="Scattered dots, with a line joining the right ones into a route"><circle cx="70" cy="60" r="6" fill="#E6DDD3"/><circle cx="200" cy="45" r="6" fill="#E6DDD3"/><circle cx="320" cy="60" r="6" fill="#E6DDD3"/><circle cx="140" cy="200" r="6" fill="#E6DDD3"/><circle cx="200" cy="212" r="6" fill="#E6DDD3"/><circle cx="262" cy="192" r="6" fill="#E6DDD3"/><circle cx="330" cy="210" r="6" fill="#E6DDD3"/><circle cx="40" cy="120" r="6" fill="#E6DDD3"/><path class="art-route" d="M60 170 C 80 120, 95 100, 110 95 S 150 150, 170 150 S 210 80, 230 80 S 280 140, 300 140" fill="none" stroke="#2B1113" stroke-width="2.5" stroke-linecap="round" pathLength="1"/><circle class="art-stop" style="--i:1" cx="60" cy="170" r="11" fill="#F95157"/><circle class="art-stop" style="--i:2" cx="110" cy="95" r="11" fill="#FF8C00"/><circle class="art-stop" style="--i:3" cx="170" cy="150" r="11" fill="#1CCE4B"/><circle class="art-stop" style="--i:4" cx="230" cy="80" r="11" fill="#9E5CBF"/><circle class="art-stop" style="--i:5" cx="300" cy="140" r="11" fill="#F95157"/></svg>
               <div class="step-copy">
                 <p class="step-num">02 · Shape</p>
                 <h3>We join the right dots.</h3>
@@ -99,7 +101,7 @@
               </div>
             </article>
             <article class="step">
-              <img class="step-photo" src="assets/step-3.png" alt="">
+              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="A traveller on a route with a smaller companion orbiting close by"><path d="M20 215 C 110 215, 130 95, 190 118 S 290 70, 352 52" fill="none" stroke="#E6DDD3" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/><circle cx="190" cy="118" r="48" fill="none" stroke="#E6DDD3" stroke-width="1.5" stroke-dasharray="4 6"/><circle cx="190" cy="118" r="24" fill="#F95157"/><g class="art-orbit"><circle cx="238" cy="118" r="9" fill="#9E5CBF"/></g><circle cx="352" cy="52" r="7" fill="#1CCE4B"/></svg>
               <div class="step-copy">
                 <p class="step-num">03 · Be there</p>
                 <h3>We stay close, never in the way.</h3>
@@ -156,24 +158,34 @@
                 <svg class="pillar-shape" data-pillar="2" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.2923 6.9844e-06C13.0621 7.03972e-06 13.5433 0.83334 13.1584 1.50001L7.13412 11.9343C6.61349 12.836 5.23322 12.4409 5.26867 11.4002L5.4951 4.75389C5.50903 4.34503 5.27251 3.96891 4.89798 3.80433L0.599541 1.91552C-0.391405 1.48008 -0.0805654 6.56224e-06 1.00183 6.65535e-06L12.2923 6.9844e-06Z" fill="#1CCE4B"/></svg>
                 <svg class="pillar-shape" data-pillar="3" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0667 3.07413C14.0976 6.37309 11.8051 11.0711 8.50615 13.102C5.20719 15.1328 6.53953 10.6248 4.50868 7.32584C2.47782 4.02688 -2.1472 3.18623 1.15177 1.15537C4.45073 -0.875483 10.0359 -0.224833 12.0667 3.07413Z" fill="#9E5CBF"/></svg>
               </div>
-              <ol class="pillars">
-                <li class="pillar is-active" data-pillar="0">
-                  <button type="button" class="pillar-title" aria-current="true">Culture</button>
-                  <div class="pillar-desc"><p>Full immersion. Not observation. You're a guest, not a tourist.</p></div>
-                </li>
-                <li class="pillar" data-pillar="1">
-                  <button type="button" class="pillar-title">Adventure</button>
-                  <div class="pillar-desc"><p>Say yes to the thing you'd normally talk yourself out of. Calibrated to your nerve, not someone else's.</p></div>
-                </li>
-                <li class="pillar" data-pillar="2">
-                  <button type="button" class="pillar-title">Explore</button>
-                  <div class="pillar-desc"><p>Side streets, local tables, places without a review count. Room to wander, built into every day.</p></div>
-                </li>
-                <li class="pillar" data-pillar="3">
-                  <button type="button" class="pillar-title">Transform</button>
-                  <div class="pillar-desc"><p>Come home a little different. Every trip is designed around the feeling you want to bring back.</p></div>
-                </li>
-              </ol>
+              <div class="pillars">
+                <!-- Línea de tiempo: se va llenando con el scroll (pillars.js) -->
+                <span class="pillars-progress" aria-hidden="true"><span class="pillars-progress-fill"></span></span>
+                <ol class="pillars-list">
+                  <li class="pillar is-active" data-pillar="0">
+                    <button type="button" class="pillar-title" aria-current="true">Culture</button>
+                    <div class="pillar-desc"><p>Full immersion. Not observation. You're a guest, not a tourist.</p></div>
+                  </li>
+                  <li class="pillar" data-pillar="1">
+                    <button type="button" class="pillar-title">Adventure</button>
+                    <div class="pillar-desc"><p>Say yes to the thing you'd normally talk yourself out of. Calibrated to your nerve, not someone else's.</p></div>
+                  </li>
+                  <li class="pillar" data-pillar="2">
+                    <button type="button" class="pillar-title">Explore</button>
+                    <div class="pillar-desc"><p>Side streets, local tables, places without a review count. Room to wander, built into every day.</p></div>
+                  </li>
+                  <li class="pillar" data-pillar="3">
+                    <button type="button" class="pillar-title">Transform</button>
+                    <div class="pillar-desc"><p>Come home a little different. Every trip is designed around the feeling you want to bring back.</p></div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <!-- Aviso de que la página sigue: visible mientras la sección está fija -->
+            <div class="pillars-hint" aria-hidden="true">
+              <span class="pillars-count">01 / 04</span>
+              <span class="pillars-hint-text">Keep scrolling</span>
+              <span class="pillars-hint-arrow"></span>
             </div>
           </div>
         </div>
@@ -253,9 +265,9 @@
       </div>
     </footer>
   </div>
-  <script src="scale.js?v=7"></script>
-  <script src="header.js?v=7"></script>
-  <script src="reveal.js?v=7"></script>
-  <script src="pillars.js?v=7"></script>
+  <script src="scale.js?v=8"></script>
+  <script src="header.js?v=8"></script>
+  <script src="reveal.js?v=8"></script>
+  <script src="pillars.js?v=8"></script>
 </body>
 </html>
