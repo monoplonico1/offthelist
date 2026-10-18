@@ -49,6 +49,17 @@ PAUSAS = {"nothing": 0.9, "surprised": 1.0, "logo": 0.6, "tagline": 1.0}
 
 # Versión corta (~31 s): cada toma dura su frase más un respiro corto,
 # fundidos breves y más cortes secos, cierre y acordes más rápidos.
+def _mover_contraste(tomas, saltos=3):
+    """Lleva las tomas de "nothing" y "everything" `saltos` frases más adelante."""
+    lista = list(tomas)
+    i = next(k for k, t in enumerate(lista) if t[2] == 3)
+    par = lista[i:i + 2]
+    del lista[i:i + 2]
+    lista[i + saltos:i + saltos] = par
+    # quien entra tras el par conserva su fundido; el par llega con corte seco
+    return lista
+
+
 CORTA = {
     "TOMAS": [
         (None, 0.4, None, 0.0, None, None),
@@ -261,11 +272,15 @@ def musica(trabajo, inicio, fin_tomas, total, ir):
     # Dinámica: desaparece en "nothing", crece en "everything", se apaga en el
     # sobre, estalla en la aurora y llena el cierre
     s = inicio
-    env = envolvente([
-        (0, 0), (3.0, 0.55), (s[3] - 0.05, 0.55), (s[3], 0.0), (s[4] - 0.05, 0.0),
-        (s[4], 0.9), (s[5] + 1.0, 0.6), (s[9], 0.65), (s[12], 0.8), (s[13], 0.25),
-        (s[14] - 0.05, 0.2), (s[14], 1.0), (fin_tomas + 1.0, 1.0), (total - 2.0, 0.85), (total, 0),
-    ])
+    linea = {t[2]: k for k, t in enumerate(TOMAS) if t[2]}
+    nada, todo, correr = s[linea[3]], s[linea[4]], s[linea[9]]
+    espera = s[[t[5] for t in TOMAS].index("espera")]
+    aurora, no_se = s[linea[13]], s[linea[12]]
+    env = envolvente(sorted([
+        (0, 0), (3.0, 0.55), (nada - 0.05, 0.55), (nada, 0.0), (todo - 0.05, 0.0),
+        (todo, 0.9), (todo + 2.5, 0.6), (correr, 0.65), (no_se, 0.8), (espera, 0.25),
+        (aurora - 0.05, 0.2), (aurora, 1.0), (fin_tomas + 1.0, 1.0), (total - 2.0, 0.85), (total, 0),
+    ]))
     seca = os.path.join(trabajo, "musica_seca.wav")
     ff("-i", bruto, "-af", "asetnsamples=n=256,volume=eval=frame:volume='%s'" % env, seca)
     out = os.path.join(trabajo, "musica.wav")
@@ -377,17 +392,24 @@ def main():
     ap.add_argument("trabajo")
     ap.add_argument("--salida", default="off-the-list-film-v2.mp4")
     ap.add_argument("--corta", action="store_true", help="versión de ~31 s, más dinámica")
+    ap.add_argument("--contraste-tarde", action="store_true",
+                    help='"I want nothing / everything" tres frases más adelante')
+    ap.add_argument("--solo-voz", action="store_true", help="sin música ni efectos")
     ap.add_argument("--solo-audio", action="store_true",
                     help="rehace la mezcla y reutiliza TRABAJO/video.mp4")
     a = ap.parse_args()
     os.makedirs(a.trabajo, exist_ok=True)
     if a.corta:
         globals().update(CORTA)
+    if a.contraste_tarde:
+        globals()["TOMAS"] = _mover_contraste(TOMAS)
+    print("Orden:", " · ".join("vo%s" % t[2] if t[2] else (t[5] or "negro") for t in TOMAS))
 
     inicio, fin_tomas, total = tiempos()
     vo_ini = {t[2]: inicio[k] + ENTRADA_VOZ for k, t in enumerate(TOMAS) if t[2]}
-    vo_ini[3] = inicio[3] + PAUSAS["nothing"]        # "nothing": más silencio antes
-    vo_ini[13] = inicio[14] + PAUSAS["surprised"]    # "surprised": tras el golpe
+    toma_de = {t[2]: k for k, t in enumerate(TOMAS) if t[2]}
+    vo_ini[3] = inicio[toma_de[3]] + PAUSAS["nothing"]       # "nothing": más silencio antes
+    vo_ini[13] = inicio[toma_de[13]] + PAUSAS["surprised"]   # "surprised": tras el golpe
     vo_ini[14] = fin_tomas + PAUSAS["logo"]          # "Off The List"
     vo_ini[15] = vo_ini[14] + dur(os.path.join(a.piezas, "vo", "14.wav")) + PAUSAS["tagline"]
     print("Total %.1f s" % total)
@@ -395,14 +417,18 @@ def main():
     ir = reverb_ir(a.trabajo)
     ir_corta = reverb_ir(a.trabajo, 0.9, "ir_corta")
     pista_voz = voz(a.piezas, a.trabajo, vo_ini, total, ir_corta)
-    pista_musica = musica(a.trabajo, inicio, fin_tomas, total, ir)
-    pista_efectos = efectos(a.trabajo, inicio, fin_tomas, total, ir)
     mezcla = os.path.join(a.trabajo, "mezcla.wav")
-    ff("-i", pista_voz, "-i", pista_musica, "-i", pista_efectos, "-filter_complex",
-       "[0]asplit=3[v][sc][sc2];[1]volume=0.4[m];[m][sc]sidechaincompress=threshold=0.015:ratio=6:"
-       "attack=40:release=650[md];[2]volume=0.36[e0];[e0][sc2]sidechaincompress=threshold=0.02:"
-       "ratio=3:attack=40:release=500[e];[v][md][e]amix=inputs=3:normalize=0,"
-       "alimiter=limit=0.9,loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", str(SR), mezcla)
+    if a.solo_voz:
+        ff("-i", pista_voz, "-af", "alimiter=limit=0.9,loudnorm=I=-14:TP=-1.5:LRA=11",
+           "-ar", str(SR), mezcla)
+    else:
+        pista_musica = musica(a.trabajo, inicio, fin_tomas, total, ir)
+        pista_efectos = efectos(a.trabajo, inicio, fin_tomas, total, ir)
+        ff("-i", pista_voz, "-i", pista_musica, "-i", pista_efectos, "-filter_complex",
+           "[0]asplit=3[v][sc][sc2];[1]volume=0.4[m];[m][sc]sidechaincompress=threshold=0.015:"
+           "ratio=6:attack=40:release=650[md];[2]volume=0.36[e0];[e0][sc2]sidechaincompress="
+           "threshold=0.02:ratio=3:attack=40:release=500[e];[v][md][e]amix=inputs=3:normalize=0,"
+           "alimiter=limit=0.9,loudnorm=I=-14:TP=-1.5:LRA=11", "-ar", str(SR), mezcla)
     pista_video = os.path.join(a.trabajo, "video.mp4")
     if not (a.solo_audio and os.path.exists(pista_video)):
         pista_video = video(a.piezas, a.trabajo, inicio, fin_tomas, total, vo_ini)
