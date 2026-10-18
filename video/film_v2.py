@@ -44,6 +44,33 @@ MONTAJE = 9.5                   # cierre con todas las imágenes
 FUNDIDO_CIERRE = 0.6
 CAMBIO = 0.32                   # segundos por imagen en el cierre
 ENTRADA_VOZ = 0.55
+ACORDE = 8.0                    # segundos por acorde de la música
+PAUSAS = {"nothing": 0.9, "surprised": 1.0, "logo": 0.6, "tagline": 1.0}
+
+# Versión corta (~31 s): cada toma dura su frase más un respiro corto,
+# fundidos breves y más cortes secos, cierre y acordes más rápidos.
+CORTA = {
+    "TOMAS": [
+        (None, 0.4, None, 0.0, None, None),
+        ("1", 2.3, 1, 0.4, "in", "lago"),
+        ("2", 2.0, 2, 0.3, "izq", "viento"),
+        (None, 1.75, 3, 0.034, None, "grillos"),
+        ("3", 2.0, 4, 0.034, "in", "fuegos"),
+        ("4", 2.15, 5, 0.25, "der", "ciudad"),
+        ("5", 2.25, 6, 0.034, "in", "ola"),
+        ("6", 1.85, 7, 0.25, "out", "mesa"),
+        ("7", 1.9, 8, 0.3, "in", "quieto"),
+        ("8", 1.7, 9, 0.034, "der", "galope"),
+        ("9", 1.75, 10, 0.25, "out", "tren"),
+        ("10", 1.8, 11, 0.3, "in", "olas"),
+        ("12", 2.45, 12, 0.25, "izq", "aeropuerto"),
+        ("11", 0.8, None, 0.2, "in", "espera"),
+        ("13", 2.3, 13, 0.034, "out", "aurora"),
+    ],
+    "MONTAJE": 6.0, "FUNDIDO_CIERRE": 0.3, "CAMBIO": 0.18, "ENTRADA_VOZ": 0.3,
+    "ACORDE": 4.0,
+    "PAUSAS": {"nothing": 0.45, "surprised": 0.55, "logo": 0.35, "tagline": 0.45},
+}
 
 
 def run(cmd):
@@ -201,7 +228,7 @@ MELODIA = [739.99, 659.26, 587.33, 493.88, 440.00, 587.33, 659.26, 739.99, 880.0
 
 
 def musica(trabajo, inicio, fin_tomas, total, ir):
-    seg, solape = 8.0, 3.0
+    seg, solape = ACORDE, min(3.0, ACORDE * 0.4)
     partes = []
     n = int(math.ceil(total / seg)) + 1
     for i in range(n):
@@ -258,7 +285,7 @@ def efectos(trabajo, inicio, fin_tomas, total, ir):
         largo = fin - ini
         ms = int(ini * 1000)
         capas.append(wav("sfx_" + nombre, trabajo,
-                         graph + ",atrim=0:%.3f,afade=t=in:d=0.35,afade=t=out:st=%.3f:d=0.7,"
+                         graph.replace("{L}", "%.3f" % largo) + ",atrim=0:%.3f,afade=t=in:d=0.35,afade=t=out:st=%.3f:d=0.7,"
                          "volume=%.2f,adelay=%d|%d" % (largo, max(largo - 0.7, 0), vol, ms, ms),
                          total, srcs))
 
@@ -310,7 +337,7 @@ def efectos(trabajo, inicio, fin_tomas, total, ir):
          "[h][j]amix=inputs=2:normalize=0", [ruido("brown", 13), ruido("pink", 14, 0.9)], vol=0.7)
     # La espera: un soplo inverso que crece hasta el golpe de la aurora
     capa("espera", k["espera"], "[0]highpass=f=400,lowpass=f=6000,"
-         "volume=eval=frame:volume='pow(t/2.9,3)'", [ruido("pink", 15, 0.8)], extra=-0.6, vol=0.9)
+         "volume=eval=frame:volume='pow(t/{L},3)'", [ruido("pink", 15, 0.8)], extra=-0.6, vol=0.9)
     # Golpes graves: aurora y aparición del logo
     golpe = "0.6*sin(2*PI*(30+28*exp(-3*t))*t)*exp(-1.4*t)*(1-exp(-300*t))"
     for nombre, t in (("golpe1", inicio[k["aurora"]]), ("golpe2", fin_tomas - 0.1)):
@@ -349,17 +376,20 @@ def main():
     ap.add_argument("piezas")
     ap.add_argument("trabajo")
     ap.add_argument("--salida", default="off-the-list-film-v2.mp4")
+    ap.add_argument("--corta", action="store_true", help="versión de ~31 s, más dinámica")
     ap.add_argument("--solo-audio", action="store_true",
                     help="rehace la mezcla y reutiliza TRABAJO/video.mp4")
     a = ap.parse_args()
     os.makedirs(a.trabajo, exist_ok=True)
+    if a.corta:
+        globals().update(CORTA)
 
     inicio, fin_tomas, total = tiempos()
     vo_ini = {t[2]: inicio[k] + ENTRADA_VOZ for k, t in enumerate(TOMAS) if t[2]}
-    vo_ini[3] = inicio[3] + 0.9                      # "nothing": más silencio antes
-    vo_ini[13] = inicio[14] + 1.0                    # "surprised": tras el golpe
-    vo_ini[14] = fin_tomas + 0.6                     # "Off The List"
-    vo_ini[15] = vo_ini[14] + dur(os.path.join(a.piezas, "vo", "14.wav")) + 1.0
+    vo_ini[3] = inicio[3] + PAUSAS["nothing"]        # "nothing": más silencio antes
+    vo_ini[13] = inicio[14] + PAUSAS["surprised"]    # "surprised": tras el golpe
+    vo_ini[14] = fin_tomas + PAUSAS["logo"]          # "Off The List"
+    vo_ini[15] = vo_ini[14] + dur(os.path.join(a.piezas, "vo", "14.wav")) + PAUSAS["tagline"]
     print("Total %.1f s" % total)
 
     ir = reverb_ir(a.trabajo)
