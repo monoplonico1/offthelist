@@ -15,3 +15,19 @@ python3 video/montar.py ruta/a/piezas --salida film-4k.mp4 --4k
 ```
 
 Requiere ffmpeg. Audio normalizado a −14 LUFS.
+
+## v2 — "I want"
+
+`film_v2.py` monta la versión poema: 15 líneas de voz con mucho aire, una
+imagen por línea, negro en "I want nothing", el sobre como pausa antes de
+la aurora y un cierre con todas las imágenes pasando rápido bajo una capa
+negra, con `cierre-logo.png` y `cierre-tagline.png` (logo nuevo:
+`logo-nuevo.svg`). Cinemascope 2.39:1, grano y viñeta.
+
+La música y los efectos están sintetizados con ffmpeg: son temporales hasta
+tener pistas definitivas.
+
+```bash
+python3 video/film_v2.py PIEZAS TRABAJO --salida film-v2.mp4
+python3 video/film_v2.py PIEZAS TRABAJO --salida film-v2.mp4 --solo-audio   # solo remezcla
+```
