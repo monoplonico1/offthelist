@@ -332,10 +332,17 @@
       return el.complete && el.naturalWidth > 0;
     }
     function reproducir(el) { if (el && el.tagName === 'VIDEO') { var p = el.play(); if (p && p.catch) p.catch(function () {}); } }
+    // El acercamiento del portal se ve una sola vez y se queda quieto en su último cuadro.
+    function acercar(el) {
+      el = el && fuente(el);
+      if (!el || el.tagName !== 'VIDEO') return;
+      try { el.currentTime = 0; } catch (err) {}
+      reproducir(el);
+    }
 
     // Precarga: fondos y portales de todos los estados.
     var medios = ESTADOS.map(function (e) {
-      return { bg: crearMedio(e.bg, true), portal: e.portal ? crearMedio(e.portal, true) : null };
+      return { bg: crearMedio(e.bg, true), portal: e.portal ? crearMedio(e.portal, false) : null };
     });
 
     // ---------- Índice de capítulos ----------
@@ -567,12 +574,9 @@
       ponerCursor(false);
       salirInfo();
       var siguiente = actual + 1;
-      if (m.tagName === 'VIDEO') {
-        m.loop = false;
-        try { m.currentTime = 0; } catch (err) {}
-        reproducir(m);
-      }
-      var esperado = m.tagName === 'VIDEO' && isFinite(m.duration) ? Math.max(VIAJE, m.duration * 1000 - 120) : VIAJE + 500;
+      // Si el acercamiento aún no termina, se espera a su último cuadro, que es el fondo nuevo.
+      var resta = m.tagName === 'VIDEO' && isFinite(m.duration) && !m.ended ? (m.duration - m.currentTime) * 1000 : 0;
+      var esperado = Math.max(VIAJE, resta) + 120;
       if (quieto) esperado = VIAJE;
       var hecho = false;
       function llegar() {
@@ -585,14 +589,13 @@
         listoFondo.then(function () {
           canvas.classList.add('is-hidden');
           setTimeout(function () {
-            if (m.tagName === 'VIDEO') { m.loop = true; m.pause(); }
             actual = siguiente;
             pintarInfo(actual);
             entrarInfo();
             aparicion = 0;
             modo = 'idle';
             canvas.classList.remove('is-hidden');
-            reproducir(medios[actual].portal);
+            acercar(medios[actual].portal);
           }, 700);
         });
       }
@@ -615,7 +618,7 @@
         aparicion = 0; modo = 'idle';
         $('veil').classList.remove('is-on');
         entrarInfo();
-        reproducir(medios[k].portal);
+        acercar(medios[k].portal);
       }, 650);
     }
     function reiniciar() { irA(0); }
@@ -674,7 +677,7 @@
       ponerFondo(0);
       pintarInfo(0);
       loader.classList.add('is-done');
-      setTimeout(function () { entrarInfo(); modo = 'idle'; aparicion = 0; reproducir(medios[0].portal); }, 500);
+      setTimeout(function () { entrarInfo(); modo = 'idle'; aparicion = 0; acercar(medios[0].portal); }, 500);
       setTimeout(function () { intro.pause(); }, 1300);
     }
     $('skip').addEventListener('click', terminarIntro);

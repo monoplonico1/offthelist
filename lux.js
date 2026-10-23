@@ -124,21 +124,48 @@
   if (pin && pista && window.innerWidth > 760) pin.style.height = (pista.scrollWidth - window.innerWidth + window.innerHeight) + 'px';
   cuadro();
 
-  // --- Hero: "I want to …" con imagen y frase rotando -----------------------
+  // --- Hero: "I want to …" con video (o imagen) y frase rotando ----------
+  // Con video, cada toma pasa a la siguiente un poco antes de terminar; con
+  // imagen, cada 4,2 s. Con "reducir movimiento" se queda el primer cuadro.
   var hero = document.querySelector('[data-rotator]');
   if (hero) {
     var slides = hero.querySelectorAll('.slide');
     var frases = hero.querySelectorAll('.phrase');
-    var k = 0;
+    var k = 0, espera = null;
+    function videoDe(n) { return slides[n] && slides[n].querySelector('video'); }
+    function siguiente() { mostrar((k + 1) % slides.length); }
     function mostrar(n) {
+      var previo = videoDe(k);
+      k = n;
       slides.forEach(function (s, i) { s.classList.toggle('is-active', i === n); });
       frases.forEach(function (f, i) {
         f.classList.toggle('is-active', i === n);
         f.classList.toggle('is-out', i === (n - 1 + frases.length) % frases.length);
       });
       hero.querySelectorAll('.counter b').forEach(function (b) { b.textContent = '0' + (n + 1); });
+      if (quieto) return;
+      clearTimeout(espera);
+      var v = videoDe(n);
+      if (v) {
+        try { v.currentTime = 0; } catch (e) {}
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+        // Si el video no avanza (sin red, sin códec), la rotación sigue igual
+        espera = setTimeout(siguiente, 11000);
+        var proximo = videoDe((n + 1) % slides.length);
+        if (proximo) proximo.preload = 'auto';
+      } else {
+        espera = setTimeout(siguiente, 4200);
+      }
+      if (previo && previo !== v) setTimeout(function () { previo.pause(); }, 1900);
     }
+    slides.forEach(function (s, i) {
+      var v = s.querySelector('video');
+      if (!v) return;
+      v.addEventListener('timeupdate', function () {
+        if (i === k && v.duration && v.duration - v.currentTime < 1.4) siguiente();
+      });
+    });
     mostrar(0);
-    if (!quieto) setInterval(function () { k = (k + 1) % slides.length; mostrar(k); }, 4200);
   }
 })();
