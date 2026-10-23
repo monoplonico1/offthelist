@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Off The List — The experience</title>
-  <meta name="description" content="Jump from one emerging destination to the next. An immersive way into Off The List.">
+  <meta name="description" content="The Off The List story, one chapter at a time: who you are, how we design, and the surprise at the end.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <style>
@@ -87,7 +87,7 @@
 
     /* ---------- Destino actual ---------- */
     .info {
-      position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: calc(var(--gutter) + 46px);
+      position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: calc(var(--gutter) + 72px);
       display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px;
       pointer-events: none;
     }
@@ -106,10 +106,16 @@
     .giant.is-out .c > span { transform: translateY(-102%); transition-duration: .6s; transition-delay: calc(var(--i) * 20ms); transition-timing-function: cubic-bezier(.7, 0, .84, 0); }
     .fade { transition: opacity .8s ease, transform .8s var(--ease); }
     .is-leaving .fade { opacity: 0; transform: translateY(-10px); }
-    .facts { display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 18px 34px; min-width: 300px; padding-bottom: 10px; }
-    .facts div { border-top: 1px solid rgba(255,255,255,.3); padding-top: 10px; }
-    .facts dt { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.62); margin-bottom: 4px; }
-    .facts dd { font-size: 14px; }
+    .copy { display: grid; gap: 18px; justify-items: start; max-width: 360px; padding-bottom: 10px; }
+    .copy p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.84); padding-top: 14px; border-top: 1px solid rgba(255,255,255,.3); }
+    .more { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; padding-bottom: 6px; background: linear-gradient(var(--coral), var(--coral)) 0 100% / 100% 1px no-repeat; }
+    .more:empty { display: none; }
+    .info > div { display: flex; flex-direction: column; align-items: flex-start; }
+    .info > div .giant { align-self: stretch; }
+    .has-phrases .tagline { order: 1; margin: 18px 0 0; font-size: clamp(30px, 3.8vw, 60px); color: #fff; }
+    .has-phrases .final-ctas { order: 2; }
+    .tagline .ph { display: inline-block; transition: opacity .6s ease, transform .6s var(--ease); }
+    .tagline .ph.is-swap { opacity: 0; transform: translateY(10px); }
     .final-ctas { display: none; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
     .is-final .final-ctas { display: flex; }
     .ghost {
@@ -123,13 +129,21 @@
     /* ---------- Lista de destinos ---------- */
     .list {
       position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: var(--gutter);
-      display: flex; gap: 22px; flex-wrap: wrap; justify-content: space-between;
-      padding-top: 14px; border-top: 1px solid rgba(255,255,255,.22);
-      font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+      display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px;
+      font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
     }
-    .list li { color: rgba(255,255,255,.4); transition: color .6s; }
-    .list li.is-trip { color: rgba(255,255,255,.75); }
-    .list li.is-active { color: var(--coral); }
+    .list button {
+      display: grid; gap: 6px; width: 100%; text-align: left; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.5);
+      font-size: inherit; letter-spacing: inherit; text-transform: inherit;
+      transition: color .5s, border-color .5s;
+    }
+    .list button:hover { color: #fff; }
+    .list b { font-weight: 500; color: rgba(255,255,255,.4); }
+    .list .is-active { color: #fff; border-color: var(--coral); }
+    .list .is-active b { color: var(--coral); }
+    .veil { position: fixed; inset: 0; z-index: 4; background: #000; opacity: 0; pointer-events: none; transition: opacity .6s ease; }
+    .veil.is-on { opacity: 1; }
 
     /* ---------- Precarga ---------- */
     .loader { position: fixed; inset: 0; z-index: 20; background: #000; transition: opacity 1.2s ease, visibility 1.2s; }
@@ -168,16 +182,16 @@
       .top { grid-template-columns: 1fr auto; }
       .top nav { display: none; }
       .top .begin { display: none; }
-      .info { grid-template-columns: 1fr; gap: 22px; bottom: calc(var(--gutter) + 40px); }
-      .facts { min-width: 0; gap: 12px 24px; }
-      .list { gap: 8px 16px; justify-content: flex-start; }
-      .list li:not(.is-trip) { display: none; }
+      .info { grid-template-columns: 1fr; gap: 22px; bottom: calc(var(--gutter) + 52px); }
+      .list { gap: 6px; }
+      .list span { display: none; }
+      .list button { padding-top: 8px; }
     }
     @media (max-width: 560px) {
       .top .logo { width: 116px; }
       .switch { font-size: 10px; letter-spacing: .1em; }
       .switch a, .switch span { padding: 7px 10px; }
-      .facts dd { font-size: 13px; }
+      .copy p { font-size: 14px; }
       .tagline { font-size: 22px; }
     }
     @media (max-height: 640px) and (min-width: 961px) {
@@ -191,7 +205,7 @@
     <div class="bar" id="bar"></div>
     <button class="skip" id="skip" type="button">Skip intro</button>
     <img class="loader-logo" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48">
-    <video id="intro" muted playsinline preload="auto" poster="assets/lux/lago.jpg"><source src="assets/immersive/to-georgia.mp4" type="video/mp4"><source src="assets/immersive/to-georgia.webm" type="video/webm"></video>
+    <video id="intro" muted playsinline preload="auto" poster="assets/lux/lago.jpg"><source src="assets/immersive/to-lago.mp4" type="video/mp4"><source src="assets/immersive/to-lago.webm" type="video/webm"></video>
     <div class="loader-ui">
       <p>Personalized journeys to emerging destinations</p>
       <div class="counter"><span id="count">000</span><i>%</i></div>
@@ -220,22 +234,23 @@
 
     <section class="info" id="info" aria-live="polite">
       <div>
-        <p class="chapter fade"><b id="chapNum">01</b><span>/ 04</span><span id="region"></span></p>
-        <p class="tagline fade" id="tagline"></p>
+        <p class="chapter fade"><b id="chapNum">01</b><span>/ 08</span><span id="region"></span></p>
+        <p class="tagline fade"><span class="ph" id="tagline"></span></p>
         <h1 class="giant" id="giant"></h1>
         <div class="final-ctas">
           <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a>
           <button class="ghost" id="restart" type="button">Start again</button>
         </div>
       </div>
-      <dl class="facts fade" id="facts"></dl>
+      <div class="copy fade"><p id="body"></p><a class="more" id="more"></a></div>
     </section>
 
-    <ul class="list" id="list"></ul>
+    <nav class="list" id="list" aria-label="Chapters"></nav>
+    <div class="veil" id="veil"></div>
   </main>
 
   <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="ring"><span id="ringText">Travel</span></div>
+  <div class="cursor-ring" id="ring"><span id="ringText">Next</span></div>
 
   <script>
   (function () {
@@ -243,25 +258,44 @@
     var QUIZ = 'https://off-the-list-poc.vercel.app/#entry';
     var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Cada estado: fondo propio y lo que se ve a través del portal (el siguiente destino).
+    // Ocho capítulos: la misma historia que la versión clásica. El portal de
+    // cada capítulo muestra el acercamiento a la imagen del siguiente.
+    function viaje(img) { return { video: 'assets/immersive/to-' + img, poster: 'assets/lux/' + img + '.jpg' }; }
     var ESTADOS = [
-      { name: 'Georgia', region: 'South Caucasus', tagline: 'A table in the Caucasus.',
-        bg: { video: 'assets/immersive/georgia-bg', poster: 'assets/lux/lago.jpg' },
-        portal: { video: 'assets/immersive/to-kyrgyzstan', poster: 'assets/lux/caballos.jpg' }, label: 'Jump to Kyrgyzstan',
-        facts: [['Flight', '~13 h from New York'], ['Best season', 'May – October'], ['Nights', '9, from US$16,200'], ['Signature', 'A supra in Kakheti']] },
-      { name: 'Kyrgyzstan', region: 'Central Asia', tagline: 'The eagle and the horizon.',
-        bg: { img: 'assets/lux/caballos.jpg' },
-        portal: { video: 'assets/immersive/to-greenland', poster: 'assets/lux/aurora.jpg' }, label: 'Jump to Greenland',
-        facts: [['Flight', '~15 h from New York'], ['Best season', 'June – September'], ['Nights', '10, from US$18,400'], ['Signature', 'Dawn with the eagle hunters']] },
-      { name: 'Greenland', region: 'The Arctic', tagline: 'Light at the end of the world.',
-        bg: { img: 'assets/lux/aurora.jpg' },
-        portal: { img: 'assets/immersive/next-mystery.jpg' }, label: 'Open your destination',
-        facts: [['Flight', '~7 h from New York'], ['Best season', 'September – March'], ['Nights', '7, from US$24,500'], ['Signature', 'The aurora from your bed']] },
-      { name: 'Yours', region: 'Off the list', tagline: 'The one place we have not chosen yet.',
-        bg: { img: 'assets/immersive/next-mystery.jpg' }, portal: null, final: true,
-        facts: [['Flight', 'From wherever you are'], ['Best season', 'Whenever you are ready'], ['Nights', 'As many as it takes'], ['Signature', 'Designed for one']] }
+      { title: 'I want to', short: 'I want to', region: 'Personalized journeys',
+        phrases: ['find myself.', 'get lost.', 'feel alive.', 'be surprised.'],
+        body: 'Private journeys designed for one person, one family, one feeling. To the places the world has not discovered yet.',
+        bg: { video: 'assets/immersive/lago-bg', poster: 'assets/lux/lago.jpg' }, portal: viaje('callejon') },
+      { title: 'Who', short: 'Who', region: 'Manifesto',
+        tagline: 'We don\u2019t start with where.',
+        body: 'We start with who. How you move, what you avoid, what makes you come alive. The destination comes last.',
+        bg: { img: 'assets/lux/callejon.jpg' }, portal: viaje('mesa') },
+      { title: 'Tell us', short: 'Tell us', region: 'The method · I',
+        tagline: 'Fifteen minutes. Honest answers.',
+        body: 'A questionnaire about how you travel, what you would never repeat and what you would never admit you want.',
+        bg: { img: 'assets/lux/mesa.jpg' }, portal: viaje('canon') },
+      { title: 'We design', short: 'We design', region: 'The method · II',
+        tagline: 'Every answer, studied in depth.',
+        body: 'Each answer becomes a private route: the place, the houses, the guides, the doors that do not open for anyone else.',
+        bg: { img: 'assets/lux/canon.jpg' }, portal: viaje('aeropuerto') },
+      { title: 'You arrive', short: 'You arrive', region: 'The method · III',
+        tagline: 'With you, every step.',
+        body: 'From the day you book to the flight home, we follow your journey and are on hand, day and night, whenever plans need to change.',
+        bg: { img: 'assets/lux/aeropuerto.jpg' }, portal: viaje('caballos') },
+      { title: 'Off the map', short: 'Off the map', region: 'Where we go',
+        tagline: 'Places that are still themselves.',
+        body: 'Somewhere the crowd has not reached yet. Sometimes we will not even tell you where until you are at the gate.',
+        more: { text: 'See sample journeys →', href: 'sample-journeys.html' },
+        bg: { img: 'assets/lux/caballos.jpg' }, portal: viaje('sobre') },
+      { title: 'Surprise', short: 'Surprise', region: 'The mystery',
+        tagline: 'Or don\u2019t tell us where.',
+        body: 'Choose to know nothing. A sealed envelope, a few clues, and the destination revealed when you are ready.',
+        bg: { img: 'assets/lux/sobre.jpg' }, portal: viaje('aurora') },
+      { title: 'Begin', short: 'Begin', region: 'Your journey', final: true,
+        tagline: 'Ready to be surprised?',
+        body: 'Fifteen minutes. Honest answers. One journey designed entirely around who you are.',
+        bg: { img: 'assets/lux/aurora.jpg' }, portal: null }
     ];
-    var LISTA = ['Georgia', 'Uzbekistan', 'Albania', 'Oman', 'Kyrgyzstan', 'Colombia', 'Zanzibar', 'Greenland'];
 
     var $ = function (id) { return document.getElementById(id); };
     var bg = $('bg'), canvas = $('portal'), ctx = canvas.getContext('2d');
@@ -305,13 +339,14 @@
       return { bg: crearMedio(e.bg, true), portal: e.portal ? crearMedio(e.portal, true) : null };
     });
 
-    // ---------- Lista y textos ----------
-    LISTA.forEach(function (n) {
-      var li = document.createElement('li');
-      li.textContent = n;
-      if (ESTADOS.some(function (e) { return e.name === n; })) li.className = 'is-trip';
-      li.dataset.name = n;
-      $('list').appendChild(li);
+    // ---------- Índice de capítulos ----------
+    ESTADOS.forEach(function (e, k) {
+      var bt = document.createElement('button');
+      bt.type = 'button';
+      bt.innerHTML = '<b>0' + (k + 1) + '</b><span>' + e.short + '</span>';
+      bt.setAttribute('aria-label', 'Chapter ' + (k + 1) + ': ' + e.short);
+      bt.addEventListener('click', function () { irA(k); });
+      $('list').appendChild(bt);
     });
 
     function escribirTitulo(texto) {
@@ -319,7 +354,7 @@
       giant.setAttribute('aria-label', texto);
       texto.split('').forEach(function (ch, i) {
         var c = document.createElement('span'); c.className = 'c'; c.setAttribute('aria-hidden', 'true');
-        var s = document.createElement('span'); s.textContent = ch; s.style.setProperty('--i', i);
+        var s = document.createElement('span'); s.textContent = ch === ' ' ? '\u00a0' : ch; s.style.setProperty('--i', i);
         c.appendChild(s); giant.appendChild(c);
       });
     }
@@ -330,18 +365,40 @@
       var ancho = giant.scrollWidth;
       if (ancho > hueco) giant.style.fontSize = (parseFloat(getComputedStyle(giant).fontSize) * hueco / ancho * .98) + 'px';
     }
+    var rotar = null;
     function pintarInfo(k) {
-      var e = ESTADOS[k];
+      var e = ESTADOS[k], sig = ESTADOS[k + 1];
       $('chapNum').textContent = '0' + (k + 1);
       $('region').textContent = '· ' + e.region;
-      $('tagline').textContent = e.tagline;
-      $('facts').innerHTML = e.facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+      $('body').textContent = e.body;
+      var mas = $('more');
+      mas.textContent = e.more ? e.more.text : '';
+      if (e.more) mas.href = e.more.href; else mas.removeAttribute('href');
       info.classList.toggle('is-final', !!e.final);
-      escribirTitulo(e.name);
+      info.classList.toggle('has-phrases', !!e.phrases);
+      escribirTitulo(e.title);
       ajustarTitulo();
-      Array.prototype.forEach.call($('list').children, function (li) { li.classList.toggle('is-active', li.dataset.name === e.name); });
-      label.textContent = e.label || '';
-      $('portalSr').textContent = e.label || '';
+      Array.prototype.forEach.call($('list').children, function (bt, i) {
+        bt.classList.toggle('is-active', i === k);
+        if (i === k) bt.setAttribute('aria-current', 'step'); else bt.removeAttribute('aria-current');
+      });
+      // Frases que rotan en el primer capítulo
+      clearInterval(rotar);
+      var tl = $('tagline');
+      tl.classList.remove('is-swap');
+      if (e.phrases) {
+        var n = 0;
+        tl.textContent = e.phrases[0];
+        if (!quieto) rotar = setInterval(function () {
+          tl.classList.add('is-swap');
+          setTimeout(function () { n = (n + 1) % e.phrases.length; tl.textContent = e.phrases[n]; tl.classList.remove('is-swap'); }, 600);
+        }, 2600);
+      } else {
+        tl.textContent = e.tagline;
+      }
+      var etiqueta = sig ? 'Next · ' + sig.short : '';
+      label.textContent = etiqueta;
+      $('portalSr').textContent = etiqueta;
       hit.style.display = e.portal ? '' : 'none';
       label.classList.toggle('is-hidden', !e.portal);
     }
@@ -424,7 +481,7 @@
 
     // ---------- Estado de la animación ----------
     var actual = 0;
-    var modo = 'intro';            // intro | idle | viaje | llegada
+    var modo = 'intro';            // intro | idle | viaje | llegada | salto
     var aparicion = 0;             // 0 → 1 cuando el portal entra
     var viajeT0 = 0, VIAJE = quieto ? 600 : 1700;
     var mouse = { x: .5, y: .5 }, tilt = { x: 0, y: 0 };
@@ -445,7 +502,7 @@
       $('ring').style.transform = 'translate(' + ringPos.x.toFixed(1) + 'px,' + ringPos.y.toFixed(1) + 'px)';
 
       var e = ESTADOS[actual], m = medios[actual].portal;
-      if (!m || modo === 'intro') { label.classList.add('is-hidden'); return; }
+      if (!m || modo === 'intro' || modo === 'salto') { label.classList.add('is-hidden'); return; }
 
       tilt.x = lerp(tilt.x, quieto ? 0 : (mouse.y - .5) * -.5, .06);
       tilt.y = lerp(tilt.y, quieto ? 0 : (mouse.x - .5) * .7, .06);
@@ -544,19 +601,26 @@
       setTimeout(llegar, esperado);
     }
 
-    function reiniciar() {
+    // Salto directo a un capítulo desde el índice: fundido a negro.
+    function irA(k) {
+      if (modo !== 'idle' || k === actual) return;
+      if (k === actual + 1) return viajar();
+      modo = 'salto';
       salirInfo();
-      canvas.classList.add('is-hidden');
+      $('veil').classList.add('is-on');
       setTimeout(function () {
-        actual = 0;
-        ponerFondo(0);
-        pintarInfo(0);
-        entrarInfo();
+        var previo = medios[actual].portal;
+        if (previo && previo.tagName === 'VIDEO') previo.pause();
+        actual = k;
+        ponerFondo(k);
+        pintarInfo(k);
         aparicion = 0; modo = 'idle';
-        canvas.classList.remove('is-hidden');
-        reproducir(medios[0].portal);
+        $('veil').classList.remove('is-on');
+        entrarInfo();
+        reproducir(medios[k].portal);
       }, 650);
     }
+    function reiniciar() { irA(0); }
 
     // ---------- Cursor e interacción ----------
     var punteroFino = window.matchMedia('(pointer: fine)').matches;
@@ -564,7 +628,7 @@
     function ponerCursor(enPortal) {
       sobrePortal = enPortal;
       $('ring').classList.toggle('is-portal', enPortal);
-      $('ringText').textContent = actual === ESTADOS.length - 2 ? 'Open' : 'Travel';
+      $('ringText').textContent = 'Next';
     }
     window.addEventListener('pointermove', function (ev) {
       cursorPos.x = ev.clientX; cursorPos.y = ev.clientY;
