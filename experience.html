@@ -91,7 +91,7 @@
     .info a, .info button { pointer-events: auto; }
     .chapter { display: flex; align-items: center; gap: 14px; font-size: 11px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.78); }
     .chapter b { color: var(--coral); font-weight: 500; }
-    .tagline { margin: 14px 0 0; font-family: "Cormorant", Georgia, serif; font-style: italic; font-size: clamp(22px, 2.3vw, 34px); line-height: 1.1; }
+    .tagline { margin: 16px 0 0; font-family: "Cormorant", Georgia, serif; font-style: italic; font-size: clamp(22px, 2.3vw, 34px); line-height: 1.1; }
     .giant {
       font-family: "Antonio", "Inter", sans-serif; font-weight: 600;
       font-size: clamp(76px, 15.5vw, 260px); line-height: .9; letter-spacing: -.01em; text-transform: uppercase;
@@ -105,18 +105,18 @@
     .giant.is-out .c > span { transform: translateY(-115%); transition-duration: .6s; transition-delay: calc(var(--i) * 20ms); transition-timing-function: cubic-bezier(.7, 0, .84, 0); }
     .fade { transition: opacity .8s ease, transform .8s var(--ease); }
     .is-leaving .fade { opacity: 0; transform: translateY(-10px); }
-    .copy { display: grid; gap: 18px; justify-items: start; max-width: 360px; padding-bottom: 10px; }
-    .copy p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.84); padding-top: 14px; border-top: 1px solid rgba(255,255,255,.3); }
+    .copy { display: grid; gap: 14px; justify-items: start; max-width: 46ch; margin-top: 18px; }
+    .copy p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.84); }
     .more { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; padding-bottom: 6px; background: linear-gradient(var(--coral), var(--coral)) 0 100% / 100% 1px no-repeat; }
     .more:empty { display: none; }
-    .info > div { display: flex; flex-direction: column; align-items: flex-start; }
-    .info > div .giant { align-self: stretch; }
-    .has-phrases .tagline { order: 1; margin: 18px 0 0; font-size: clamp(30px, 3.8vw, 60px); color: #fff; }
-    .has-phrases .final-ctas { order: 2; }
+    /* Todo el bloque de información a la izquierda; la acción (portal o botones) a la derecha */
+    .info-main { display: flex; flex-direction: column; align-items: flex-start; max-width: 54vw; }
+    .info-main .giant { align-self: stretch; margin-top: 12px; }
+    .has-phrases .tagline { font-size: clamp(32px, 3.6vw, 58px); }
     .tagline .ph { display: inline-block; transition: opacity .6s ease, transform .6s var(--ease); }
     .tagline .ph.is-swap { opacity: 0; transform: translateY(10px); }
-    .final-ctas { display: none; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
-    .is-final .final-ctas { display: flex; }
+    .final-ctas { display: none; gap: 12px; flex-wrap: wrap; justify-content: flex-end; padding-bottom: 6px; }
+    .info.is-final .final-ctas { display: flex; }
     .ghost {
       display: inline-flex; align-items: center; height: 48px; padding: 0 24px; border-radius: 999px;
       border: 1px solid #fff; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
@@ -182,6 +182,8 @@
       .top nav { display: none; }
       .top .begin { display: none; }
       .info { grid-template-columns: 1fr; gap: 22px; bottom: calc(var(--gutter) + 52px); }
+      .info-main { max-width: none; }
+      .final-ctas { justify-content: flex-start; }
       .list { gap: 6px; }
       .list span { display: none; }
       .list button { padding-top: 8px; }
@@ -232,16 +234,16 @@
     <div class="portal-label" id="portalLabel"></div>
 
     <section class="info" id="info" aria-live="polite">
-      <div>
+      <div class="info-main">
         <p class="chapter fade"><b id="chapNum">01</b><span>/ 08</span><span id="region"></span></p>
-        <p class="tagline fade"><span class="ph" id="tagline"></span></p>
         <h1 class="giant" id="giant"></h1>
-        <div class="final-ctas">
-          <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a>
-          <button class="ghost" id="restart" type="button">Start again</button>
-        </div>
+        <p class="tagline fade"><span class="ph" id="tagline"></span></p>
+        <div class="copy fade"><p id="body"></p><a class="more" id="more"></a></div>
       </div>
-      <div class="copy fade"><p id="body"></p><a class="more" id="more"></a></div>
+      <div class="final-ctas">
+        <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a>
+        <button class="ghost" id="restart" type="button">Start again</button>
+      </div>
     </section>
 
     <nav class="list" id="list" aria-label="Chapters"></nav>
