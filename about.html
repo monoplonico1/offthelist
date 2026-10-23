@@ -4,122 +4,121 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About — Off The List</title>
-  <meta name="description" content="Off The List designs the journeys that don’t fit a list. Built by listening, then following the details that make someone light up.">
+  <meta name="description" content="Why Off The List exists: private journeys to emerging destinations, designed around who you are.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
-  <link rel="stylesheet" href="pages.css?v=10">
+  <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="lux.css?v=2">
 </head>
 <body>
-  <div class="page subpage">
-    <img class="deco-grid" src="assets/grid-lines.svg" alt="" aria-hidden="true">
-    <div class="hero-wash" aria-hidden="true"></div>
 
-    <header class="nav">
-      <a class="brand" href="index.html" aria-label="Off The List — home"><img src="assets/brand.svg" alt="Off The List" width="90" height="90"></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span></button>
-      <nav class="nav-links" id="nav-links" aria-label="Main">
-        <a href="about.html" aria-current="page">About</a>
-        <a href="sample-journeys.html">Sample journeys</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-      </nav>
-    </header>
+  <header class="header">
+    <a href="index.html" aria-label="Off The List — home">
+      <img class="logo logo-light" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48">
+      <img class="logo logo-dark" src="assets/lux/logo-dark.svg" alt="" width="268" height="48">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#method">The method</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="sample-journeys.html">Journeys</a>
+      <a href="about.html" aria-current="page">About</a>
+    </nav>
+    <div class="header-end">
+      <div class="switch" aria-label="Site version">
+        <span class="is-current"><b>Classic</b></span>
+        <a href="experience.html">Immersive</a>
+      </div>
+      <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin</a>
+      <button class="menu-toggle" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </header>
 
-    <main>
-      <!-- Apertura -->
-      <section class="about-hero">
-        <div class="about-hero-copy">
-          <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Why we’re here</p>
-          <h1 class="page-title">We design the journeys that don’t fit a list.</h1>
-          <p class="page-lead">Off the List began with a simple belief: the best trips aren’t found by scrolling. They’re built by listening, then following the details that make someone light up.</p>
-          <div class="ctas">
-            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-outline" href="sample-journeys.html">See sample trips</a>
-          </div>
-          <p class="founder-note"><span>“</span>We don’t start with where. We start with who.<span>”</span></p>
+  <main>
+    <section class="page-hero on-dark">
+      <figure class="tone is-color"><img src="assets/lux/huellas.jpg" alt="" data-parallax=".1"></figure>
+      <div class="inner">
+        <div style="display:grid;gap:26px">
+          <p class="eyebrow" data-reveal>About</p>
+          <h1 class="display" data-split>We design the journeys <em>no list</em> could hold.</h1>
         </div>
-        <div class="about-hero-media">
-          <img class="about-portrait photo-card" src="assets/about-hero.png" alt="Two women sharing tea on a mountain terrace">
-        </div>
-      </section>
+        <p class="body" data-reveal style="--d:300ms">The best trips are not found by scrolling. They are built by listening closely, then following the details that make someone come alive.</p>
+      </div>
+    </section>
 
-      <section class="about-purpose">
-        <!-- Manifiesto -->
-        <div class="manifesto sand-card">
-          <div class="manifesto-head">
-            <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Our purpose</p>
-            <h2>Travel should feel less like a product. More like a story only you could live.</h2>
-          </div>
-          <div class="manifesto-body">
-            <p>We exist to replace the obvious with the meaningful. To make room for curiosity, serendipity and the people who turn a place into something you remember.</p>
-            <p class="manifesto-strong">No templates. No one-size-fits-all itineraries. No ticking off someone else’s highlights.</p>
-          </div>
-        </div>
+    <section class="section">
+      <p class="eyebrow" data-reveal>Our purpose</p>
+      <p class="manifesto-text" data-scrub style="max-width:24ch">Travel should feel less like a product and more like a story only you could live. We exist to replace the obvious with the meaningful.</p>
+      <div class="values">
+        <div class="value" data-reveal><i>I</i><h3>We start <em>with who</em></h3><p class="body">Before any destination, a questionnaire about how you move, what you avoid and what you would never admit you want. Every answer is studied in depth.</p></div>
+        <div class="value" data-reveal style="--d:120ms"><i>II</i><h3>Places before <em>the crowd</em></h3><p class="body">Georgia, Kyrgyzstan, Oman, Greenland. Countries that are still themselves, reached through people who know their corner of the world deeply.</p></div>
+        <div class="value" data-reveal style="--d:240ms"><i>III</i><h3>With you, <em>every step</em></h3><p class="body">From the day you book to the flight home, we follow your journey closely and are on hand, day and night, whenever plans need to change.</p></div>
+      </div>
+    </section>
 
-        <!-- Origen -->
-        <div class="origin">
-          <div class="origin-media">
-            <img class="origin-photo photo-card" src="assets/about-origin.png" alt="Family travelling through mountain landscapes beside a jeep">
-            <div class="origin-year">
-              <p class="origin-year-num">2021</p>
-              <p>The first brief arrived on one page. The answer became a company.</p>
-            </div>
-          </div>
-          <div class="origin-copy">
-            <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">How it started</p>
-            <h2 class="serif-heading">It started with one trip we couldn’t find anywhere.</h2>
-            <p class="origin-lead">A milestone birthday. A love of wild landscapes. A deep dislike of groups, lanyards and being told where to stand.</p>
-            <p class="origin-body">The plan that followed crossed mountains, kitchens and family homes — not because they were on a “must-see” list, but because every choice made sense for that person. Friends asked for their own. Then friends of friends did too. Off the List grew from there: slowly, personally, one well-listened-to traveller at a time.</p>
-            <p class="pull-quote"><span>“</span>The destination matters. But how it makes you feel matters more.<span>”</span></p>
-            <a class="text-link" href="sample-journeys.html">See what we mean <img src="assets/arrow-right.svg" alt="" width="16" height="16"></a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Fundadora -->
-      <section class="founder-wrap">
-        <div class="founder">
-          <img class="founder-photo photo-card" src="assets/about-founder.png" alt="Sofia Bennett, founder of Off The List">
-          <div class="founder-copy">
-            <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Meet our founder</p>
-            <h2 class="serif-heading">Sofia Bennett</h2>
-            <p class="founder-role">Founder · listener-in-chief · lifelong detour-taker</p>
-            <p>After fifteen years designing journeys for big travel names, Sofia realised the moments travellers remembered most were rarely the ones in the brochure. They were the invitations, wrong turns and conversations no algorithm could rank.</p>
-            <p>She founded Off the List to make those moments the starting point — supported by a small team of specialists and a trusted network of people who know their corner of the world deeply.</p>
-            <p class="founder-quote">“Our job is to notice the sentence you almost throw away — because that’s often where your journey begins.”</p>
-            <a class="text-link" href="#contact">Start a conversation <img src="assets/arrow-right.svg" alt="" width="16" height="16"></a>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="sec sec-footer on-sand" id="contact">
-      <div class="canvas">
-        <img class="footer-wave" src="assets/footer-wave.svg" alt="" aria-hidden="true">
-        <div class="footer-content" id="quiz">
-          <h2>Ready to find out where we'd send you?</h2>
-          <p>15 minutes. Honest answers. One trip designed entirely around who you are.</p>
-          <div class="ctas">
-            <a class="btn btn-dark" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-ghost" href="index.html#how-it-works">How it works</a>
-          </div>
-          <ul class="social">
-            <li><a href="#" aria-label="Instagram"><img src="assets/instagram.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="YouTube"><img src="assets/youtube.svg" alt="" width="16" height="16"></a></li>
+    <section class="section dark on-dark">
+      <div class="manifesto-grid">
+        <div>
+          <p class="eyebrow" data-reveal>What we leave out</p>
+          <h2 class="title" data-split style="margin-top:28px">No templates. <br>No <em>one-size-fits-all.</em></h2>
+          <ul class="never" data-reveal>
+            <li>Group tours</li><li>Lanyards</li><li>Queues</li><li>Must-see lists</li><li>Someone else's highlights</li>
           </ul>
         </div>
-        <div class="footer-bar"><p>Off The List. Copyright 2026.</p></div>
+        <figure class="tone manifesto-figure" data-color><img src="assets/lux/callejon.jpg" alt="" loading="lazy" data-parallax=".1"></figure>
       </div>
-    </footer>
-  </div>
-  <script src="scale.js?v=10"></script>
-  <script src="header.js?v=10"></script>
-  <script src="reveal.js?v=10"></script>
+    </section>
+
+    <section class="section ivory">
+      <div class="founder">
+        <figure class="tone founder-figure" data-color><img src="assets/lux/mesa.jpg" alt="" loading="lazy" data-parallax=".1"></figure>
+        <div class="founder-copy">
+          <p class="eyebrow" data-reveal>Our founder</p>
+          <h2 class="title" data-split>Sofia <em>Bennett</em></h2>
+          <p class="body" data-reveal>After fifteen years designing journeys for the biggest names in travel, Sofia noticed that the moments people remembered were rarely the ones in the brochure. They were the invitations, the wrong turns, the dinners nobody planned.</p>
+          <p class="body" data-reveal>She founded Off The List to make those moments the starting point, supported by a small team of specialists and a trusted network on the ground.</p>
+          <blockquote data-reveal>“The destination matters. How it makes you feel matters more.”</blockquote>
+        </div>
+      </div>
+      <div class="timeline" data-reveal>
+        <div><b>2021</b><span class="small">The first brief arrives on a single page.</span></div>
+        <div><b>One</b><span class="small">Traveller at a time, never a group.</span></div>
+        <div><b>30+</b><span class="small">Emerging destinations in our network.</span></div>
+        <div><b>24/7</b><span class="small">Support from departure to return.</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="quote">
+        <p class="eyebrow" data-reveal style="justify-self:center">How we work</p>
+        <p class="lede" data-split>We don't start with where. <em>We start with who.</em></p>
+        <div><a class="btn" href="index.html#method">See the method <span class="arrow">→</span></a></div>
+      </div>
+    </section>
+
+    <section class="closing on-dark">
+      <figure class="tone" data-color><img src="assets/lux/aurora.jpg" alt="" loading="lazy"></figure>
+      <div class="inner">
+        <p class="eyebrow" data-reveal>Your journey</p>
+        <h2 class="display" data-split>Ready to be <em>surprised?</em></h2>
+        <p class="body" data-reveal style="text-align:center;margin:0 auto">Fifteen minutes. Honest answers. One journey designed entirely around who you are.</p>
+        <div class="ctas" data-reveal>
+          <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
+          <a class="btn" href="sample-journeys.html">See sample journeys</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div><img src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48"><p class="small" style="margin-top:22px;max-width:28ch">Personalized journeys to emerging destinations.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html#method">The method</a></li><li><a href="index.html#destinations">Destinations</a></li><li><a href="sample-journeys.html">Journeys</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="experience.html">Immersive experience</a></li><li><a href="https://off-the-list-poc.vercel.app/#entry">Begin</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Off The List</span><span>Designed for one.</span></div>
+  </footer>
+
+  <script src="lux.js?v=2"></script>
 </body>
 </html>

@@ -4,204 +4,170 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sample journeys — Off The List</title>
-  <meta name="description" content="Four travellers, four briefs, four completely different answers. Sample journeys designed by Off The List.">
+  <meta name="description" content="Four private journeys to emerging destinations, each designed around one traveller.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
-  <link rel="stylesheet" href="pages.css?v=10">
+  <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="lux.css?v=2">
 </head>
 <body>
-  <div class="page subpage">
-    <img class="deco-grid" src="assets/grid-lines.svg" alt="" aria-hidden="true">
-    <div class="hero-wash" aria-hidden="true"></div>
 
-    <header class="nav">
-      <a class="brand" href="index.html" aria-label="Off The List — home"><img src="assets/brand.svg" alt="Off The List" width="90" height="90"></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span></button>
-      <nav class="nav-links" id="nav-links" aria-label="Main">
-        <a href="about.html">About</a>
-        <a href="sample-journeys.html" aria-current="page">Sample journeys</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-      </nav>
-    </header>
-
-    <main>
-      <!-- Apertura -->
-      <section class="sj-hero">
-        <div class="sj-hero-copy">
-          <h1 class="page-title">Four ways to<br>go off the list.</h1>
-          <p class="page-lead">Different people. Different reasons to leave.<br>Every route built around the traveller, never the crowd.</p>
-          <div class="ctas">
-            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-outline" href="#journeys">See sample trips</a>
-          </div>
-        </div>
-        <img class="sj-hero-art photo-card" src="assets/journey-armenia.png" alt="Traveller looking over an Armenian monastery">
-      </section>
-
-      <section class="sj-intro-wrap">
-        <div class="sj-intro sand-card">
-          <h2>These aren’t packages.<br>They’re starting points.</h2>
-          <p>Four travellers, four briefs, four completely different answers. Read them as proof of what becomes possible when a journey begins with who you are.</p>
-        </div>
-      </section>
-
-      <!-- Colección de viajes -->
-      <section class="journeys" id="journeys">
-        <div class="journeys-head">
-          <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Choose your way in</p>
-          <h2>Every trip begins<br>with a different truth.</h2>
-        </div>
-
-        <article class="journey">
-          <img class="journey-art photo-card" src="assets/journey-kyrgyzstan.png" alt="Eagle hunter in the Tian Shan mountains">
-          <div class="journey-details">
-            <p class="journey-region">Central Asia</p>
-            <div class="journey-intro">
-              <h3>Eagle Hunters of Kyrgyzstan</h3>
-              <p>Eight days chasing the life less ordinary across the Tian Shan.</p>
-            </div>
-            <dl class="journey-facts">
-              <div><dt>Duration</dt><dd>8 days</dd></div>
-              <div><dt>Travellers</dt><dd>Solo</dd></div>
-              <div><dt>Flight</dt><dd>~5 hrs</dd></div>
-            </dl>
-            <div class="journey-keystones">
-              <p class="journey-label">Keystone experiences</p>
-              <ul>
-                <li>Eagle Hunter apprenticeship — Two days with a berkutchi family in Bokonbaevo. Ride out at dawn, fly the golden eagle, stay in their yurt.</li>
-                <li>Kel-Suu by horseback — Remote turquoise lake reachable only on foot or horse. One night camping at 3,200m with a herder guide.</li>
-                <li>Manas Epic storytelling — Private performance of the world's longest oral poem, told by a manaschi in his home village.</li>
-                <li>Felt-making with nomad women — Craft a shyrdak in a mountain yurt camp. Leave with a piece you made yourself.</li>
-              </ul>
-            </div>
-            <div class="journey-price">
-              <p class="journey-label">From</p>
-              <p class="journey-amount">€3,800</p>
-              <p class="journey-note">per person · flights incl.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="journey">
-          <img class="journey-art photo-card" src="assets/journey-morocco.png" alt="Family walking through the streets of Essaouira">
-          <div class="journey-details">
-            <p class="journey-region">North Africa</p>
-            <div class="journey-intro">
-              <h3>Slow Morocco: Essaouira &amp; the Atlas</h3>
-              <p>Seven days of unhurried discovery. Designed around two very small travellers.</p>
-            </div>
-            <dl class="journey-facts">
-              <div><dt>Duration</dt><dd>7 days</dd></div>
-              <div><dt>Travellers</dt><dd>2 adults, 2 kids</dd></div>
-              <div><dt>Flight</dt><dd>~3 hrs</dd></div>
-            </dl>
-            <div class="journey-keystones">
-              <p class="journey-label">Keystone experiences</p>
-              <ul>
-                <li>Private sunrise harbour boat — Out before the medina wakes. A small fishing boat, just your family and a captain who knows every gannet roost.</li>
-                <li>Rampart sunset walk — The famous Essaouira bastions at golden hour, timed for when the wind drops and kids can run freely.</li>
-                <li>Chefchaouen blue alley morning — Private riad, early access before the crowds, a local guide who brings the right pace for a family.</li>
-                <li>Family cooking class — Tagine and flatbread in a home kitchen. Harira for the grown-ups. Msemen the kids can help fold.</li>
-              </ul>
-            </div>
-            <div class="journey-price">
-              <p class="journey-label">From</p>
-              <p class="journey-amount">€4,200</p>
-              <p class="journey-note">family total · flights incl.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="journey">
-          <img class="journey-art photo-card" src="assets/journey-borneo.png" alt="Traveller in the Borneo rainforest">
-          <div class="journey-details">
-            <p class="journey-region">Southeast Asia</p>
-            <div class="journey-intro">
-              <h3>Borneo: Deep into Sabah's Rainforest</h3>
-              <p>Ten days in the oldest rainforest on earth, built around a 30th birthday worth remembering.</p>
-            </div>
-            <dl class="journey-facts">
-              <div><dt>Duration</dt><dd>10 days</dd></div>
-              <div><dt>Travellers</dt><dd>Solo</dd></div>
-              <div><dt>Flight</dt><dd>~14 hrs</dd></div>
-            </dl>
-            <div class="journey-keystones">
-              <p class="journey-label">Keystone experiences</p>
-              <ul>
-                <li>Kadazan-Dusun harvest ceremony — Invited into the Pesta Kaamatan celebration in a longhouse village. Tapai rice wine, bamboo music, dances that have not changed in 400 years.</li>
-                <li>Kinabalu summit at dawn — Southeast Asia's highest peak. Via Ferrata descent with the Crocker Range below in morning cloud.</li>
-                <li>Kinabatangan River night cruise — Pygmy elephants, proboscis monkeys, and freshwater crocodiles, with a local naturalist and no tour group.</li>
-                <li>Rungus longhouse stay — Two nights with an indigenous Rungus family. Learn to weave beaded jewellery. Eat what they eat.</li>
-              </ul>
-            </div>
-            <div class="journey-price">
-              <p class="journey-label">From</p>
-              <p class="journey-amount">€4,600</p>
-              <p class="journey-note">per person · flights incl.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="journey">
-          <img class="journey-art photo-card" src="assets/journey-armenia.png" alt="Traveller looking over an Armenian monastery">
-          <div class="journey-details">
-            <p class="journey-region">South Caucasus</p>
-            <div class="journey-intro">
-              <h3>Armenia: The Undiscovered Caucasus</h3>
-              <p>Nine days in the world's oldest Christian nation. Lavash, ancient monasteries, and a balloon over Ararat at dawn.</p>
-            </div>
-            <dl class="journey-facts">
-              <div><dt>Duration</dt><dd>9 days</dd></div>
-              <div><dt>Travellers</dt><dd>Group of 4</dd></div>
-              <div><dt>Flight</dt><dd>~4.5 hrs</dd></div>
-            </dl>
-            <div class="journey-keystones">
-              <p class="journey-label">Keystone experiences</p>
-              <ul>
-                <li>Lavash baking with a village family — The ancient flatbread, made in a tonir earth oven. UNESCO-listed, rarely done with outsiders. Lunch stays after.</li>
-                <li>Khosrov Forest State Reserve — One of the oldest protected forests on earth. Private jeep, local botanist, no other tourists.</li>
-                <li>Duduk in a stone church — A master musician plays the mournful Armenian reed flute inside a 5th-century monastery in the Debed Canyon. Acoustics that stay with you.</li>
-                <li>Hot air balloon over Mount Ararat — At first light from the Ararat plain. The sacred mountain the Armenian nation was born looking at, from above.</li>
-              </ul>
-            </div>
-            <div class="journey-price">
-              <p class="journey-label">From</p>
-              <p class="journey-amount">€3,000</p>
-              <p class="journey-note">per person · flights incl.</p>
-            </div>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <footer class="sec sec-footer" id="contact">
-      <div class="canvas">
-        <img class="footer-wave" src="assets/footer-wave.svg" alt="" aria-hidden="true">
-        <div class="footer-content" id="quiz">
-          <h2>Ready to find out where we'd send you?</h2>
-          <p>15 minutes. Honest answers. One trip designed entirely around who you are.</p>
-          <div class="ctas">
-            <a class="btn btn-dark" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-ghost" href="index.html#how-it-works">How it works</a>
-          </div>
-          <ul class="social">
-            <li><a href="#" aria-label="Instagram"><img src="assets/instagram.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="YouTube"><img src="assets/youtube.svg" alt="" width="16" height="16"></a></li>
-          </ul>
-        </div>
-        <div class="footer-bar"><p>Off The List. Copyright 2026.</p></div>
+  <header class="header">
+    <a href="index.html" aria-label="Off The List — home">
+      <img class="logo logo-light" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48">
+      <img class="logo logo-dark" src="assets/lux/logo-dark.svg" alt="" width="268" height="48">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#method">The method</a>
+      <a href="index.html#destinations">Destinations</a>
+      <a href="sample-journeys.html" aria-current="page">Journeys</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-end">
+      <div class="switch" aria-label="Site version">
+        <span class="is-current"><b>Classic</b></span>
+        <a href="experience.html">Immersive</a>
       </div>
-    </footer>
-  </div>
-  <script src="scale.js?v=10"></script>
-  <script src="header.js?v=10"></script>
-  <script src="reveal.js?v=10"></script>
+      <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin</a>
+      <button class="menu-toggle" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero on-dark">
+      <figure class="tone is-color"><img src="assets/lux/tren.jpg" alt="" data-parallax=".1"></figure>
+      <div class="inner">
+        <div style="display:grid;gap:26px">
+          <p class="eyebrow" data-reveal>Sample journeys</p>
+          <h1 class="display" data-split>Four people. <br>Four <em>reasons</em> to leave.</h1>
+        </div>
+        <p class="body" data-reveal style="--d:300ms">Every route below began with a questionnaire, not a destination. Read them as proof of what becomes possible when a journey starts with who you are.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="intro-grid">
+        <div>
+          <p class="eyebrow" data-reveal>Not packages</p>
+          <p class="lede" data-scrub>These are not itineraries to book. They are answers to four very different briefs. Yours will look nothing like them, and that is the point.</p>
+        </div>
+        <ol class="chapters" data-reveal>
+          <li><a href="#kyrgyzstan"><i>01</i><b>Kyrgyzstan</b><span>10 nights · from US$18,400</span></a></li>
+          <li><a href="#oman"><i>02</i><b>Oman</b><span>8 nights · from US$14,900</span></a></li>
+          <li><a href="#georgia"><i>03</i><b>Georgia</b><span>9 nights · from US$16,200</span></a></li>
+          <li><a href="#greenland"><i>04</i><b>Greenland</b><span>7 nights · from US$24,500</span></a></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="journey" id="kyrgyzstan">
+        <div class="journey-media">
+          <figure class="tone journey-main" data-color><img src="assets/lux/caballos.jpg" alt="Kyrgyzstan" loading="lazy" data-parallax=".08"></figure>
+          <figure class="tone journey-inset" data-color data-reveal style="--d:200ms"><img src="assets/lux/tren.jpg" alt="" loading="lazy"></figure>
+        </div>
+        <div class="journey-copy">
+          <span class="journey-num" data-reveal>01</span>
+          <p class="eyebrow" data-reveal>Central Asia · Kyrgyzstan</p>
+          <h2 class="title" data-split>The eagle and <em>the horizon</em></h2>
+          <p class="body" data-reveal>Ten nights across the Tian Shan, for a traveller who wanted to feel small again.</p>
+          <dl class="facts" data-reveal><div><dt>Duration</dt><dd>10 nights</dd></div><div><dt>Travellers</dt><dd>Solo</dd></div><div><dt>Best season</dt><dd>June – Sept</dd></div></dl>
+          <ol class="moments" data-reveal><li><span><b>Dawn with the berkutchi.</b> Two days with an eagle-hunting family on the shores of Issyk-Kul, sleeping in their private yurt.</span></li><li><span><b>Kel-Suu on horseback.</b> A turquoise lake reached only by horse, with a private camp at 3,200 metres.</span></li><li><span><b>The night train east.</b> A restored carriage to the edge of the Chinese border, dinner served as the steppe goes dark.</span></li><li><span><b>A felt of your own.</b> A shyrdak made by hand in a mountain camp, carried home in your luggage.</span></li></ol>
+          <div class="price" data-reveal>
+            <p>From <b>US$18,400</b>per person · private throughout</p>
+            <a class="btn" href="https://off-the-list-poc.vercel.app/#entry">Design mine <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section ivory">
+      <article class="journey flip" id="oman">
+        <div class="journey-media">
+          <figure class="tone journey-main" data-color><img src="assets/lux/canon.jpg" alt="Oman" loading="lazy" data-parallax=".08"></figure>
+          <figure class="tone journey-inset" data-color data-reveal style="--d:200ms"><img src="assets/lux/huellas.jpg" alt="" loading="lazy"></figure>
+        </div>
+        <div class="journey-copy">
+          <span class="journey-num" data-reveal>02</span>
+          <p class="eyebrow" data-reveal>Arabian Peninsula · Oman</p>
+          <h2 class="title" data-split>Wadis and <em>silence</em></h2>
+          <p class="body" data-reveal>Eight nights between canyon water and empty beaches, for two people who needed to stop.</p>
+          <dl class="facts" data-reveal><div><dt>Duration</dt><dd>8 nights</dd></div><div><dt>Travellers</dt><dd>A couple</dd></div><div><dt>Best season</dt><dd>Oct – April</dd></div></dl>
+          <ol class="moments" data-reveal><li><span><b>Wadi Shab before anyone.</b> A private swim through the canyon at first light, before the road wakes up.</span></li><li><span><b>A night in the Empty Quarter.</b> A camp set for two among the dunes, under more stars than you have seen.</span></li><li><span><b>The turtle beach at Ras al Jinz.</b> After the last visitors leave, with a conservationist and a red torch.</span></li><li><span><b>A dhow along Musandam.</b> Fjords, dolphins and a lunch cooked on board, with no one else on the water.</span></li></ol>
+          <div class="price" data-reveal>
+            <p>From <b>US$14,900</b>per person · private throughout</p>
+            <a class="btn" href="https://off-the-list-poc.vercel.app/#entry">Design mine <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section dark on-dark">
+      <article class="journey" id="georgia">
+        <div class="journey-media">
+          <figure class="tone journey-main" data-color><img src="assets/lux/bosque.jpg" alt="Georgia" loading="lazy" data-parallax=".08"></figure>
+          <figure class="tone journey-inset" data-color data-reveal style="--d:200ms"><img src="assets/lux/mesa.jpg" alt="" loading="lazy"></figure>
+        </div>
+        <div class="journey-copy">
+          <span class="journey-num" data-reveal>03</span>
+          <p class="eyebrow" data-reveal>South Caucasus · Georgia</p>
+          <h2 class="title" data-split>A table in <em>the Caucasus</em></h2>
+          <p class="body" data-reveal>Nine nights of mountains, wine and long dinners, for a family of four who wanted to slow down together.</p>
+          <dl class="facts" data-reveal><div><dt>Duration</dt><dd>9 nights</dd></div><div><dt>Travellers</dt><dd>Family of four</dd></div><div><dt>Best season</dt><dd>May – Oct</dd></div></dl>
+          <ol class="moments" data-reveal><li><span><b>A supra in Kakheti.</b> A traditional feast in a winemaker's garden, with the toasts explained to the children.</span></li><li><span><b>Into Svaneti by road and foot.</b> Medieval stone towers, mountain villages and a picnic above the glaciers.</span></li><li><span><b>Qvevri wine with the family.</b> Opening a clay vessel buried in the ground, eight thousand years of practice.</span></li><li><span><b>Tbilisi after dark.</b> Sulphur baths, a private rooftop and the old town once the day-trippers are gone.</span></li></ol>
+          <div class="price" data-reveal>
+            <p>From <b>US$16,200</b>per person · private throughout</p>
+            <a class="btn" href="https://off-the-list-poc.vercel.app/#entry">Design mine <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <article class="journey flip" id="greenland">
+        <div class="journey-media">
+          <figure class="tone journey-main" data-color><img src="assets/lux/aurora.jpg" alt="Greenland" loading="lazy" data-parallax=".08"></figure>
+          <figure class="tone journey-inset" data-color data-reveal style="--d:200ms"><img src="assets/lux/lago.jpg" alt="" loading="lazy"></figure>
+        </div>
+        <div class="journey-copy">
+          <span class="journey-num" data-reveal>04</span>
+          <p class="eyebrow" data-reveal>The Arctic · Greenland</p>
+          <h2 class="title" data-split>Light at the <em>end of the world</em></h2>
+          <p class="body" data-reveal>Seven nights on the edge of the ice, for a traveller who wanted one sky they would never forget.</p>
+          <dl class="facts" data-reveal><div><dt>Duration</dt><dd>7 nights</dd></div><div><dt>Travellers</dt><dd>Two friends</dd></div><div><dt>Best season</dt><dd>Sept – March</dd></div></dl>
+          <ol class="moments" data-reveal><li><span><b>Ilulissat by private boat.</b> The icefjord at midnight, among bergs the size of cathedrals, without another vessel in sight.</span></li><li><span><b>A lodge with a glass roof.</b> The aurora from your bed, and a wake-up call the moment it begins.</span></li><li><span><b>Dog sled to a hunting camp.</b> A day across the sea ice with a local musher, and a fish cooked over the stove.</span></li><li><span><b>A helicopter to the ice sheet.</b> Landing on two-kilometre-thick ice that has never seen a road.</span></li></ol>
+          <div class="price" data-reveal>
+            <p>From <b>US$24,500</b>per person · private throughout</p>
+            <a class="btn" href="https://off-the-list-poc.vercel.app/#entry">Design mine <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="closing on-dark">
+      <figure class="tone" data-color><img src="assets/lux/sobre.jpg" alt="" loading="lazy"></figure>
+      <div class="inner">
+        <p class="eyebrow" data-reveal>Yours is the fifth</p>
+        <h2 class="display" data-split>Where would we <em>send you?</em></h2>
+        <p class="body" data-reveal style="text-align:center;margin:0 auto">Fifteen minutes. Honest answers. One journey designed entirely around who you are.</p>
+        <div class="ctas" data-reveal>
+          <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
+          <a class="btn" href="experience.html">Enter the experience</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div><img src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48"><p class="small" style="margin-top:22px;max-width:28ch">Personalized journeys to emerging destinations.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="index.html#method">The method</a></li><li><a href="index.html#destinations">Destinations</a></li><li><a href="sample-journeys.html">Journeys</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="experience.html">Immersive experience</a></li><li><a href="https://off-the-list-poc.vercel.app/#entry">Begin</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Off The List</span><span>Designed for one.</span></div>
+  </footer>
+
+  <script src="lux.js?v=2"></script>
 </body>
 </html>

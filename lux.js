@@ -1,0 +1,144 @@
+// Off The List — versión clásica: animaciones de texto y scroll.
+// Sin JavaScript todo se ve completo y estático; con "reducir movimiento"
+// el contenido aparece sin animar.
+(function () {
+  var doc = document.documentElement;
+  doc.classList.add('js');
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Titulares que suben palabra por palabra -----------------------------
+  // Mantiene <em>, <br> y demás etiquetas: solo parte los nodos de texto.
+  function partir(el) {
+    var i = 0;
+    (function recorrer(nodo) {
+      Array.prototype.slice.call(nodo.childNodes).forEach(function (h) {
+        if (h.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          h.textContent.split(/(\s+)/).forEach(function (trozo) {
+            if (!trozo) return;
+            if (/^\s+$/.test(trozo)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span');
+            w.className = 'w';
+            var s = document.createElement('span');
+            s.textContent = trozo;
+            s.style.setProperty('--i', i++);
+            w.appendChild(s);
+            frag.appendChild(w);
+          });
+          h.parentNode.replaceChild(frag, h);
+        } else if (h.nodeType === 1 && h.tagName !== 'BR') {
+          recorrer(h);
+        }
+      });
+    })(el);
+  }
+  document.querySelectorAll('[data-split]').forEach(partir);
+
+  // --- Texto que se tiñe palabra a palabra con el scroll -------------------
+  var scrubs = [];
+  document.querySelectorAll('[data-scrub]').forEach(function (el) {
+    var palabras = el.textContent.trim().split(/\s+/);
+    el.innerHTML = palabras.map(function (p) { return '<span class="sw">' + p + '</span>'; }).join(' ');
+    scrubs.push({ el: el, sw: el.querySelectorAll('.sw') });
+  });
+
+  // --- Entradas al hacer scroll y paso a color ------------------------------
+  if ('IntersectionObserver' in window) {
+    var entrar = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); entrar.unobserve(e.target); }
+      });
+    }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('[data-split], [data-reveal], [data-line]').forEach(function (el) { entrar.observe(el); });
+
+    // Las fotos toman color cuando ocupan el centro de la pantalla
+    var color = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('is-color', e.isIntersecting); });
+    }, { rootMargin: '-38% 0px -38% 0px' });
+    document.querySelectorAll('.tone[data-color]').forEach(function (el) { color.observe(el); });
+  } else {
+    document.querySelectorAll('[data-split], [data-reveal], [data-line]').forEach(function (el) { el.classList.add('is-in'); });
+  }
+
+  // --- Cabecera: transparente sobre el hero, sólida al bajar ---------------
+  var header = document.querySelector('.header');
+  var menuBtn = document.querySelector('.menu-toggle');
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () {
+      var abierto = header.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', String(abierto));
+      menuBtn.textContent = abierto ? 'Close' : 'Menu';
+    });
+  }
+
+  // --- Galería horizontal fijada --------------------------------------------
+  var pin = document.querySelector('[data-hscroll]');
+  var pista = pin && pin.querySelector('.hs-track');
+
+  // --- Parallax ---------------------------------------------------------------
+  var paralajes = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+
+  var pendiente = false;
+  function cuadro() {
+    pendiente = false;
+    var vh = window.innerHeight;
+    if (header) header.classList.toggle('is-solid', window.scrollY > vh * .08 && !header.classList.contains('is-light'));
+
+    scrubs.forEach(function (s) {
+      var r = s.el.getBoundingClientRect();
+      var p = (vh * .85 - r.top) / (r.height + vh * .45);
+      p = Math.max(0, Math.min(1, p));
+      var n = Math.round(p * s.sw.length);
+      for (var i = 0; i < s.sw.length; i++) s.sw[i].classList.toggle('on', i < n);
+    });
+
+    if (!quieto) {
+      paralajes.forEach(function (el) {
+        var r = el.parentElement.getBoundingClientRect();
+        var v = parseFloat(el.getAttribute('data-parallax')) || .12;
+        var centro = r.top + r.height / 2 - vh / 2;
+        el.style.transform = 'translate3d(0,' + (-centro * v).toFixed(1) + 'px,0)';
+      });
+    }
+
+    if (pin && pista && window.innerWidth > 760) {
+      var rp = pin.getBoundingClientRect();
+      var recorrido = pin.offsetHeight - vh;
+      var avance = Math.max(0, Math.min(1, -rp.top / recorrido));
+      var max = pista.scrollWidth - window.innerWidth;
+      pista.style.transform = 'translate3d(' + (-avance * max).toFixed(1) + 'px,0,0)';
+      var tarjetas = pista.children;
+      for (var j = 0; j < tarjetas.length; j++) {
+        var rc = tarjetas[j].getBoundingClientRect();
+        var enCentro = rc.left < window.innerWidth * .62 && rc.right > window.innerWidth * .38;
+        tarjetas[j].classList.toggle('is-color', enCentro);
+      }
+    }
+  }
+  function alScroll() { if (!pendiente) { pendiente = true; requestAnimationFrame(cuadro); } }
+  window.addEventListener('scroll', alScroll, { passive: true });
+  window.addEventListener('resize', function () {
+    if (pin && pista) pin.style.height = window.innerWidth > 760 ? (pista.scrollWidth - window.innerWidth + window.innerHeight) + 'px' : '';
+    alScroll();
+  });
+  if (pin && pista && window.innerWidth > 760) pin.style.height = (pista.scrollWidth - window.innerWidth + window.innerHeight) + 'px';
+  cuadro();
+
+  // --- Hero: "I want to …" con imagen y frase rotando -----------------------
+  var hero = document.querySelector('[data-rotator]');
+  if (hero) {
+    var slides = hero.querySelectorAll('.slide');
+    var frases = hero.querySelectorAll('.phrase');
+    var k = 0;
+    function mostrar(n) {
+      slides.forEach(function (s, i) { s.classList.toggle('is-active', i === n); });
+      frases.forEach(function (f, i) {
+        f.classList.toggle('is-active', i === n);
+        f.classList.toggle('is-out', i === (n - 1 + frases.length) % frases.length);
+      });
+      hero.querySelectorAll('.counter b').forEach(function (b) { b.textContent = '0' + (n + 1); });
+    }
+    mostrar(0);
+    if (!quieto) setInterval(function () { k = (k + 1) % slides.length; mostrar(k); }, 4200);
+  }
+})();

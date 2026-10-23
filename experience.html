@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Off The List — The experience</title>
+  <meta name="description" content="Jump from one emerging destination to the next. An immersive way into Off The List.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <style>
+    @font-face { font-family: "Inter"; src: url("assets/fonts/inter.woff2") format("woff2"); font-weight: 100 700; font-display: swap; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-italic.woff2") format("woff2"); font-weight: 300 500; font-style: italic; font-display: swap; }
+    @font-face { font-family: "Antonio"; src: url("assets/fonts/antonio.woff2") format("woff2"); font-weight: 100 700; font-display: swap; }
+
+    :root {
+      --coral: #F95157;
+      --ink: #0B0A09;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+      --gutter: clamp(20px, 3.4vw, 56px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: var(--ink);
+      color: #fff;
+      font: 400 15px/1.5 "Inter", "Helvetica Neue", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+    ul, dl, dd, p, h1 { margin: 0; padding: 0; list-style: none; }
+    @media (pointer: fine) { body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; } }
+
+    /* ---------- Escena ---------- */
+    .stage { position: fixed; inset: 0; overflow: hidden; }
+    .bg { position: absolute; inset: 0; }
+    .bg > * {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+      animation: drift 26s linear forwards;
+    }
+    @keyframes drift { from { transform: scale(1); } to { transform: scale(1.08); } }
+    .shade {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 52%, rgba(0,0,0,.72) 100%),
+        linear-gradient(90deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,0) 55%);
+    }
+    #portal { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; transition: opacity .7s ease; }
+    #portal.is-hidden { opacity: 0; }
+    .portal-hit { position: absolute; left: 0; top: 0; z-index: 3; border-radius: 50% 50% 8px 8px / 36% 36% 8px 8px; }
+    .portal-hit:focus-visible { outline: 1px solid var(--coral); outline-offset: 10px; }
+    .portal-label {
+      position: absolute; z-index: 3; left: 0; top: 0;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase;
+      white-space: nowrap; pointer-events: none;
+      transition: opacity .6s ease;
+    }
+    .portal-label::before { content: ""; width: 28px; height: 1px; background: var(--coral); }
+    .portal-label.is-hidden { opacity: 0; }
+
+    /* ---------- Cabecera ---------- */
+    .top {
+      position: fixed; inset: 0 0 auto 0; z-index: 10;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px;
+      padding: 22px var(--gutter);
+    }
+    .top .logo { width: 150px; height: auto; display: block; }
+    .top nav { display: flex; gap: 34px; }
+    .top nav a, .top .end a, .switch {
+      font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+    }
+    .top nav a { padding: 6px 0; background: linear-gradient(#fff, #fff) 0 100% / 0 1px no-repeat; transition: background-size .5s var(--ease); }
+    .top nav a:hover { background-size: 100% 1px; }
+    .end { display: flex; justify-content: flex-end; align-items: center; gap: 12px; }
+    .switch { display: inline-flex; padding: 3px; border: 1px solid rgba(255,255,255,.7); border-radius: 999px; letter-spacing: .14em; }
+    .switch a, .switch span { padding: 7px 13px; border-radius: 999px; line-height: 1; }
+    .switch span { background: #fff; color: var(--ink); }
+    .switch a:hover { background: rgba(255,255,255,.18); }
+    .begin {
+      display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 999px;
+      background: var(--coral); color: #fff; transition: background-color .4s, color .4s;
+    }
+    .begin:hover { background: #fff; color: var(--ink); }
+
+    /* ---------- Destino actual ---------- */
+    .info {
+      position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: calc(var(--gutter) + 46px);
+      display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 40px;
+      pointer-events: none;
+    }
+    .info a, .info button { pointer-events: auto; }
+    .chapter { display: flex; align-items: center; gap: 14px; font-size: 11px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.78); }
+    .chapter b { color: var(--coral); font-weight: 500; }
+    .tagline { margin: 14px 0 0; font-family: "Cormorant", Georgia, serif; font-style: italic; font-size: clamp(22px, 2.3vw, 34px); line-height: 1.1; }
+    .giant {
+      font-family: "Antonio", "Inter", sans-serif; font-weight: 600;
+      font-size: clamp(76px, 15.5vw, 260px); line-height: .9; letter-spacing: -.01em; text-transform: uppercase;
+      margin-left: -.03em; white-space: nowrap;
+    }
+    .giant .c { display: inline-block; overflow: hidden; vertical-align: top; padding-top: .04em; margin-top: -.04em; }
+    .giant .c > span { display: inline-block; transform: translateY(102%); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 40ms); }
+    .giant.is-in .c > span { transform: none; }
+    .giant.is-out .c > span { transform: translateY(-102%); transition-duration: .6s; transition-delay: calc(var(--i) * 20ms); transition-timing-function: cubic-bezier(.7, 0, .84, 0); }
+    .fade { transition: opacity .8s ease, transform .8s var(--ease); }
+    .is-leaving .fade { opacity: 0; transform: translateY(-10px); }
+    .facts { display: grid; grid-template-columns: repeat(2, minmax(130px, 1fr)); gap: 18px 34px; min-width: 300px; padding-bottom: 10px; }
+    .facts div { border-top: 1px solid rgba(255,255,255,.3); padding-top: 10px; }
+    .facts dt { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.62); margin-bottom: 4px; }
+    .facts dd { font-size: 14px; }
+    .final-ctas { display: none; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+    .is-final .final-ctas { display: flex; }
+    .ghost {
+      display: inline-flex; align-items: center; height: 48px; padding: 0 24px; border-radius: 999px;
+      border: 1px solid #fff; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+      transition: background-color .4s, color .4s;
+    }
+    .ghost:hover { background: #fff; color: var(--ink); }
+    .final-ctas .begin { height: 48px; padding: 0 26px; font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+
+    /* ---------- Lista de destinos ---------- */
+    .list {
+      position: absolute; z-index: 2; left: var(--gutter); right: var(--gutter); bottom: var(--gutter);
+      display: flex; gap: 22px; flex-wrap: wrap; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid rgba(255,255,255,.22);
+      font-size: 10px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase;
+    }
+    .list li { color: rgba(255,255,255,.4); transition: color .6s; }
+    .list li.is-trip { color: rgba(255,255,255,.75); }
+    .list li.is-active { color: var(--coral); }
+
+    /* ---------- Precarga ---------- */
+    .loader { position: fixed; inset: 0; z-index: 20; background: #000; transition: opacity 1.2s ease, visibility 1.2s; }
+    .loader.is-done { opacity: 0; visibility: hidden; }
+    .loader video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s; }
+    .loader.is-playing video { opacity: 1; }
+    .loader-ui { position: absolute; inset: auto var(--gutter) var(--gutter) var(--gutter); display: flex; justify-content: space-between; align-items: flex-end; transition: opacity .6s; }
+    .loader.is-playing .loader-ui { opacity: 0; }
+    .loader-ui p { font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.7); max-width: 26ch; }
+    .counter { font-family: "Antonio", sans-serif; font-weight: 300; font-size: clamp(80px, 14vw, 200px); line-height: .8; font-variant-numeric: tabular-nums; }
+    .counter i { font-style: normal; color: var(--coral); }
+    .loader-logo { position: absolute; left: 50%; top: 46%; width: min(260px, 60vw); transform: translate(-50%, -50%); transition: opacity .6s; }
+    .loader.is-playing .loader-logo { opacity: 0; }
+    .bar { position: absolute; left: 0; top: 0; height: 2px; background: var(--coral); width: 0; }
+    .skip { position: absolute; right: var(--gutter); top: 26px; z-index: 1; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+    .skip:hover { color: #fff; }
+
+    /* ---------- Cursor ---------- */
+    .cursor, .cursor-ring { position: fixed; left: 0; top: 0; z-index: 30; pointer-events: none; border-radius: 50%; display: none; }
+    .has-cursor .cursor, .has-cursor .cursor-ring { display: block; }
+    .cursor { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--coral); }
+    .cursor-ring {
+      width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1px solid rgba(255,255,255,.7);
+      display: grid; place-items: center;
+      transition: width .5s var(--ease), height .5s var(--ease), margin .5s var(--ease), background-color .5s, border-color .5s;
+    }
+    .has-cursor .cursor-ring { display: grid; }
+    .cursor-ring span { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; opacity: 0; transition: opacity .3s; }
+    .cursor-ring.is-portal { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: var(--coral); border-color: var(--coral); }
+    .cursor-ring.is-portal span { opacity: 1; }
+    .cursor-ring.is-link { width: 58px; height: 58px; margin: -29px 0 0 -29px; border-color: var(--coral); }
+
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    @media (max-width: 960px) {
+      .top { grid-template-columns: 1fr auto; }
+      .top nav { display: none; }
+      .top .begin { display: none; }
+      .info { grid-template-columns: 1fr; gap: 22px; bottom: calc(var(--gutter) + 40px); }
+      .facts { min-width: 0; gap: 12px 24px; }
+      .list { gap: 8px 16px; justify-content: flex-start; }
+      .list li:not(.is-trip) { display: none; }
+    }
+    @media (max-width: 560px) {
+      .top .logo { width: 116px; }
+      .switch { font-size: 10px; letter-spacing: .1em; }
+      .switch a, .switch span { padding: 7px 10px; }
+      .facts dd { font-size: 13px; }
+      .tagline { font-size: 22px; }
+    }
+    @media (max-height: 640px) and (min-width: 961px) {
+      .giant { font-size: clamp(64px, 11vw, 150px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loader" id="loader">
+    <div class="bar" id="bar"></div>
+    <button class="skip" id="skip" type="button">Skip intro</button>
+    <img class="loader-logo" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48">
+    <video id="intro" muted playsinline preload="auto" poster="assets/lux/lago.jpg"><source src="assets/immersive/to-georgia.mp4" type="video/mp4"><source src="assets/immersive/to-georgia.webm" type="video/webm"></video>
+    <div class="loader-ui">
+      <p>Personalized journeys to emerging destinations</p>
+      <div class="counter"><span id="count">000</span><i>%</i></div>
+    </div>
+  </div>
+
+  <header class="top">
+    <a href="index.html" aria-label="Off The List — classic site"><img class="logo" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48"></a>
+    <nav aria-label="Main">
+      <a href="index.html#method">The method</a>
+      <a href="sample-journeys.html">Journeys</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="end">
+      <div class="switch" aria-label="Site version"><a href="index.html">Classic</a><span>Immersive</span></div>
+      <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin</a>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+    <div class="bg" id="bg"></div>
+    <div class="shade"></div>
+    <canvas id="portal" aria-hidden="true"></canvas>
+    <button class="portal-hit" id="portalHit" type="button"><span class="sr" id="portalSr"></span></button>
+    <div class="portal-label" id="portalLabel"></div>
+
+    <section class="info" id="info" aria-live="polite">
+      <div>
+        <p class="chapter fade"><b id="chapNum">01</b><span>/ 04</span><span id="region"></span></p>
+        <p class="tagline fade" id="tagline"></p>
+        <h1 class="giant" id="giant"></h1>
+        <div class="final-ctas">
+          <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a>
+          <button class="ghost" id="restart" type="button">Start again</button>
+        </div>
+      </div>
+      <dl class="facts fade" id="facts"></dl>
+    </section>
+
+    <ul class="list" id="list"></ul>
+  </main>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="ring"><span id="ringText">Travel</span></div>
+
+  <script>
+  (function () {
+    'use strict';
+    var QUIZ = 'https://off-the-list-poc.vercel.app/#entry';
+    var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Cada estado: fondo propio y lo que se ve a través del portal (el siguiente destino).
+    var ESTADOS = [
+      { name: 'Georgia', region: 'South Caucasus', tagline: 'A table in the Caucasus.',
+        bg: { video: 'assets/immersive/georgia-bg', poster: 'assets/lux/lago.jpg' },
+        portal: { video: 'assets/immersive/to-kyrgyzstan', poster: 'assets/lux/caballos.jpg' }, label: 'Jump to Kyrgyzstan',
+        facts: [['Flight', '~13 h from New York'], ['Best season', 'May – October'], ['Nights', '9, from US$16,200'], ['Signature', 'A supra in Kakheti']] },
+      { name: 'Kyrgyzstan', region: 'Central Asia', tagline: 'The eagle and the horizon.',
+        bg: { img: 'assets/lux/caballos.jpg' },
+        portal: { video: 'assets/immersive/to-greenland', poster: 'assets/lux/aurora.jpg' }, label: 'Jump to Greenland',
+        facts: [['Flight', '~15 h from New York'], ['Best season', 'June – September'], ['Nights', '10, from US$18,400'], ['Signature', 'Dawn with the eagle hunters']] },
+      { name: 'Greenland', region: 'The Arctic', tagline: 'Light at the end of the world.',
+        bg: { img: 'assets/lux/aurora.jpg' },
+        portal: { img: 'assets/immersive/next-mystery.jpg' }, label: 'Open your destination',
+        facts: [['Flight', '~7 h from New York'], ['Best season', 'September – March'], ['Nights', '7, from US$24,500'], ['Signature', 'The aurora from your bed']] },
+      { name: 'Yours', region: 'Off the list', tagline: 'The one place we have not chosen yet.',
+        bg: { img: 'assets/immersive/next-mystery.jpg' }, portal: null, final: true,
+        facts: [['Flight', 'From wherever you are'], ['Best season', 'Whenever you are ready'], ['Nights', 'As many as it takes'], ['Signature', 'Designed for one']] }
+    ];
+    var LISTA = ['Georgia', 'Uzbekistan', 'Albania', 'Oman', 'Kyrgyzstan', 'Colombia', 'Zanzibar', 'Greenland'];
+
+    var $ = function (id) { return document.getElementById(id); };
+    var bg = $('bg'), canvas = $('portal'), ctx = canvas.getContext('2d');
+    var hit = $('portalHit'), label = $('portalLabel'), info = $('info'), giant = $('giant');
+
+    // ---------- Medios ----------
+    // MP4 (H.264) donde se pueda; WebM en navegadores sin H.264. Si el video
+    // falla, se usa su imagen fija en su lugar.
+    var prueba = document.createElement('video');
+    var EXT = prueba.canPlayType('video/mp4; codecs="avc1.42E01E"') ? '.mp4' : '.webm';
+    function crearMedio(m, loop) {
+      var el;
+      if (m.video) {
+        el = document.createElement('video');
+        el.muted = true; el.playsInline = true; el.loop = loop; el.preload = 'auto';
+        el.setAttribute('muted', ''); el.setAttribute('playsinline', '');
+        if (m.poster) {
+          el.poster = m.poster;
+          el.addEventListener('error', function () {
+            var img = new Image(); img.src = m.poster; img.alt = '';
+            el.fallo = img;
+            if (el.parentNode) el.parentNode.replaceChild(img, el);
+          });
+        }
+        el.src = m.video + EXT;
+      } else {
+        el = new Image(); el.src = m.img; el.alt = '';
+      }
+      return el;
+    }
+    function fuente(el) { return el.fallo || el; }
+    function listo(el) {
+      el = fuente(el);
+      if (el.tagName === 'VIDEO') return el.readyState >= 2;
+      return el.complete && el.naturalWidth > 0;
+    }
+    function reproducir(el) { if (el && el.tagName === 'VIDEO') { var p = el.play(); if (p && p.catch) p.catch(function () {}); } }
+
+    // Precarga: fondos y portales de todos los estados.
+    var medios = ESTADOS.map(function (e) {
+      return { bg: crearMedio(e.bg, true), portal: e.portal ? crearMedio(e.portal, true) : null };
+    });
+
+    // ---------- Lista y textos ----------
+    LISTA.forEach(function (n) {
+      var li = document.createElement('li');
+      li.textContent = n;
+      if (ESTADOS.some(function (e) { return e.name === n; })) li.className = 'is-trip';
+      li.dataset.name = n;
+      $('list').appendChild(li);
+    });
+
+    function escribirTitulo(texto) {
+      giant.innerHTML = '';
+      giant.setAttribute('aria-label', texto);
+      texto.split('').forEach(function (ch, i) {
+        var c = document.createElement('span'); c.className = 'c'; c.setAttribute('aria-hidden', 'true');
+        var s = document.createElement('span'); s.textContent = ch; s.style.setProperty('--i', i);
+        c.appendChild(s); giant.appendChild(c);
+      });
+    }
+    // El nombre ocupa todo el ancho disponible sin pisar los datos.
+    function ajustarTitulo() {
+      giant.style.fontSize = '';
+      var hueco = giant.parentNode.clientWidth;
+      var ancho = giant.scrollWidth;
+      if (ancho > hueco) giant.style.fontSize = (parseFloat(getComputedStyle(giant).fontSize) * hueco / ancho * .98) + 'px';
+    }
+    function pintarInfo(k) {
+      var e = ESTADOS[k];
+      $('chapNum').textContent = '0' + (k + 1);
+      $('region').textContent = '· ' + e.region;
+      $('tagline').textContent = e.tagline;
+      $('facts').innerHTML = e.facts.map(function (f) { return '<div><dt>' + f[0] + '</dt><dd>' + f[1] + '</dd></div>'; }).join('');
+      info.classList.toggle('is-final', !!e.final);
+      escribirTitulo(e.name);
+      ajustarTitulo();
+      Array.prototype.forEach.call($('list').children, function (li) { li.classList.toggle('is-active', li.dataset.name === e.name); });
+      label.textContent = e.label || '';
+      $('portalSr').textContent = e.label || '';
+      hit.style.display = e.portal ? '' : 'none';
+      label.classList.toggle('is-hidden', !e.portal);
+    }
+    function entrarInfo() {
+      info.classList.remove('is-leaving');
+      giant.classList.remove('is-out');
+      void giant.offsetWidth;
+      giant.classList.add('is-in');
+    }
+    function salirInfo() {
+      info.classList.add('is-leaving');
+      giant.classList.remove('is-in');
+      giant.classList.add('is-out');
+    }
+
+    function ponerFondo(k) {
+      var el = fuente(medios[k].bg);
+      el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
+      if (el.tagName === 'VIDEO') { try { el.currentTime = 0; } catch (err) {} }
+      bg.innerHTML = '';
+      bg.appendChild(el);
+      reproducir(el);
+    }
+
+    // ---------- Portal: forma de arco proyectada en 3D ----------
+    var W = 0, H = 0, DPR = 1, FOCAL = 850;
+    var forma = [];          // puntos locales del arco
+    var proy = [];           // puntos proyectados del cuadro actual
+    var base = { cx: 0, cy: 0, w: 0, h: 0 };
+    function medir() {
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = Math.round(W * DPR); canvas.height = Math.round(H * DPR);
+      var movil = W <= 760;
+      base.w = movil ? Math.min(W * 0.42, 200) : Math.min(W * 0.2, 330);
+      base.h = base.w * 1.36;
+      base.cx = movil ? W * 0.68 : W * 0.7;
+      base.cy = movil ? H * 0.34 : H * 0.42;
+      forma = arco(base.w, base.h);
+    }
+    function arco(w, h) {
+      var r = w / 2, pts = [], i, n = 40;
+      var top = -h / 2 + r, bottom = h / 2;
+      for (i = 0; i <= n; i++) { var a = Math.PI + Math.PI * i / n; pts.push([Math.cos(a) * r, top + Math.sin(a) * r]); }
+      for (i = 1; i <= 10; i++) pts.push([r, top + (bottom - top) * i / 10]);
+      for (i = 1; i <= 10; i++) pts.push([r - w * i / 10, bottom]);
+      for (i = 1; i < 10; i++) pts.push([-r, bottom - (bottom - top) * i / 10]);
+      return pts;
+    }
+    function proyectar(cx, cy, escala, rx, ry) {
+      var cX = Math.cos(rx), sX = Math.sin(rx), cY = Math.cos(ry), sY = Math.sin(ry);
+      proy = forma.map(function (p) {
+        var x = p[0] * escala, y = p[1] * escala;
+        var y1 = y * cX, z1 = y * sX;
+        var x2 = x * cY + z1 * sY, z2 = -x * sY + z1 * cY;
+        var s = FOCAL / (FOCAL + z2);
+        return [cx + x2 * s, cy + y1 * s];
+      });
+      return proy;
+    }
+    function caja(pts) {
+      var x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      pts.forEach(function (p) { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); });
+      return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+    }
+    function cubrir(el, r) {
+      var mw = el.videoWidth || el.naturalWidth || 16, mh = el.videoHeight || el.naturalHeight || 9;
+      var s = Math.max(r.w / mw, r.h / mh);
+      return { x: r.x + (r.w - mw * s) / 2, y: r.y + (r.h - mh * s) / 2, w: mw * s, h: mh * s };
+    }
+    function dentro(x, y, pts) {
+      var c = false;
+      for (var i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+        if ((pts[i][1] > y) !== (pts[j][1] > y) && x < (pts[j][0] - pts[i][0]) * (y - pts[i][1]) / (pts[j][1] - pts[i][1]) + pts[i][0]) c = !c;
+      }
+      return c;
+    }
+
+    // ---------- Estado de la animación ----------
+    var actual = 0;
+    var modo = 'intro';            // intro | idle | viaje | llegada
+    var aparicion = 0;             // 0 → 1 cuando el portal entra
+    var viajeT0 = 0, VIAJE = quieto ? 600 : 1700;
+    var mouse = { x: .5, y: .5 }, tilt = { x: 0, y: 0 };
+    var cursorPos = { x: -100, y: -100 }, ringPos = { x: -100, y: -100 };
+    var sobrePortal = false;
+    var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var lerp = function (a, b, t) { return a + (b - a) * t; };
+
+    function cuadro(ahora) {
+      requestAnimationFrame(cuadro);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+
+      // Cursor
+      ringPos.x = lerp(ringPos.x, cursorPos.x, .18); ringPos.y = lerp(ringPos.y, cursorPos.y, .18);
+      $('cursor').style.transform = 'translate(' + cursorPos.x + 'px,' + cursorPos.y + 'px)';
+      $('ring').style.transform = 'translate(' + ringPos.x.toFixed(1) + 'px,' + ringPos.y.toFixed(1) + 'px)';
+
+      var e = ESTADOS[actual], m = medios[actual].portal;
+      if (!m || modo === 'intro') { label.classList.add('is-hidden'); return; }
+
+      tilt.x = lerp(tilt.x, quieto ? 0 : (mouse.y - .5) * -.5, .06);
+      tilt.y = lerp(tilt.y, quieto ? 0 : (mouse.x - .5) * .7, .06);
+      var flota = quieto ? 0 : Math.sin(ahora / 1400) * 8;
+
+      var cx = base.cx, cy = base.cy + flota, esc = 1, rx = tilt.x, ry = tilt.y, p = 0;
+      if (modo === 'idle') {
+        aparicion = Math.min(1, aparicion + 1 / 50);
+        esc = quieto ? 1 : .6 + .4 * easeOut(aparicion);
+      } else if (modo === 'viaje') {
+        p = Math.min(1, (ahora - viajeT0) / VIAJE);
+        var q = ease(p);
+        var cubre = Math.max(W / base.w, H / (base.h - base.w / 2)) * 1.9;
+        cx = lerp(cx, W / 2, q); cy = lerp(cy, H / 2 + H * .18, q);
+        esc = lerp(1, cubre, q); rx = lerp(rx, 0, q); ry = lerp(ry, 0, q);
+        if (p >= 1) { p = 1; }
+      } else if (modo === 'llegada') {
+        p = 1; cx = W / 2; cy = H / 2; esc = 40; rx = 0; ry = 0;
+      }
+
+      var pts = proyectar(cx, cy, esc, rx, ry);
+      var r = caja(pts);
+      ctx.globalAlpha = modo === 'idle' ? easeOut(aparicion) : 1;
+
+      // Fondo del portal: se mueve contra la inclinación para dar profundidad
+      ctx.save();
+      ctx.beginPath();
+      pts.forEach(function (pt, i) { i ? ctx.lineTo(pt[0], pt[1]) : ctx.moveTo(pt[0], pt[1]); });
+      ctx.closePath();
+      ctx.clip();
+      if (listo(m)) {
+        m = fuente(m);
+        var rPortal = cubrir(m, { x: r.x - r.w * .08 - ry * 30, y: r.y - r.h * .06 + rx * 30, w: r.w * 1.16, h: r.h * 1.12 });
+        var rPantalla = cubrir(m, { x: 0, y: 0, w: W, h: H });
+        var q2 = modo === 'idle' ? 0 : ease(p);
+        ctx.drawImage(m, lerp(rPortal.x, rPantalla.x, q2), lerp(rPortal.y, rPantalla.y, q2), lerp(rPortal.w, rPantalla.w, q2), lerp(rPortal.h, rPantalla.h, q2));
+      } else {
+        ctx.fillStyle = '#111'; ctx.fillRect(r.x, r.y, r.w, r.h);
+      }
+      ctx.restore();
+
+      if (modo === 'idle') {
+        ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 1;
+        ctx.beginPath();
+        pts.forEach(function (pt, i) { i ? ctx.lineTo(pt[0], pt[1]) : ctx.moveTo(pt[0], pt[1]); });
+        ctx.closePath(); ctx.stroke();
+        // Botón accesible y etiqueta siguen al portal
+        hit.style.transform = 'translate(' + r.x.toFixed(0) + 'px,' + r.y.toFixed(0) + 'px)';
+        hit.style.width = r.w.toFixed(0) + 'px'; hit.style.height = r.h.toFixed(0) + 'px';
+        var izq = r.x - 24 - label.offsetWidth;
+        var lx = izq > 16 ? izq : Math.min(r.x, W - label.offsetWidth - 16);
+        label.style.transform = 'translate(' + lx.toFixed(0) + 'px,' + (izq > 16 ? r.y + r.h * .55 : r.y + r.h + 18).toFixed(0) + 'px)';
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // ---------- Viaje al siguiente destino ----------
+    function viajar() {
+      if (modo !== 'idle' || !medios[actual].portal) return;
+      var m = fuente(medios[actual].portal);
+      modo = 'viaje'; viajeT0 = performance.now();
+      label.classList.add('is-hidden');
+      hit.style.display = 'none';
+      ponerCursor(false);
+      salirInfo();
+      var siguiente = actual + 1;
+      if (m.tagName === 'VIDEO') {
+        m.loop = false;
+        try { m.currentTime = 0; } catch (err) {}
+        reproducir(m);
+      }
+      var esperado = m.tagName === 'VIDEO' && isFinite(m.duration) ? Math.max(VIAJE, m.duration * 1000 - 120) : VIAJE + 500;
+      if (quieto) esperado = VIAJE;
+      var hecho = false;
+      function llegar() {
+        if (hecho) return; hecho = true;
+        modo = 'llegada';
+        // El fondo nuevo es la misma imagen con la que termina el video del portal.
+        ponerFondo(siguiente);
+        var fondo = fuente(medios[siguiente].bg);
+        var listoFondo = fondo.tagName === 'IMG' && fondo.decode ? fondo.decode().catch(function () {}) : Promise.resolve();
+        listoFondo.then(function () {
+          canvas.classList.add('is-hidden');
+          setTimeout(function () {
+            if (m.tagName === 'VIDEO') { m.loop = true; m.pause(); }
+            actual = siguiente;
+            pintarInfo(actual);
+            entrarInfo();
+            aparicion = 0;
+            modo = 'idle';
+            canvas.classList.remove('is-hidden');
+            reproducir(medios[actual].portal);
+          }, 700);
+        });
+      }
+      setTimeout(llegar, esperado);
+    }
+
+    function reiniciar() {
+      salirInfo();
+      canvas.classList.add('is-hidden');
+      setTimeout(function () {
+        actual = 0;
+        ponerFondo(0);
+        pintarInfo(0);
+        entrarInfo();
+        aparicion = 0; modo = 'idle';
+        canvas.classList.remove('is-hidden');
+        reproducir(medios[0].portal);
+      }, 650);
+    }
+
+    // ---------- Cursor e interacción ----------
+    var punteroFino = window.matchMedia('(pointer: fine)').matches;
+    if (punteroFino) document.body.classList.add('has-cursor');
+    function ponerCursor(enPortal) {
+      sobrePortal = enPortal;
+      $('ring').classList.toggle('is-portal', enPortal);
+      $('ringText').textContent = actual === ESTADOS.length - 2 ? 'Open' : 'Travel';
+    }
+    window.addEventListener('pointermove', function (ev) {
+      cursorPos.x = ev.clientX; cursorPos.y = ev.clientY;
+      mouse.x = ev.clientX / W; mouse.y = ev.clientY / H;
+      var enPortal = modo === 'idle' && !!medios[actual].portal && proy.length && dentro(ev.clientX, ev.clientY, proy);
+      if (enPortal !== sobrePortal) ponerCursor(enPortal);
+      var t = ev.target.closest && ev.target.closest('a, button:not(.portal-hit)');
+      $('ring').classList.toggle('is-link', !!t && !enPortal);
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { cursorPos.x = cursorPos.y = -100; });
+    hit.addEventListener('click', viajar);
+    $('restart').addEventListener('click', reiniciar);
+    window.addEventListener('resize', function () { medir(); ajustarTitulo(); });
+
+    // ---------- Precarga con contador ----------
+    var intro = $('intro'), loader = $('loader');
+    var aEsperar = [medios[0].bg, medios[0].portal, intro];
+    var mostrado = 0, t0 = performance.now(), terminado = false;
+    function progreso() {
+      var n = aEsperar.filter(listo).length / aEsperar.length;
+      var t = Math.min(1, (performance.now() - t0) / 1600);
+      var porTiempo = (performance.now() - t0) > 7000 ? 1 : 0;   // nunca se queda colgado
+      return Math.max(Math.min(n, t), porTiempo);
+    }
+    function contar() {
+      if (terminado) return;
+      var meta = progreso() * 100;
+      mostrado = Math.min(100, mostrado + Math.max(.4, (meta - mostrado) * .08));
+      if (mostrado > meta) mostrado = meta;
+      $('count').textContent = ('00' + Math.floor(mostrado)).slice(-3);
+      $('bar').style.width = mostrado + '%';
+      if (mostrado >= 99.9) { $('count').textContent = '100'; return setTimeout(arrancarIntro, 250); }
+      requestAnimationFrame(contar);
+    }
+    function arrancarIntro() {
+      if (terminado) return;
+      if (quieto) return terminarIntro();
+      loader.classList.add('is-playing');
+      reproducir(intro);
+      intro.addEventListener('ended', terminarIntro);
+      setTimeout(terminarIntro, 4200);
+    }
+    function terminarIntro() {
+      if (terminado) return; terminado = true;
+      ponerFondo(0);
+      pintarInfo(0);
+      loader.classList.add('is-done');
+      setTimeout(function () { entrarInfo(); modo = 'idle'; aparicion = 0; reproducir(medios[0].portal); }, 500);
+      setTimeout(function () { intro.pause(); }, 1300);
+    }
+    $('skip').addEventListener('click', terminarIntro);
+    window.addEventListener('keydown', function (ev) {
+      if (!terminado && (ev.key === 'Escape' || ev.key === 'Enter')) terminarIntro();
+    });
+
+    medir();
+    pintarInfo(0);
+    requestAnimationFrame(cuadro);
+    requestAnimationFrame(contar);
+  })();
+  </script>
+</body>
+</html>

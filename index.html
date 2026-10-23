@@ -3,265 +3,224 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Off The List — Your next favourite trip isn't on your list</title>
-  <meta name="description" content="Take a quiz. We build a trip around who you are. You choose whether to know where you're going or find out at the gate.">
+  <title>Off The List — Personalized journeys to emerging destinations</title>
+  <meta name="description" content="Private, personalized journeys to emerging destinations. Designed for one, from US$10,000.">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=10">
+  <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="lux.css?v=2">
 </head>
 <body>
-  <div class="page">
-    <img class="deco-grid" src="assets/grid-lines.svg" alt="" aria-hidden="true">
 
-    <!-- Hero -->
-    <section class="sec sec-hero">
-      <div class="canvas">
-        <div class="hero-wash" aria-hidden="true"></div>
-        <img class="hero-circle" src="assets/hero-circle.svg" alt="" aria-hidden="true">
-        <img class="hero-photo" src="assets/hero-traveller.png" alt="Traveller with a backpack">
-
-        <header class="nav">
-          <a class="brand" href="index.html" aria-label="Off The List — home"><img src="assets/brand.svg" alt="Off The List" width="90" height="90"></a>
-          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span></button>
-      <nav class="nav-links" id="nav-links" aria-label="Main">
-            <a href="about.html">About</a>
-            <a href="sample-journeys.html">Sample journeys</a>
-            <a href="#contact">Contact</a>
-            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-          </nav>
-        </header>
-
-        <div class="hero-content">
-          <h1 class="hero-title">Your next<br>favourite trip<br>isn't on your list.</h1>
-          <p class="hero-lead">Take a quiz. We build a trip around who you are.<br>You choose whether to know where you're going or find out at the gate.</p>
-          <div class="ctas">
-            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-outline" href="sample-journeys.html">See sample trips</a>
-          </div>
-          <p class="founder-note"><span>“</span>We don’t start with where. We start with who.<span>”</span></p>
-        </div>
-
-        <ul class="trust-bar">
-          <li><strong>100%</strong><span>Personalised</span></li>
-          <li class="trust-sep" aria-hidden="true"></li>
-          <li><strong>24</strong><span>Trip delivery</span></li>
-          <li class="trust-sep" aria-hidden="true"></li>
-          <li><strong>45</strong><span>Of mystery clues</span></li>
-          <li class="trust-sep" aria-hidden="true"></li>
-          <li><strong>0</strong><span>Tourist traps</span></li>
-        </ul>
+  <header class="header">
+    <a href="index.html" aria-label="Off The List — home">
+      <img class="logo logo-light" src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48">
+      <img class="logo logo-dark" src="assets/lux/logo-dark.svg" alt="" width="268" height="48">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#method">The method</a>
+      <a href="#destinations">Destinations</a>
+      <a href="sample-journeys.html">Journeys</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-end">
+      <div class="switch" aria-label="Site version">
+        <span class="is-current"><b>Classic</b></span>
+        <a href="experience.html">Immersive</a>
       </div>
-    </section>
+      <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin</a>
+      <button class="menu-toggle" type="button" aria-expanded="false">Menu</button>
+    </div>
+  </header>
 
-    <!-- How it works -->
-    <section class="sec sec-how" id="how-it-works">
-      <div class="canvas">
-        <div class="how-copy">
-          <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">How it works</p>
-          <h2 class="display">We design personalised trips around who you actually are</h2>
-          <div class="how-body">
-            <ol class="timeline">
-              <li>You take a quiz.</li>
-              <li>We read every answer.</li>
-              <li>Then we build you a trip.</li>
-            </ol>
-            <p>The destination, the experiences and the accommodation matched to your personality, your limits, and what you actually want to come home feeling. <em>Then you decide:</em> know where you're going from day one, or keep it sealed until departure. Either way, the trip is built entirely for you.</p>
-          </div>
-          <a class="btn btn-coral" href="#mystery">How mystery works?</a>
-        </div>
-        <div class="blob blob-how-1"><img src="assets/how-1.png" alt="Travellers sharing a meal"></div>
-        <div class="blob blob-how-2"><img src="assets/how-2.png" alt="Traveller exploring a green valley"></div>
+  <main>
+    <!-- Hero: "I want to…" con las imágenes del film -->
+    <section class="hero" data-rotator>
+      <div class="hero-media" aria-hidden="true">
+        <div class="slide"><img src="assets/lux/lago.jpg" alt=""></div>
+        <div class="slide"><img src="assets/lux/bosque.jpg" alt=""></div>
+        <div class="slide"><img src="assets/lux/ola.jpg" alt=""></div>
+        <div class="slide"><img src="assets/lux/aurora.jpg" alt=""></div>
       </div>
-    </section>
-
-    <!-- Approach -->
-    <section class="sec sec-approach" id="about">
-      <div class="canvas">
-        <div class="approach">
-          <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Personal by design</p>
-          <h2 class="display">Simple &amp; personal.<br>Nothing like anything else.</h2>
-          <div class="steps">
-            <article class="step">
-              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="A grid of shapes where a few, your answers, light up in colour"><circle cx="81" cy="75" r="13" fill="#E6DDD3"/><g class="art-pick" style="--i:1"><rect x="121" y="63" width="24" height="24" rx="6" fill="#F95157"/></g><path d="M185 61 L199 86 H171 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="237" cy="75" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/><rect x="279" y="65" width="20" height="20" rx="4" fill="#E6DDD3" transform="rotate(45 289 75)"/><path d="M81 111 L95 136 H67 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="133" cy="125" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/><rect x="175" y="115" width="20" height="20" rx="4" fill="#E6DDD3" transform="rotate(45 185 125)"/><g class="art-pick" style="--i:2"><circle cx="237" cy="125" r="13" fill="#FF8C00"/></g><g class="art-pick" style="--i:3"><rect x="277" y="113" width="24" height="24" rx="6" fill="#9E5CBF"/></g><g class="art-pick" style="--i:4"><rect x="71" y="165" width="20" height="20" rx="4" fill="#1CCE4B" transform="rotate(45 81 175)"/></g><circle cx="133" cy="175" r="13" fill="#E6DDD3"/><rect x="173" y="163" width="24" height="24" rx="6" fill="#E6DDD3"/><path d="M237 161 L251 186 H223 Z" fill="#E6DDD3" stroke="#E6DDD3" stroke-width="3" stroke-linejoin="round"/><circle cx="289" cy="175" r="10.5" fill="none" stroke="#E6DDD3" stroke-width="5"/></svg>
-              <div class="step-copy">
-                <p class="step-num">01 · Tell us</p>
-                <h3>We begin with you, not a map.</h3>
-                <p>A 15-minute quiz about your pace, obsessions, people, appetite and the feeling you want to come home with. Honest answers are all it takes.</p>
-              </div>
-            </article>
-            <article class="step">
-              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="Scattered dots, with a line joining the right ones into a route"><circle cx="70" cy="60" r="6" fill="#E6DDD3"/><circle cx="200" cy="45" r="6" fill="#E6DDD3"/><circle cx="320" cy="60" r="6" fill="#E6DDD3"/><circle cx="140" cy="200" r="6" fill="#E6DDD3"/><circle cx="200" cy="212" r="6" fill="#E6DDD3"/><circle cx="262" cy="192" r="6" fill="#E6DDD3"/><circle cx="330" cy="210" r="6" fill="#E6DDD3"/><circle cx="40" cy="120" r="6" fill="#E6DDD3"/><path class="art-route" d="M60 170 C 80 120, 95 100, 110 95 S 150 150, 170 150 S 210 80, 230 80 S 280 140, 300 140" fill="none" stroke="#2B1113" stroke-width="2.5" stroke-linecap="round" pathLength="1"/><circle class="art-stop" style="--i:1" cx="60" cy="170" r="11" fill="#F95157"/><circle class="art-stop" style="--i:2" cx="110" cy="95" r="11" fill="#FF8C00"/><circle class="art-stop" style="--i:3" cx="170" cy="150" r="11" fill="#1CCE4B"/><circle class="art-stop" style="--i:4" cx="230" cy="80" r="11" fill="#9E5CBF"/><circle class="art-stop" style="--i:5" cx="300" cy="140" r="11" fill="#F95157"/></svg>
-              <div class="step-copy">
-                <p class="step-num">02 · Shape</p>
-                <h3>We join the right dots.</h3>
-                <p>Every answer is analysed in depth and turned into a route with rhythm, balancing the extraordinary with enough room to breathe.</p>
-              </div>
-            </article>
-            <article class="step">
-              <svg class="step-art" viewBox="0 0 370 250" role="img" aria-label="A traveller on a route with a smaller companion orbiting close by"><path d="M20 215 C 110 215, 130 95, 190 118 S 290 70, 352 52" fill="none" stroke="#E6DDD3" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/><circle cx="190" cy="118" r="48" fill="none" stroke="#E6DDD3" stroke-width="1.5" stroke-dasharray="4 6"/><circle cx="190" cy="118" r="24" fill="#F95157"/><g class="art-orbit"><circle cx="238" cy="118" r="9" fill="#9E5CBF"/></g><circle cx="352" cy="52" r="7" fill="#1CCE4B"/></svg>
-              <div class="step-copy">
-                <p class="step-num">03 · Be there</p>
-                <h3>We stay close, never in the way.</h3>
-                <p>From the day you book to the flight home, we follow your journey and are on hand whenever plans need to flex.</p>
-              </div>
-            </article>
+      <div class="hero-inner on-dark">
+        <p class="eyebrow" data-reveal>Personalized journeys to emerging destinations</p>
+        <h1 class="hero-title">
+          <span class="hero-lead" data-split>I want to</span>
+          <span class="phrases" aria-live="polite">
+            <span class="phrase">find myself.</span>
+            <span class="phrase">get lost.</span>
+            <span class="phrase">feel alive.</span>
+            <span class="phrase">be surprised.</span>
+          </span>
+        </h1>
+        <div class="hero-foot">
+          <p class="hero-copy" data-reveal style="--d:300ms">Private journeys designed for one person, one family, one feeling. To the places the world has not discovered yet.</p>
+          <div class="hero-ctas" data-reveal style="--d:450ms">
+            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
+            <a class="btn" href="experience.html">Enter the experience</a>
           </div>
+        </div>
+        <div class="hero-meta" data-reveal style="--d:600ms">
+          <span class="counter"><b>01</b> / 04</span>
+          <span>Scroll</span>
         </div>
       </div>
     </section>
 
-    <!-- Mystery trips + encabezado de los pilares -->
-    <section class="sec sec-mystery" id="mystery">
-      <div class="canvas">
-        <div class="mystery-card" aria-hidden="true"></div>
-        <div class="mystery-traveller"><img src="assets/mystery-traveller.png" alt="Traveller with a backpack and shopping bag"></div>
+    <!-- Manifiesto que se tiñe con el scroll -->
+    <section class="section manifesto" id="about">
+      <div class="manifesto-grid">
+        <div>
+          <p class="eyebrow" data-reveal>Off The List</p>
+          <p class="manifesto-text" data-scrub>We design private journeys for people who have already seen the obvious. One traveller, one brief, one journey built entirely around who you are, to the corners of the world that have not been written about yet.</p>
+          <a class="link" href="about.html" data-reveal>Our philosophy →</a>
+        </div>
+        <figure class="manifesto-figure tone" data-color>
+          <img src="assets/lux/callejon.jpg" alt="An empty old-town alley at night in Tbilisi" data-parallax=".08">
+        </figure>
+      </div>
+    </section>
+
+    <!-- El método -->
+    <section class="section ivory method" id="method">
+      <div class="method-head">
+        <p class="eyebrow" data-reveal>The method</p>
+        <h2 class="display" data-split>Simple. <em>Personal.</em><br>Unrepeatable.</h2>
+      </div>
+      <ol class="method-list">
+        <li class="method-item">
+          <span class="method-num" data-reveal>01</span>
+          <div class="method-copy">
+            <h3 class="title" data-split>Tell <em>us</em></h3>
+            <p class="body" data-reveal>A fifteen-minute questionnaire about your pace, your obsessions, who you travel with and the feeling you want to come home with. Honest answers are all it takes.</p>
+          </div>
+          <figure class="method-img tone"><img src="assets/lux/mesa.jpg" alt="A long table set outdoors at dusk"></figure>
+        </li>
+        <li class="method-item">
+          <span class="method-num" data-reveal>02</span>
+          <div class="method-copy">
+            <h3 class="title" data-split>We <em>design</em></h3>
+            <p class="body" data-reveal>Every answer is studied in depth and turned into a private route: the destination, the houses, the guides, the doors that do not open for anyone else.</p>
+          </div>
+          <figure class="method-img tone"><img src="assets/lux/canon.jpg" alt="A still turquoise pool in a canyon"></figure>
+        </li>
+        <li class="method-item">
+          <span class="method-num" data-reveal>03</span>
+          <div class="method-copy">
+            <h3 class="title" data-split>You <em>arrive</em></h3>
+            <p class="body" data-reveal>From the day you book to the flight home, we follow every step of your journey and are on hand, day and night, whenever plans need to change.</p>
+          </div>
+          <figure class="method-img tone"><img src="assets/lux/aeropuerto.jpg" alt="An airport terminal at dusk"></figure>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Destinos emergentes: galería horizontal fijada -->
+    <section class="destinations" id="destinations" data-hscroll>
+      <div class="hs-sticky">
+        <div class="hs-head">
+          <p class="eyebrow" data-reveal>Emerging destinations</p>
+          <h2 class="title" data-split>Where the world <em>is still quiet</em></h2>
+        </div>
+        <div class="hs-track">
+          <article class="dest tone"><img src="assets/lux/lago.jpg" alt="Mountain lake in Kazbegi"><div class="dest-info"><span>01</span><h3>Georgia</h3><p>Kazbegi &amp; Svaneti</p></div></article>
+          <article class="dest tone"><img src="assets/lux/mesa.jpg" alt="Table set in a village courtyard"><div class="dest-info"><span>02</span><h3>Uzbekistan</h3><p>Bukhara &amp; the Silk Road</p></div></article>
+          <article class="dest tone"><img src="assets/lux/ola.jpg" alt="Wave breaking against cliffs"><div class="dest-info"><span>03</span><h3>Albania</h3><p>The Riviera</p></div></article>
+          <article class="dest tone"><img src="assets/lux/canon.jpg" alt="Turquoise canyon pool"><div class="dest-info"><span>04</span><h3>Oman</h3><p>Wadis &amp; desert stars</p></div></article>
+          <article class="dest tone"><img src="assets/lux/caballos.jpg" alt="Wild horses on the steppe"><div class="dest-info"><span>05</span><h3>Kyrgyzstan</h3><p>The Tian Shan</p></div></article>
+          <article class="dest tone"><img src="assets/lux/fuegos.jpg" alt="Fireworks over a colonial bay"><div class="dest-info"><span>06</span><h3>Colombia</h3><p>The Caribbean coast</p></div></article>
+          <article class="dest tone"><img src="assets/lux/huellas.jpg" alt="Footprints on a beach at sunset"><div class="dest-info"><span>07</span><h3>Zanzibar</h3><p>Stone Town &amp; beyond</p></div></article>
+          <article class="dest tone"><img src="assets/lux/aurora.jpg" alt="Northern lights over icebergs"><div class="dest-info"><span>08</span><h3>Greenland</h3><p>Disko Bay</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Viaje misterio -->
+    <section class="section dark mystery on-dark">
+      <div class="mystery-grid">
+        <figure class="mystery-img tone" data-color>
+          <img src="assets/lux/sobre.jpg" alt="A cream envelope sealed with coral wax" data-parallax=".06">
+        </figure>
         <div class="mystery-copy">
-          <p class="eyebrow eyebrow-light"><img src="assets/marker-white.svg" alt="" width="7" height="7">Mystery Trips</p>
-          <h2 class="serif-title">For the ones who want the full experience.</h2>
-          <div class="mystery-body">
-            <p>Choose the mystery option and for six weeks before you leave, clues arrive in your letterbox, in your inbox. A spice from a market you haven't heard of. A recipe with one ingredient missing. A word in a language you don't recognise yet.</p>
-            <p>You open the envelope on the day you go. Everything is already arranged. You just have to show up.</p>
-            <p>Most people are wrong about where they're going right up until they open it.<br>All of them are excited.</p>
-          </div>
-          <div class="ctas">
-            <a class="btn btn-dark" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-ghost" href="sample-journeys.html">See sample trips</a>
-          </div>
-        </div>
-
-        <div class="pillars-head">
-          <h2 class="display display-right">Every trip<br>is built on<br>four things.</h2>
-          <img class="pillars-line" src="assets/line.svg" alt="" aria-hidden="true">
-        </div>
-      </div>
-    </section>
-
-    <!-- Cuatro pilares: la sección se queda fija y el scroll recorre las categorías -->
-    <section class="sec sec-pillars" id="pillars" aria-label="The four things every trip is built on">
-      <div class="canvas">
-        <div class="pillars-track">
-          <div class="pillars-stage">
-            <div class="pillars-inner">
-              <div class="pillars-media">
-                <img class="pillar-img is-active flip" data-pillar="0" src="assets/pillars.png" alt="Couple walking through a souk">
-                <img class="pillar-img" data-pillar="1" src="assets/pillar-adventure.png" alt="Adventure">
-                <img class="pillar-img" data-pillar="2" src="assets/pillar-explore.png" alt="Explore">
-                <img class="pillar-img" data-pillar="3" src="assets/pillar-transform.png" alt="Transform">
-              </div>
-              <!-- Una figura por categoría; pillars.js activa la que corresponde -->
-              <div class="pillars-dot" aria-hidden="true">
-                <img class="pillar-shape is-active" data-pillar="0" src="assets/dot.svg" alt="" width="48" height="48">
-                <svg class="pillar-shape" data-pillar="1" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.0956193 1.42264C-0.293986 0.578492 0.578492 -0.293986 1.42264 0.0956195L4.36289 1.45266C5.69236 2.06626 7.22399 2.06626 8.55347 1.45266L11.4937 0.0956193C12.3379 -0.293986 13.2103 0.578492 12.8207 1.42264L11.4637 4.36289C10.8501 5.69236 10.8501 7.22399 11.4637 8.55347L12.8207 11.4937C13.2103 12.3379 12.3379 13.2103 11.4937 12.8207L8.55347 11.4637C7.22399 10.8501 5.69236 10.8501 4.36289 11.4637L1.42264 12.8207C0.578492 13.2103 -0.293986 12.3379 0.0956195 11.4937L1.45266 8.55347C2.06626 7.22399 2.06626 5.69236 1.45266 4.36289L0.0956193 1.42264Z" fill="#FF8C00"/></svg>
-                <svg class="pillar-shape" data-pillar="2" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.2923 6.9844e-06C13.0621 7.03972e-06 13.5433 0.83334 13.1584 1.50001L7.13412 11.9343C6.61349 12.836 5.23322 12.4409 5.26867 11.4002L5.4951 4.75389C5.50903 4.34503 5.27251 3.96891 4.89798 3.80433L0.599541 1.91552C-0.391405 1.48008 -0.0805654 6.56224e-06 1.00183 6.65535e-06L12.2923 6.9844e-06Z" fill="#1CCE4B"/></svg>
-                <svg class="pillar-shape" data-pillar="3" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12.0667 3.07413C14.0976 6.37309 11.8051 11.0711 8.50615 13.102C5.20719 15.1328 6.53953 10.6248 4.50868 7.32584C2.47782 4.02688 -2.1472 3.18623 1.15177 1.15537C4.45073 -0.875483 10.0359 -0.224833 12.0667 3.07413Z" fill="#9E5CBF"/></svg>
-              </div>
-              <div class="pillars">
-                <!-- Línea de tiempo: se va llenando con el scroll (pillars.js) -->
-                <span class="pillars-progress" aria-hidden="true"><span class="pillars-progress-fill"></span></span>
-                <ol class="pillars-list">
-                  <li class="pillar is-active" data-pillar="0">
-                    <button type="button" class="pillar-title" aria-current="true">Culture</button>
-                    <div class="pillar-desc"><p>Full immersion. Not observation. You're a guest, not a tourist.</p></div>
-                  </li>
-                  <li class="pillar" data-pillar="1">
-                    <button type="button" class="pillar-title">Adventure</button>
-                    <div class="pillar-desc"><p>Say yes to the thing you'd normally talk yourself out of. Calibrated to your nerve, not someone else's.</p></div>
-                  </li>
-                  <li class="pillar" data-pillar="2">
-                    <button type="button" class="pillar-title">Explore</button>
-                    <div class="pillar-desc"><p>Side streets, local tables, places without a review count. Room to wander, built into every day.</p></div>
-                  </li>
-                  <li class="pillar" data-pillar="3">
-                    <button type="button" class="pillar-title">Transform</button>
-                    <div class="pillar-desc"><p>Come home a little different. Every trip is designed around the feeling you want to bring back.</p></div>
-                  </li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Gallery + testimonials -->
-    <section class="sec sec-stories" id="sample-trips">
-      <div class="canvas">
-        <div class="gallery" aria-hidden="true">
-          <span class="tile t-a"></span><span class="tile t-b"></span><span class="tile t-c"></span>
-          <span class="tile t-d"></span><span class="tile t-e"></span><span class="tile t-f"></span>
-          <span class="tile t-g"></span><span class="tile t-h"></span><span class="tile t-i"></span>
-
-          <span class="guide" style="--x:289.62px"></span>
-          <span class="guide" style="--x:458.70px"></span>
-          <span class="guide" style="--x:627.79px"></span>
-          <span class="guide" style="--x:796.87px"></span>
-          <span class="guide" style="--x:965.95px"></span>
-          <span class="guide" style="--x:1304.12px"></span>
-
-          <img class="shot" style="--x:-30.72px;--y:167.36px" src="assets/gallery-12.png" alt="">
-          <img class="shot" style="--x:-30.72px;--y:372.67px" src="assets/gallery-0.png" alt="">
-          <img class="shot" style="--x:138.36px;--y:96.62px" src="assets/gallery-11.png" alt="">
-          <img class="shot" style="--x:138.39px;--y:301.35px" src="assets/gallery-10.png" alt="">
-          <img class="shot" style="--x:307.45px;--y:182.89px" src="assets/gallery-9.png" alt="">
-          <img class="shot" style="--x:476.53px;--y:105.82px" src="assets/gallery-8.png" alt="">
-          <img class="shot" style="--x:645.62px;--y:150.68px" src="assets/gallery-7.png" alt="">
-          <img class="shot" style="--x:814.70px;--y:101.22px" src="assets/gallery-6.png" alt="">
-          <img class="shot" style="--x:983.78px;--y:181.74px" src="assets/gallery-5.png" alt="">
-          <img class="shot" style="--x:1152.87px;--y:95.47px" src="assets/gallery-4.png" alt="">
-          <img class="shot shot-lifted" style="--x:1152.84px;--y:301.35px" src="assets/gallery-3.png" alt="">
-          <img class="shot" style="--x:1321.94px;--y:166.73px" src="assets/gallery-2.png" alt="">
-          <img class="shot" style="--x:1321.95px;--y:372.67px" src="assets/gallery-1.png" alt="">
-        </div>
-
-        <div class="testimonials">
-          <p class="eyebrow"><img src="assets/marker.svg" alt="" width="7" height="7">Testimonials</p>
-          <h2 class="serif-title serif-dark">Real trips. Real people.<br>Nothing obvious.</h2>
-          <figure class="quote">
-            <img class="quote-photo" src="assets/testimonial-vanessa.png" alt="Vanessa on the coast">
-            <figcaption>
-              <img src="assets/stars.svg" alt="5 out of 5 stars" width="150" height="25">
-              <p class="quote-title">Our trip was unforgettable!</p>
-              <blockquote>"The personalized itinerary made every moment special. I felt truly connected to each destination, and the memories we created will last a lifetime."</blockquote>
-              <p class="quote-author">Vanessa, 25</p>
-            </figcaption>
-          </figure>
-          <img class="quote-dots" src="assets/dots.svg" alt="" aria-hidden="true" width="85" height="12">
-          <div class="ctas">
-            <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-outline" href="sample-journeys.html">See sample trips</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Closing / footer -->
-    <footer class="sec sec-footer" id="contact">
-      <div class="canvas">
-        <img class="footer-wave" src="assets/footer-wave.svg" alt="" aria-hidden="true">
-        <div class="footer-content" id="quiz">
-          <h2>Ready to find out where we'd send you?</h2>
-          <p>15 minutes. Honest answers. One trip designed entirely around who you are.</p>
-          <div class="ctas">
-            <a class="btn btn-dark" href="https://off-the-list-poc.vercel.app/#entry">Take the quiz →</a>
-            <a class="btn btn-ghost" href="#how-it-works">How it works</a>
-          </div>
-          <ul class="social">
-            <li><a href="#" aria-label="Instagram"><img src="assets/instagram.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Facebook"><img src="assets/facebook.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="Twitter"><img src="assets/twitter.svg" alt="" width="16" height="16"></a></li>
-            <li><a href="#" aria-label="YouTube"><img src="assets/youtube.svg" alt="" width="16" height="16"></a></li>
+          <p class="eyebrow" data-reveal>Mystery journeys</p>
+          <h2 class="display" data-split>Or let the <em>destination</em> stay sealed.</h2>
+          <p class="body" data-reveal>For six weeks before you leave, it arrives in fragments. A spice from a market you have never heard of. A word in a language you do not recognise yet. You open the envelope at the gate. Everything is already arranged.</p>
+          <ul class="clues" data-reveal>
+            <li><span>I</span>A spice</li>
+            <li><span>II</span>A word</li>
+            <li><span>III</span>A key</li>
           </ul>
         </div>
-        <div class="footer-bar"><p>Off The List. Copyright 2026.</p></div>
       </div>
-    </footer>
-  </div>
-  <script src="scale.js?v=10"></script>
-  <script src="header.js?v=10"></script>
-  <script src="reveal.js?v=10"></script>
-  <script src="pillars.js?v=10"></script>
+    </section>
+
+    <!-- Viajes de autor -->
+    <section class="section signature">
+      <div class="signature-head">
+        <div>
+          <p class="eyebrow" data-reveal>Signature journeys</p>
+          <h2 class="title" data-split>Proof of what is <em>possible</em></h2>
+        </div>
+        <a class="link" href="sample-journeys.html" data-reveal>All journeys →</a>
+      </div>
+      <div class="signature-grid">
+        <a class="sig" href="sample-journeys.html#kyrgyzstan" data-reveal>
+          <figure class="tone"><img src="assets/lux/caballos.jpg" alt="Wild horses galloping on the steppe"></figure>
+          <div class="sig-meta"><span>Kyrgyzstan · 10 nights</span><span>From US$18,400</span></div>
+          <h3>Eagle Hunters of the Tian Shan</h3>
+        </a>
+        <a class="sig" href="sample-journeys.html#oman" data-reveal style="--d:120ms">
+          <figure class="tone"><img src="assets/lux/canon.jpg" alt="A still pool between canyon walls"></figure>
+          <div class="sig-meta"><span>Oman · 8 nights</span><span>From US$14,900</span></div>
+          <h3>Wadis, Dunes &amp; Desert Stars</h3>
+        </a>
+        <a class="sig" href="sample-journeys.html#greenland" data-reveal style="--d:240ms">
+          <figure class="tone"><img src="assets/lux/aurora.jpg" alt="Northern lights over Disko Bay"></figure>
+          <div class="sig-meta"><span>Greenland · 7 nights</span><span>From US$24,500</span></div>
+          <h3>Ice, Silence &amp; the Aurora</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- Cita de marca -->
+    <section class="section ivory quote">
+      <blockquote>
+        <p class="lede" data-split>“We don’t start with <em>where.</em><br>We start with <em>who.</em>”</p>
+      </blockquote>
+      <div class="rule" data-line></div>
+      <div class="quote-facts" data-reveal>
+        <div><b>One</b><span>traveller, one brief</span></div>
+        <div><b>24/7</b><span>support while you travel</span></div>
+        <div><b>0</b><span>tourist traps</span></div>
+        <div><b>US$10k+</b><span>per journey</span></div>
+      </div>
+    </section>
+
+    <!-- Cierre -->
+    <section class="closing on-dark" id="contact">
+      <figure class="tone" data-color><img src="assets/lux/aurora.jpg" alt=""></figure>
+      <div class="inner">
+        <p class="eyebrow" data-reveal>Your journey</p>
+        <h2 class="display" data-split>Ready to be <em>surprised?</em></h2>
+        <p class="body" data-reveal style="text-align:center;margin:0 auto">Fifteen minutes. Honest answers. One journey designed entirely around who you are.</p>
+        <div class="ctas" data-reveal>
+          <a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
+          <a class="btn" href="experience.html">Enter the experience</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div><img src="assets/lux/logo-light.svg" alt="Off The List" width="268" height="48"><p class="small" style="margin-top:22px;max-width:28ch">Personalized journeys to emerging destinations.</p></div>
+      <div><h4>Explore</h4><ul><li><a href="#method">The method</a></li><li><a href="#destinations">Destinations</a></li><li><a href="sample-journeys.html">Journeys</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="experience.html">Immersive experience</a></li><li><a href="https://off-the-list-poc.vercel.app/#entry">Begin</a></li></ul></div>
+      <div><h4>Follow</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">LinkedIn</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Off The List</span><span>Designed for one.</span></div>
+  </footer>
+
+  <script src="lux.js?v=2"></script>
 </body>
 </html>
