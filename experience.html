@@ -36,11 +36,8 @@
     /* ---------- Escena ---------- */
     .stage { position: fixed; inset: 0; overflow: hidden; }
     .bg { position: absolute; inset: 0; }
-    .bg > * {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
-      animation: drift 26s linear forwards;
-    }
-    @keyframes drift { from { transform: scale(1); } to { transform: scale(1.08); } }
+    /* Fondo fijo: es exactamente el último cuadro del video de acercamiento */
+    .bg > * { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .shade {
       position: absolute; inset: 0; pointer-events: none;
       background:
@@ -100,10 +97,12 @@
       font-size: clamp(76px, 15.5vw, 260px); line-height: .9; letter-spacing: -.01em; text-transform: uppercase;
       margin-left: -.03em; white-space: nowrap;
     }
-    .giant .c { display: inline-block; overflow: hidden; vertical-align: top; padding-top: .04em; margin-top: -.04em; }
-    .giant .c > span { display: inline-block; transform: translateY(102%); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 40ms); }
+    .giant { transition: opacity .45s ease; }
+    .giant.is-out { opacity: 0; }
+    .giant .c { display: inline-block; overflow: hidden; vertical-align: top; padding: .06em 0 .1em; margin: -.06em 0 -.1em; }
+    .giant .c > span { display: inline-block; transform: translateY(115%); transition: transform 1s var(--ease); transition-delay: calc(var(--i) * 40ms); }
     .giant.is-in .c > span { transform: none; }
-    .giant.is-out .c > span { transform: translateY(-102%); transition-duration: .6s; transition-delay: calc(var(--i) * 20ms); transition-timing-function: cubic-bezier(.7, 0, .84, 0); }
+    .giant.is-out .c > span { transform: translateY(-115%); transition-duration: .6s; transition-delay: calc(var(--i) * 20ms); transition-timing-function: cubic-bezier(.7, 0, .84, 0); }
     .fade { transition: opacity .8s ease, transform .8s var(--ease); }
     .is-leaving .fade { opacity: 0; transform: translateY(-10px); }
     .copy { display: grid; gap: 18px; justify-items: start; max-width: 360px; padding-bottom: 10px; }
@@ -265,7 +264,7 @@
       { title: 'I want to', short: 'I want to', region: 'Personalized journeys',
         phrases: ['find myself.', 'get lost.', 'feel alive.', 'be surprised.'],
         body: 'Private journeys designed for one person, one family, one feeling. To the places the world has not discovered yet.',
-        bg: { video: 'assets/immersive/lago-bg', poster: 'assets/lux/lago.jpg' }, portal: viaje('callejon') },
+        bg: { img: 'assets/lux/lago.jpg' }, portal: viaje('callejon') },
       { title: 'Who', short: 'Who', region: 'Manifesto',
         tagline: 'We don\u2019t start with where.',
         body: 'We start with who. How you move, what you avoid, what makes you come alive. The destination comes last.',
@@ -416,7 +415,6 @@
 
     function ponerFondo(k) {
       var el = fuente(medios[k].bg);
-      el.style.animation = 'none'; void el.offsetWidth; el.style.animation = '';
       if (el.tagName === 'VIDEO') { try { el.currentTime = 0; } catch (err) {} }
       bg.innerHTML = '';
       bg.appendChild(el);
