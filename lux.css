@@ -54,11 +54,14 @@ ul, ol { padding: 0; list-style: none; }
 
 .display {
   font-weight: 300;
-  font-size: clamp(42px, 7.2vw, 120px);
+  font-size: clamp(40px, 6.8vw, 112px);
   line-height: .94;
   letter-spacing: -.04em;
 }
 .display em, .title em, .lede em {
+  /* Cormorant es más pequeña a igual tamaño que Inter: se agranda la cursiva
+     y se reduce un poco la sans para que ambas queden en un tamaño medio */
+  font-size: 1.12em;
   font-family: var(--serif);
   font-style: italic;
   font-weight: 400;
@@ -68,7 +71,7 @@ ul, ol { padding: 0; list-style: none; }
 .display em { color: var(--coral); }
 .title {
   font-weight: 300;
-  font-size: clamp(34px, 4.6vw, 72px);
+  font-size: clamp(32px, 4.3vw, 68px);
   line-height: 1;
   letter-spacing: -.035em;
 }
@@ -355,9 +358,9 @@ ul, ol { padding: 0; list-style: none; }
 .hero-media .slide.is-active img, .hero-media .slide.is-active video { filter: grayscale(0) brightness(.92); transform: scale(1.02); }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,.15) 55%, rgba(0,0,0,.7) 100%); pointer-events: none; }
 .hero-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--gutter) clamp(28px, 4vw, 52px); }
-.hero-title { font-weight: 300; font-size: clamp(54px, 9.4vw, 168px); line-height: .9; letter-spacing: -.045em; margin: 22px 0 clamp(28px, 4vw, 52px); }
+.hero-title { font-weight: 300; font-size: clamp(50px, 8.8vw, 158px); line-height: .9; letter-spacing: -.045em; margin: 22px 0 clamp(28px, 4vw, 52px); }
 .hero-lead { display: block; }
-.phrases { display: block; position: relative; height: 1.08em; overflow: hidden; }
+.phrases { display: block; position: relative; height: 1.22em; overflow: hidden; font-size: 1.12em; }
 .phrase {
   position: absolute; left: 0; top: 0;
   font-family: var(--serif); font-style: italic; font-weight: 400;
@@ -428,7 +431,7 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Cita */
 .quote { text-align: center; display: grid; gap: clamp(40px, 6vw, 80px); }
-.quote .lede { font-size: clamp(32px, 4.8vw, 76px); line-height: 1.08; letter-spacing: -.035em; }
+.quote .lede { font-size: clamp(30px, 4.5vw, 72px); line-height: 1.08; letter-spacing: -.035em; }
 .quote-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .quote-facts b { display: block; font-weight: 300; font-size: clamp(34px, 3.6vw, 56px); letter-spacing: -.04em; }
 .quote-facts span { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); }
