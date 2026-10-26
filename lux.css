@@ -622,3 +622,4 @@ ul, ol { padding: 0; list-style: none; }
 @media (max-width: 560px) {
   .cta .btn, .float-cta { padding: 0 22px; font-size: 11px; letter-spacing: .14em; gap: 10px; }
 }
+.signature-more { display: flex; justify-content: center; margin-top: clamp(40px, 5vw, 64px); }
