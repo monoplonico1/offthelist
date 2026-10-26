@@ -10,7 +10,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="lux.css?v=11">
+  <link rel="stylesheet" href="lux.css?v=12">
 </head>
 <body>
 
@@ -76,7 +76,7 @@
         <div>
           <p class="eyebrow" data-reveal>Off The List</p>
           <p class="manifesto-text" data-scrub>We design private journeys for people who have already seen the obvious. One traveller, one brief, one journey built entirely around who you are, to the corners of the world that have not been written about yet.</p>
-          <a class="link" href="about.html" data-reveal>Our philosophy →</a>
+          <div class="cta" data-reveal><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Tell us who you are <span class="arrow">→</span></a><a class="link" href="about.html">Our philosophy →</a></div>
         </div>
         <figure class="manifesto-figure tone" data-color>
           <img src="assets/lux/callejon.jpg" alt="An empty old-town alley at night in Tbilisi" data-parallax=".08">
@@ -118,6 +118,7 @@
           <figure class="method-img tone" data-color><img src="assets/lux/aeropuerto.jpg" alt="An airport terminal at dusk"></figure>
         </li>
       </ol>
+        <div class="cta" data-reveal><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Start with step 01 <span class="arrow">→</span></a><span class="cta-note">A 15-minute questionnaire</span></div>
       </div>
     </section>
 
@@ -136,6 +137,7 @@
             <li><span>II</span>A word</li>
             <li><span>III</span>A key</li>
           </ul>
+          <div class="cta" data-reveal><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Choose a mystery journey <span class="arrow">→</span></a></div>
         </div>
       </div>
     </section>
@@ -144,8 +146,11 @@
     <section class="destinations" id="moments" data-hscroll>
       <div class="hs-sticky">
         <div class="hs-head">
-          <p class="eyebrow" data-reveal>Not a list of places</p>
-          <h2 class="title" data-split>A list of <em>feelings</em></h2>
+          <div>
+            <p class="eyebrow" data-reveal>Not a list of places</p>
+            <h2 class="title" data-split>A list of <em>feelings</em></h2>
+          </div>
+          <div class="cta" data-reveal><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Tell us what you want to feel <span class="arrow">→</span></a></div>
         </div>
         <div class="hs-track">
           <article class="dest tone"><img src="assets/lux/lago.jpg" alt=""><div class="dest-info"><span>01</span><h3>Silence</h3><p>A lake before anyone wakes</p></div></article>
@@ -167,7 +172,7 @@
           <p class="eyebrow" data-reveal>Sample journeys</p>
           <h2 class="title" data-split>Proof of what is <em>possible</em></h2>
         </div>
-        <a class="link" href="sample-journeys.html" data-reveal>All sample journeys →</a>
+        <div class="cta" data-reveal><a class="link" href="sample-journeys.html">All sample journeys →</a><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Design yours <span class="arrow">→</span></a></div>
       </div>
       <div class="signature-grid">
         <a class="sig" href="sample-journeys.html#kyrgyzstan" data-reveal>
@@ -200,6 +205,7 @@
         <div><b>0</b><span>tourist traps</span></div>
         <div><b>US$10k+</b><span>per journey</span></div>
       </div>
+      <div class="cta" data-reveal><a class="btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Start with who <span class="arrow">→</span></a><span class="cta-note">Fifteen minutes. Honest answers.</span></div>
     </section>
 
     <!-- Cierre -->
@@ -227,6 +233,8 @@
     <div class="footer-bottom"><span>© 2026 Off The List</span><span>Designed for one.</span></div>
   </footer>
 
-  <script src="lux.js?v=10"></script>
+  <a class="float-cta btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
+
+  <script src="lux.js?v=12"></script>
 </body>
 </html>

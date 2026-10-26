@@ -111,6 +111,14 @@
     .copy p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.84); }
     .more { font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; padding-bottom: 6px; background: linear-gradient(var(--coral), var(--coral)) 0 100% / 100% 1px no-repeat; }
     .more:empty { display: none; }
+    .copy-links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+    .quiz-link {
+      display: inline-flex; align-items: center; height: 40px; padding: 0 20px; border-radius: 999px;
+      background: var(--coral); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      transition: background-color .4s, color .4s;
+    }
+    .quiz-link:hover { background: #fff; color: var(--ink); }
+    .is-final .quiz-link { display: none; }
     /* Todo el bloque de información a la izquierda; la acción (portal o botones) a la derecha */
     .info-main { display: flex; flex-direction: column; align-items: flex-start; max-width: 54vw; }
     .info-main .giant { align-self: stretch; margin-top: 12px; }
@@ -240,7 +248,7 @@
         <p class="chapter fade"><b id="chapNum">01</b><span>/ 08</span><span id="region"></span></p>
         <h1 class="giant" id="giant"></h1>
         <p class="tagline fade"><span class="ph" id="tagline"></span></p>
-        <div class="copy fade"><p id="body"></p><a class="more" id="more"></a></div>
+        <div class="copy fade"><p id="body"></p><div class="copy-links"><a class="quiz-link" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a><a class="more" id="more"></a></div></div>
       </div>
       <div class="final-ctas">
         <a class="begin" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey →</a>

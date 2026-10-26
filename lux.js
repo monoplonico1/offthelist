@@ -102,11 +102,19 @@
   // --- Parallax ---------------------------------------------------------------
   var paralajes = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
 
+  // --- Botón flotante al quiz (solo móvil, por CSS) --------------------------
+  var flotante = document.querySelector('.float-cta');
+  var cierre = document.querySelector('.closing');
+
   var pendiente = false;
   function cuadro() {
     pendiente = false;
     var vh = window.innerHeight;
     if (header) header.classList.toggle('is-solid', window.scrollY > vh * .08 && !header.classList.contains('is-light'));
+    if (flotante) {
+      var cierreVisible = cierre && cierre.getBoundingClientRect().top < vh;
+      flotante.classList.toggle('is-on', window.scrollY > vh * .6 && !cierreVisible);
+    }
 
     scrubs.forEach(function (s) {
       var r = s.el.getBoundingClientRect();
