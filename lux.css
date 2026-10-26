@@ -213,6 +213,38 @@ ul, ol { padding: 0; list-style: none; }
 .tone.is-color { --g: 0; }
 .dest img { transition: filter 1.4s var(--ease), transform 2s var(--ease); }
 
+/* Viajes de ejemplo: color al pasar el cursor */
+.sig .tone img { transition: filter 1s var(--ease), transform 1.4s var(--ease); }
+.sig:hover .tone { --g: 0; }
+
+/* Foto activa: esquinas en coral, como los corchetes del logo, a 16 px del borde */
+.tone { position: relative; }
+.tone::after {
+  --c: var(--coral);
+  --l: 26px;
+  --w: 1.5px;
+  content: "";
+  position: absolute;
+  inset: 16px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) left top / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) left top / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) right top / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) right top / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) left bottom / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) left bottom / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) right bottom / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) right bottom / var(--w) var(--l);
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity .6s ease, transform .9s var(--ease);
+}
+.tone.is-active::after, .dest.is-color::after, .sig:hover .tone::after { opacity: 1; transform: none; }
+.page-hero .tone::after, .closing .tone::after { display: none; }
+
 /* ---------- Animaciones de texto y entrada ---------- */
 
 .js [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }

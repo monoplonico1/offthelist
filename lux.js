@@ -113,6 +113,7 @@
       if (r.bottom < 0 || r.top > vh) return;
       var g = 1 - Math.max(0, Math.min(1, (vh * .95 - r.top) / (vh * .55)));
       el.style.setProperty('--g', g.toFixed(3));
+      el.classList.toggle('is-active', g < .12);
     });
 
     if (!quieto) {
