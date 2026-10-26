@@ -57,7 +57,6 @@ ul, ol { padding: 0; list-style: none; }
   font-size: clamp(42px, 7.2vw, 120px);
   line-height: .94;
   letter-spacing: -.04em;
-  text-transform: uppercase;
 }
 .display em, .title em, .lede em {
   font-family: var(--serif);
@@ -72,7 +71,6 @@ ul, ol { padding: 0; list-style: none; }
   font-size: clamp(34px, 4.6vw, 72px);
   line-height: 1;
   letter-spacing: -.035em;
-  text-transform: uppercase;
 }
 .lede {
   font-weight: 300;
@@ -200,17 +198,17 @@ ul, ol { padding: 0; list-style: none; }
 /* ---------- Imágenes: blanco y negro → color ---------- */
 
 .tone { overflow: hidden; background: #1a1816; }
+/* --g va de 1 (blanco y negro) a 0 (color) según el scroll; lo fija lux.js */
 .tone img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05) brightness(.96);
-  transform: scale(1.08);
-  transition: filter 1.6s var(--ease), transform 2.4s var(--ease);
+  filter: grayscale(var(--g, 1)) contrast(calc(1 + .05 * var(--g, 1))) brightness(calc(1 - .04 * var(--g, 1)));
+  transform: scale(calc(1 + .08 * var(--g, 1)));
+  transition: filter .25s linear, transform .25s linear;
 }
-.tone.is-color img, .tone:hover img { filter: grayscale(0) contrast(1) brightness(1); transform: scale(1.0); }
-.tone.keep-bw.is-color img { filter: grayscale(1) contrast(1.05); }
-.tone.keep-bw:hover img { filter: grayscale(0); }
+.tone.is-color { --g: 0; }
+.dest img { transition: filter 1.4s var(--ease), transform 2s var(--ease); }
 
 /* ---------- Animaciones de texto y entrada ---------- */
 
@@ -357,7 +355,7 @@ ul, ol { padding: 0; list-style: none; }
 .hero-media .slide.is-active img, .hero-media .slide.is-active video { filter: grayscale(0) brightness(.92); transform: scale(1.02); }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,.15) 55%, rgba(0,0,0,.7) 100%); pointer-events: none; }
 .hero-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 var(--gutter) clamp(28px, 4vw, 52px); }
-.hero-title { font-weight: 300; font-size: clamp(54px, 9.4vw, 168px); line-height: .9; letter-spacing: -.045em; text-transform: uppercase; margin: 22px 0 clamp(28px, 4vw, 52px); }
+.hero-title { font-weight: 300; font-size: clamp(54px, 9.4vw, 168px); line-height: .9; letter-spacing: -.045em; margin: 22px 0 clamp(28px, 4vw, 52px); }
 .hero-lead { display: block; }
 .phrases { display: block; position: relative; height: 1.08em; overflow: hidden; }
 .phrase {
@@ -406,7 +404,7 @@ ul, ol { padding: 0; list-style: none; }
 .dest img { position: absolute; inset: 0; }
 .dest-info { position: absolute; inset: auto 0 0 0; padding: 26px 24px; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
 .dest-info span { font-size: 11px; letter-spacing: .24em; opacity: .8; }
-.dest-info h3 { font-weight: 300; font-size: clamp(26px, 2.4vw, 38px); letter-spacing: -.03em; text-transform: uppercase; margin: 6px 0 2px; }
+.dest-info h3 { font-weight: 300; font-size: clamp(26px, 2.4vw, 38px); letter-spacing: -.03em; margin: 6px 0 2px; }
 .dest-info p { font-family: var(--serif); font-style: italic; font-size: 19px; opacity: .9; }
 
 /* Misterio */
@@ -428,10 +426,11 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Cita */
 .quote { text-align: center; display: grid; gap: clamp(40px, 6vw, 80px); }
-.quote .lede { font-size: clamp(32px, 4.8vw, 76px); line-height: 1.08; letter-spacing: -.035em; text-transform: uppercase; }
+.quote .lede { font-size: clamp(32px, 4.8vw, 76px); line-height: 1.08; letter-spacing: -.035em; }
 .quote-facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .quote-facts b { display: block; font-weight: 300; font-size: clamp(34px, 3.6vw, 56px); letter-spacing: -.04em; }
 .quote-facts span { font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--ink-3); }
+.dark .quote-facts span { color: rgba(255, 255, 255, .6); }
 
 @media (max-width: 960px) {
   .manifesto-grid, .mystery-grid { grid-template-columns: 1fr; }
@@ -465,7 +464,7 @@ ul, ol { padding: 0; list-style: none; }
 }
 .chapters a:hover { color: var(--coral); padding-left: 10px; }
 .chapters i { font-family: var(--serif); font-size: 22px; color: var(--coral); }
-.chapters b { font-weight: 300; font-size: clamp(20px, 1.8vw, 26px); letter-spacing: -.02em; text-transform: uppercase; }
+.chapters b { font-weight: 300; font-size: clamp(20px, 1.8vw, 26px); letter-spacing: -.02em; }
 .chapters span { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
 
 .journey {
@@ -518,7 +517,7 @@ ul, ol { padding: 0; list-style: none; }
 .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 64px); margin-top: clamp(48px, 6vw, 88px); }
 .value { display: grid; gap: 18px; align-content: start; padding-top: 26px; border-top: 1px solid var(--line); }
 .value i { font-family: var(--serif); font-size: 26px; color: var(--coral); }
-.value h3 { font-weight: 300; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.03em; text-transform: uppercase; line-height: 1.05; }
+.value h3 { font-weight: 300; font-size: clamp(24px, 2.2vw, 34px); letter-spacing: -.03em; line-height: 1.05; }
 .never { display: flex; flex-wrap: wrap; gap: 10px 14px; margin-top: 40px; }
 .never li { padding: 10px 18px; border: 1px solid rgba(255, 255, 255, .24); border-radius: 999px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .78); text-decoration: line-through; text-decoration-color: var(--coral); }
 .founder { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(40px, 7vw, 120px); align-items: center; }

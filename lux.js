@@ -51,11 +51,6 @@
     }, { threshold: .18, rootMargin: '0px 0px -6% 0px' });
     document.querySelectorAll('[data-split], [data-reveal], [data-line]').forEach(function (el) { entrar.observe(el); });
 
-    // Las fotos toman color cuando ocupan el centro de la pantalla
-    var color = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { e.target.classList.toggle('is-color', e.isIntersecting); });
-    }, { rootMargin: '-38% 0px -38% 0px' });
-    document.querySelectorAll('.tone[data-color]').forEach(function (el) { color.observe(el); });
   } else {
     document.querySelectorAll('[data-split], [data-reveal], [data-line]').forEach(function (el) { el.classList.add('is-in'); });
   }
@@ -75,6 +70,9 @@
   var pin = document.querySelector('[data-hscroll]');
   var pista = pin && pin.querySelector('.hs-track');
 
+  // --- Fotos que pasan de blanco y negro a color con el scroll --------------
+  var tonos = Array.prototype.slice.call(document.querySelectorAll('.tone[data-color]'));
+
   // --- Parallax ---------------------------------------------------------------
   var paralajes = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
 
@@ -86,10 +84,19 @@
 
     scrubs.forEach(function (s) {
       var r = s.el.getBoundingClientRect();
-      var p = (vh * .85 - r.top) / (r.height + vh * .45);
+      // Empieza al asomar y termina cuando el final del texto está en el 70 % de la pantalla
+      var p = (vh * .9 - r.top) / (r.height + vh * .2);
       p = Math.max(0, Math.min(1, p));
       var n = Math.round(p * s.sw.length);
       for (var i = 0; i < s.sw.length; i++) s.sw[i].classList.toggle('on', i < n);
+    });
+
+    // Color completo cuando la foto llega al 40 % superior de la pantalla
+    tonos.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      var g = 1 - Math.max(0, Math.min(1, (vh * .95 - r.top) / (vh * .55)));
+      el.style.setProperty('--g', g.toFixed(3));
     });
 
     if (!quieto) {
@@ -121,6 +128,18 @@
     if (pin && pista) pin.style.height = window.innerWidth > 760 ? (pista.scrollWidth - window.innerWidth + window.innerHeight) + 'px' : '';
     alScroll();
   });
+  // En móvil la galería se desliza con el dedo: la tarjeta centrada toma color
+  if (pista) {
+    pista.addEventListener('scroll', function () {
+      if (window.innerWidth > 760) return;
+      var cards = pista.children;
+      for (var j = 0; j < cards.length; j++) {
+        var rc = cards[j].getBoundingClientRect();
+        cards[j].classList.toggle('is-color', rc.left < window.innerWidth * .7 && rc.right > window.innerWidth * .3);
+      }
+    }, { passive: true });
+    pista.dispatchEvent(new Event('scroll'));
+  }
   if (pin && pista && window.innerWidth > 760) pin.style.height = (pista.scrollWidth - window.innerWidth + window.innerHeight) + 'px';
   cuadro();
 
