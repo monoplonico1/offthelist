@@ -73,6 +73,10 @@
   // --- Fotos que pasan de blanco y negro a color con el scroll --------------
   var tonos = Array.prototype.slice.call(document.querySelectorAll('.tone[data-color]'));
 
+  // --- Método: línea que une 01, 02 y 03 y se dibuja con el scroll ----------
+  var linea = document.querySelector('.method-line');
+  var numeros = linea ? linea.parentNode.querySelectorAll('.method-num') : [];
+
   // --- Parallax ---------------------------------------------------------------
   var paralajes = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
 
@@ -90,6 +94,18 @@
       var n = Math.round(p * s.sw.length);
       for (var i = 0; i < s.sw.length; i++) s.sw[i].classList.toggle('on', i < n);
     });
+
+    if (linea && numeros.length > 1) {
+      var caja = linea.parentNode.getBoundingClientRect();
+      // offsetTop ignora el desplazamiento de la animación de entrada de los números
+      var n0 = numeros[0], n1 = numeros[numeros.length - 1];
+      var arriba = n0.offsetTop + n0.offsetHeight / 2, alto = n1.offsetTop + n1.offsetHeight / 2 - arriba;
+      linea.style.top = arriba + 'px';
+      linea.style.height = alto + 'px';
+      // Se completa cuando el último número llega a la mitad de la pantalla
+      var avanceLinea = (vh * .5 - (caja.top + arriba)) / alto;
+      linea.style.setProperty('--p', Math.max(0, Math.min(1, avanceLinea)).toFixed(3));
+    }
 
     // Color completo cuando la foto llega al 40 % superior de la pantalla
     tonos.forEach(function (el) {

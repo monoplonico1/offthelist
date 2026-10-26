@@ -382,16 +382,18 @@ ul, ol { padding: 0; list-style: none; }
 
 /* Método */
 .method-head { display: grid; gap: 26px; margin-bottom: clamp(48px, 7vw, 96px); }
+/* Pasos sin separadores: una línea que se dibuja con el scroll une los números */
+.method-steps { position: relative; --pad: clamp(0px, 13vw, 220px); --num: 90px; }
 .method-item {
   display: grid;
-  grid-template-columns: 90px 1fr minmax(240px, 34%);
+  grid-template-columns: var(--num) 1fr minmax(240px, 34%);
   gap: clamp(20px, 4vw, 64px);
   align-items: center;
-  padding: clamp(32px, 4vw, 52px) 0;
-  border-top: 1px solid var(--line);
+  padding: clamp(32px, 4vw, 52px) 0 clamp(32px, 4vw, 52px) var(--pad);
 }
-.method-item:last-child { border-bottom: 1px solid var(--line); }
-.method-num { font-family: var(--serif); font-style: italic; font-size: 34px; color: var(--coral); }
+.method-num { position: relative; z-index: 1; justify-self: center; padding: 10px 0; background: var(--ivory); font-family: var(--serif); font-style: italic; font-size: 34px; line-height: 1.1; color: var(--coral); }
+.method-line { position: absolute; left: calc(var(--pad) + var(--num) / 2); width: 1px; background: var(--line); pointer-events: none; }
+.method-line i { position: absolute; top: 0; bottom: 0; left: -.5px; right: -.5px; background: var(--coral); transform-origin: top; transform: scaleY(var(--p, 0)); }
 .method-copy { display: grid; gap: 18px; }
 .method-img { aspect-ratio: 4 / 3; }
 
@@ -434,7 +436,8 @@ ul, ol { padding: 0; list-style: none; }
 
 @media (max-width: 960px) {
   .manifesto-grid, .mystery-grid { grid-template-columns: 1fr; }
-  .method-item { grid-template-columns: 52px 1fr; align-items: start; }
+  .method-steps { --pad: 0px; --num: 52px; }
+  .method-item { align-items: start; grid-template-columns: var(--num) 1fr; }
   .method-img { grid-column: 2; }
   .signature-grid { grid-template-columns: 1fr; }
   .quote-facts { grid-template-columns: 1fr 1fr; row-gap: 36px; }
