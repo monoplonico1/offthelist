@@ -251,10 +251,12 @@ ul, ol { padding: 0; list-style: none; }
 
 /* ---------- Animaciones de texto y entrada ---------- */
 
-.js [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+/* Cada palabra se alinea por la línea base (sans y cursiva quedan a la misma
+   altura) y la máscara deja espacio para las letras con descendente (g, y, p) */
+.js [data-split] .w { display: inline-block; vertical-align: baseline; clip-path: inset(-.3em -.2em -.35em -.2em); }
 .js [data-split] .w > span {
   display: inline-block;
-  transform: translateY(105%);
+  transform: translateY(140%);
   transition: transform 1.1s var(--ease);
   transition-delay: calc(var(--i, 0) * 45ms + var(--d, 0ms));
 }
