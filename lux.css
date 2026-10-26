@@ -247,7 +247,7 @@ ul, ol { padding: 0; list-style: none; }
   transition: opacity .6s ease, transform .9s var(--ease);
 }
 .tone.is-active::after, .dest.is-color::after, .sig:hover .tone::after { opacity: 1; transform: none; }
-.page-hero .tone::after, .closing .tone::after { display: none; }
+.page-hero .tone::after, .closing .tone::after, .method-img::after, .dest::after { display: none; }
 
 /* ---------- Animaciones de texto y entrada ---------- */
 
