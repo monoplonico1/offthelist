@@ -6,6 +6,17 @@
   doc.classList.add('js');
   var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // --- Fotos: el recorte va en una capa interna para que las esquinas del
+  // marco activo queden por fuera de la imagen
+  document.querySelectorAll('.tone').forEach(function (fig) {
+    var clip = document.createElement('span');
+    clip.className = 'tone-clip';
+    Array.prototype.slice.call(fig.childNodes).forEach(function (n) {
+      if (n.nodeType === 1 && n.tagName === 'IMG') clip.appendChild(n);
+    });
+    fig.insertBefore(clip, fig.firstChild);
+  });
+
   // --- Titulares que suben palabra por palabra -----------------------------
   // Mantiene <em>, <br> y demás etiquetas: solo parte los nodos de texto.
   function partir(el) {
@@ -77,6 +88,17 @@
   var linea = document.querySelector('.method-line');
   var numeros = linea ? linea.parentNode.querySelectorAll('.method-num') : [];
 
+  // Solo una tarjeta activa a la vez: la más cercana al centro de la pantalla
+  function marcarCentrada() {
+    var tarjetas = pista.children, mejor = null, menor = Infinity, centro = window.innerWidth / 2;
+    for (var j = 0; j < tarjetas.length; j++) {
+      var rc = tarjetas[j].getBoundingClientRect();
+      var d = Math.abs(rc.left + rc.width / 2 - centro);
+      if (d < menor) { menor = d; mejor = tarjetas[j]; }
+    }
+    for (var m = 0; m < tarjetas.length; m++) tarjetas[m].classList.toggle('is-color', tarjetas[m] === mejor);
+  }
+
   // --- Parallax ---------------------------------------------------------------
   var paralajes = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
 
@@ -131,12 +153,7 @@
       var avance = Math.max(0, Math.min(1, -rp.top / recorrido));
       var max = pista.scrollWidth - window.innerWidth;
       pista.style.transform = 'translate3d(' + (-avance * max).toFixed(1) + 'px,0,0)';
-      var tarjetas = pista.children;
-      for (var j = 0; j < tarjetas.length; j++) {
-        var rc = tarjetas[j].getBoundingClientRect();
-        var enCentro = rc.left < window.innerWidth * .62 && rc.right > window.innerWidth * .38;
-        tarjetas[j].classList.toggle('is-color', enCentro);
-      }
+      marcarCentrada();
     }
   }
   function alScroll() { if (!pendiente) { pendiente = true; requestAnimationFrame(cuadro); } }
@@ -148,12 +165,7 @@
   // En móvil la galería se desliza con el dedo: la tarjeta centrada toma color
   if (pista) {
     pista.addEventListener('scroll', function () {
-      if (window.innerWidth > 760) return;
-      var cards = pista.children;
-      for (var j = 0; j < cards.length; j++) {
-        var rc = cards[j].getBoundingClientRect();
-        cards[j].classList.toggle('is-color', rc.left < window.innerWidth * .7 && rc.right > window.innerWidth * .3);
-      }
+      if (window.innerWidth <= 760) marcarCentrada();
     }, { passive: true });
     pista.dispatchEvent(new Event('scroll'));
   }
