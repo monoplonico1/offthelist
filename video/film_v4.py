@@ -29,7 +29,7 @@ ESCENAS = [
     (None, 4.30, 2.5, "corte", -34),  # 6  nothing · negro + fogata
     (4, 0.30, 3.0, "corte", -17),   # 7  everything · fuego (lo más fuerte)
     (4, 4.00, 3.4, "corte", -38),   # 8  guest · telar
-    (5, 2.80, 3.5, "corte", -36),   # 9  belong · café
+    (5, 0.85, 3.4, "corte", -36),   # 9  belong · café (antes del salto de la taza en 4.3 s)
     (6, 0.20, 3.0, "corte", -22),   # 10 go first · esquí (segundo pico)
     (6, 4.30, 3.5, "corte", -30),   # 11 be in awe · volcán
     (7, 0.00, 3.6, "corte", -32),   # 12 rise · globos
