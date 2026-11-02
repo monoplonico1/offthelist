@@ -29,7 +29,7 @@ ESCENAS = [
     (None, 4.30, 2.5, "corte", -34),  # 6  nothing · negro + fogata
     (4, 0.30, 3.0, "corte", -17),   # 7  everything · fuego (lo más fuerte)
     (4, 4.00, 3.4, "corte", -38),   # 8  guest · telar
-    (5, 0.85, 3.4, "corte", -36),   # 9  belong · café (antes del salto de la taza en 4.3 s)
+    (5, 0.35, 3.4, "corte", -36),   # 9  belong · café (termina en 3,75 s: desde 3,9 s la taza flota)
     (6, 0.20, 3.0, "corte", -22),   # 10 go first · esquí (segundo pico)
     (6, 4.30, 3.5, "corte", -30),   # 11 be in awe · volcán
     (7, 0.00, 3.6, "corte", -32),   # 12 rise · globos
@@ -44,6 +44,10 @@ LINEAS = [(0.00, 2.43), (3.09, 5.13), (5.70, 6.92), (7.45, 9.57), (10.15, 11.12)
           (21.19, 22.78), (23.22, 24.52), (24.95, 26.67), (27.15, 28.45), (28.88, 30.87),
           (31.35, 32.84), (33.43, 34.25), (34.60, 38.03)]
 ENTRADA_VOZ = 0.35
+# Escena (índice desde 0) → segundos desde el inicio de su línea hasta la palabra
+# que debe coincidir con el corte: "nothing" (corte a negro) y "-thing" de
+# "everything" (entrada del fuego)
+ANCLAS = {5: 0.34, 6: 0.94}
 # Recortes por escena (índice desde 0): bordes negros que dejó Flow
 RECORTES = {4: "1892:1064:14:8", 10: "1476:830:222:125"}
 
@@ -146,6 +150,10 @@ def main():
     # --- Voz ---
     args += ["-i", VOZ]; vz = n; n += 1
     entradas = [p + ENTRADA_VOZ + (0.5 if k == 0 else 0) for k, p in enumerate(pos)]
+    # Corte sobre la palabra: la línea se adelanta para que esa palabra caiga
+    # justo en el corte a la escena
+    for k, desfase in ANCLAS.items():
+        entradas[k] = pos[k] - desfase
     entradas += [cierre_ini + t_logo, cierre_ini + t_tag]
     voces = []
     for i, (a, b) in enumerate(LINEAS):
