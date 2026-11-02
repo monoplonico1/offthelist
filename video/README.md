@@ -31,3 +31,19 @@ tener pistas definitivas.
 python3 video/film_v2.py PIEZAS TRABAJO --salida film-v2.mp4
 python3 video/film_v2.py PIEZAS TRABAJO --salida film-v2.mp4 --solo-audio   # solo remezcla
 ```
+
+## v4 — "I want", POV con clips de Flow
+
+`film_v4.py` monta la versión en primera persona: 16 escenas generadas en
+Google Flow (`clip1.mp4` … `clip9.mp4`, algunos con dos escenas por clip),
+la voz de ElevenLabs en un solo archivo y el sonido de la fogata para el
+negro de "I want nothing". Cada escena toma su fragmento del clip según el
+ritmo por tramos; el ambiente de Flow se nivela por energía y baja cuando
+habla la voz. Cierre con montaje rápido, logo y tagline.
+
+```bash
+python3 video/film_v4.py CARPETA_CLIPS voz.mp3 video/cierre-logo.png video/cierre-tagline.png fogata.mp3 film-v4.mp4
+```
+
+Los tiempos de cada línea de voz están en `LINEAS` (medidos sobre la toma
+actual de ElevenLabs): si se regenera la voz, hay que volver a medirlos.
