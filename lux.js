@@ -198,7 +198,7 @@
         f.classList.toggle('is-active', i === n);
         f.classList.toggle('is-out', i === (n - 1 + frases.length) % frases.length);
       });
-      hero.querySelectorAll('.counter b').forEach(function (b) { b.textContent = '0' + (n + 1); });
+      hero.querySelectorAll('.counter b').forEach(function (b) { b.textContent = (n < 9 ? '0' : '') + (n + 1); });
       if (quieto) return;
       clearTimeout(espera);
       var v = videoDe(n);

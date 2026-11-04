@@ -10,7 +10,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="lux.css?v=14">
+  <link rel="stylesheet" href="lux.css?v=15">
 </head>
 <body>
 
@@ -38,12 +38,18 @@
   <main>
     <!-- Hero: "I want to…" con las imágenes del film -->
     <section class="hero" data-rotator>
+      <!-- Una toma del film por frase: la frase cambia con el corte del video -->
       <div class="hero-media" aria-hidden="true">
-        <div class="slide"><video muted playsinline preload="auto" poster="assets/lux/hero-monasterio.jpg"><source src="assets/lux/hero-monasterio.mp4" type="video/mp4"><source src="assets/lux/hero-monasterio.webm" type="video/webm"></video></div>
-        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-mercado.jpg"><source src="assets/lux/hero-mercado.mp4" type="video/mp4"><source src="assets/lux/hero-mercado.webm" type="video/webm"></video></div>
-        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-cafe.jpg"><source src="assets/lux/hero-cafe.mp4" type="video/mp4"><source src="assets/lux/hero-cafe.webm" type="video/webm"></video></div>
-        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-chef.jpg"><source src="assets/lux/hero-chef.mp4" type="video/mp4"><source src="assets/lux/hero-chef.webm" type="video/webm"></video></div>
-        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-tren.jpg"><source src="assets/lux/hero-tren.mp4" type="video/mp4"><source src="assets/lux/hero-tren.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="auto" poster="assets/lux/hero-01-find.jpg"><source src="assets/lux/hero-01-find.mp4" type="video/mp4"><source src="assets/lux/hero-01-find.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-02-lost.jpg"><source src="assets/lux/hero-02-lost.mp4" type="video/mp4"><source src="assets/lux/hero-02-lost.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-03-connect.jpg"><source src="assets/lux/hero-03-connect.mp4" type="video/mp4"><source src="assets/lux/hero-03-connect.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-04-belong.jpg"><source src="assets/lux/hero-04-belong.mp4" type="video/mp4"><source src="assets/lux/hero-04-belong.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-05-first.jpg"><source src="assets/lux/hero-05-first.mp4" type="video/mp4"><source src="assets/lux/hero-05-first.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-06-awe.jpg"><source src="assets/lux/hero-06-awe.mp4" type="video/mp4"><source src="assets/lux/hero-06-awe.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-07-rise.jpg"><source src="assets/lux/hero-07-rise.mp4" type="video/mp4"><source src="assets/lux/hero-07-rise.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-08-shine.jpg"><source src="assets/lux/hero-08-shine.mp4" type="video/mp4"><source src="assets/lux/hero-08-shine.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-09-breathe.jpg"><source src="assets/lux/hero-09-breathe.mp4" type="video/mp4"><source src="assets/lux/hero-09-breathe.webm" type="video/webm"></video></div>
+        <div class="slide"><video muted playsinline preload="none" poster="assets/lux/hero-10-surprised.jpg"><source src="assets/lux/hero-10-surprised.mp4" type="video/mp4"><source src="assets/lux/hero-10-surprised.webm" type="video/webm"></video></div>
       </div>
       <div class="hero-inner on-dark">
         <p class="eyebrow" data-reveal>Personalized journeys to emerging destinations</p>
@@ -52,9 +58,14 @@
           <span class="phrases" aria-live="polite">
             <span class="phrase">find myself.</span>
             <span class="phrase">get lost.</span>
-            <span class="phrase">feel alive.</span>
+            <span class="phrase">connect.</span>
+            <span class="phrase">belong.</span>
+            <span class="phrase">go first.</span>
+            <span class="phrase">be in awe.</span>
+            <span class="phrase">rise.</span>
+            <span class="phrase">shine.</span>
+            <span class="phrase">breathe.</span>
             <span class="phrase">be surprised.</span>
-            <span class="phrase">fall in love.</span>
           </span>
         </h1>
         <div class="hero-foot">
@@ -64,7 +75,7 @@
           </div>
         </div>
         <div class="hero-meta" data-reveal style="--d:600ms">
-          <span class="counter"><b>01</b> / 05</span>
+          <span class="counter"><b>01</b> / 10</span>
           <span>Scroll</span>
         </div>
       </div>
@@ -236,6 +247,6 @@
 
   <a class="float-cta btn btn-coral" href="https://off-the-list-poc.vercel.app/#entry">Begin your journey <span class="arrow">→</span></a>
 
-  <script src="lux.js?v=12"></script>
+  <script src="lux.js?v=15"></script>
 </body>
 </html>
